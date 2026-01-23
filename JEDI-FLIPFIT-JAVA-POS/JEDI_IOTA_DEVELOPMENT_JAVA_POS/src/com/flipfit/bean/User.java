@@ -6,6 +6,7 @@ public class User {
     private String email;
     private String password;
     private String mobileNumber;
+    private Role role;
 	public int getUserId() {
 		return userId;
 	}
@@ -36,12 +37,12 @@ public class User {
 	public void setMobileNumber(String mobileNumber) {
 		this.mobileNumber = mobileNumber;
 	}
-//	public Role getRole() {
-//		return role;
-//	}
-//	public void setRole(Role role) {
-//		this.role = role;
-//	}
 	
-    //private Role role;
+    
+	public Role getRole() {
+		return role;
+	}
+	public void setRole(Role role) {
+		this.role = role;
+	}
 }
