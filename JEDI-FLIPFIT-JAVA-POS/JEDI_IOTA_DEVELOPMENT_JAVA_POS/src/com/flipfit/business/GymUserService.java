@@ -1,5 +1,5 @@
 package com.flipfit.business;
 
-public class GymUser {
+public class GymUserService {
 	
 }
