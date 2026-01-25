@@ -19,6 +19,6 @@ boolean addToWaitlist(int userId, int slotId);
     // Promote next person from waitlist when slot becomes available
     boolean promoteFromWaitlist(int slotId);
     
-    // Check if user is in waitlist for a slot
+    // Check if user is in waitlist
     boolean isUserInWaitlist(int userId, int slotId);
 }
