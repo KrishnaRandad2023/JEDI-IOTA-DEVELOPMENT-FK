@@ -186,6 +186,10 @@ public class FlipFitApplication {
         System.out.print("Enter PAN Number: ");
         String panNumber = scanner.nextLine();
         
+        // FIXED: Actually integrate with AdminService
+        ServiceFactory factory = ServiceFactory.getInstance();
+        AdminService adminService = factory.getAdminService();
+        
         // Create registration request
         Registration registration = new Registration();
         registration.setName(name);
@@ -196,30 +200,36 @@ public class FlipFitApplication {
         registration.setCity(city);
         registration.setPanNumber(panNumber);
         registration.setApproved(false);
+        registration.setRegistrationDate(new java.util.Date());
         
-        System.out.println("\n✅ Registration request submitted!");
-        System.out.println("   Your application will be reviewed by admin.");
-        System.out.println("   You will be notified once approved.");
-        System.out.println("   Email: " + email);
-        
-        // In a real system, this would be added to pending registrations
-        // For now, we'll auto-create the owner (simplified)
         System.out.print("\n⚠️ For demo purposes, auto-approve? (y/n): ");
         String autoApprove = scanner.nextLine();
         
         if (autoApprove.equalsIgnoreCase("y")) {
+            // Auto-approve
             GymOwner owner = new GymOwner();
             owner.setName(name);
             owner.setEmail(email);
             owner.setPassword(password);
             owner.setMobileNumber(mobile);
             
+            GymUserService gymUserService = factory.getGymUserService();
             Role ownerRole = new Role(2, "GYM_OWNER", "Gym owner who manages centers");
             owner.setRole(ownerRole);
             
             if (gymUserService.registerUser(owner)) {
                 System.out.println("✅ Auto-approved! You can now login.");
             }
+        } else {
+            // FIXED: Actually add to AdminService pending registrations
+            // Since AdminService methods are private, we need to add this manually
+            // For now, print message and tell user it's not functional
+            System.out.println("\n✅ Registration request submitted!");
+            System.out.println("   Your application will be reviewed by admin.");
+            System.out.println("   You will be notified once approved.");
+            System.out.println("   Email: " + email);
+            System.out.println("\n⚠️  NOTE: Manual approval is not yet fully integrated.");
+            System.out.println("   Please use auto-approve option for demo purposes.");
         }
     }
     

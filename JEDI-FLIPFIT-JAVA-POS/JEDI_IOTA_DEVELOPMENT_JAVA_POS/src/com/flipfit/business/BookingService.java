@@ -145,21 +145,27 @@ public class BookingService implements BookingServiceInterface {
             return;
         }
         
+        // FIXED: Store old status BEFORE updating
+        BookingStatus oldStatus = booking.getStatus();
+        
         // Update booking status
         booking.setStatus(BookingStatus.CANCELLED);
         
-        // Decrease slot booking count
-        int slotId = booking.getSlotId();
-        slotBookingCount.put(slotId, slotBookingCount.getOrDefault(slotId, 1) - 1);
-        
-        // Increase available seats
-        if (slotService != null) {
-            slotService.increaseAvailableSeats(slotId);
-        }
-        
-        // Promote from waitlist if applicable
-        if (waitlistService != null) {
-            waitlistService.promoteFromWaitlist(slotId);
+        // FIXED: Only decrease count and increase seats if booking was CONFIRMED
+        if (oldStatus == BookingStatus.CONFIRMED) {
+            // Decrease slot booking count
+            int slotId = booking.getSlotId();
+            slotBookingCount.put(slotId, slotBookingCount.getOrDefault(slotId, 1) - 1);
+            
+            // Increase available seats
+            if (slotService != null) {
+                slotService.increaseAvailableSeats(slotId);
+            }
+            
+            // Promote from waitlist if applicable
+            if (waitlistService != null) {
+                waitlistService.promoteFromWaitlist(slotId);
+            }
         }
         
         System.out.println("✅ Booking cancelled successfully!");

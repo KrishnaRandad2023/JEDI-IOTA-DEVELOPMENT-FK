@@ -139,7 +139,7 @@ public class CustomerService {
     
     // ==================== BOOKING OPERATIONS ====================
     
-    // 8. Book a slot
+ // 8. Book a slot
     public boolean bookSlot(int userId, int slotId) {
         if (bookingService == null || slotService == null) {
             System.out.println("❌ Required services not available!");
@@ -173,9 +173,15 @@ public class CustomerService {
             return false;
         }
         
+        // FIXED: Check availability BEFORE booking to return accurate result
+        boolean hasSeats = slotService.hasAvailableSeats(slotId);
+        
         // Try to book
         bookingService.bookSlot(userId, slotId, new Date());
-        return true;
+        
+        // FIXED: Return true only if seats were available (confirmed booking)
+        // If no seats, user was added to waitlist, so return false
+        return hasSeats;
     }
     
     // 9. Cancel a booking
