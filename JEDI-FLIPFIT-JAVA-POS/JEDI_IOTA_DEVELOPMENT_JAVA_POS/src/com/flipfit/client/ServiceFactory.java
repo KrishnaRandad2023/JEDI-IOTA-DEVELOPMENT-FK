@@ -96,14 +96,30 @@ public class ServiceFactory {
     }
     
     // Display initialization summary
+ // Display initialization summary
     private void displayInitializationSummary() {
         System.out.println("📊 SYSTEM SUMMARY:");
-        System.out.println("   - Users: " + gymUserService.getAllUsers().size());
-        System.out.println("   - Gym Centers: " + gymService.getAllCenters().size());
-        System.out.println("   - Slots: " + slotService.getAllSlots().size());
-        System.out.println("   - Bookings: " + bookingService.getAllBookings().size());
-        System.out.println("   - Waitlist Entries: " + waitlistService.getAllWaitlistEntries().size());
-        System.out.println("   - Pending Registrations: " + adminService.getAllPendingRegistrations().size());
+        
+        // FIXED: Add null checks to prevent NullPointerException
+        int userCount = (gymUserService != null && gymUserService.getAllUsers() != null) 
+            ? gymUserService.getAllUsers().size() : 0;
+        int centerCount = (gymService != null && gymService.getAllCenters() != null) 
+            ? gymService.getAllCenters().size() : 0;
+        int slotCount = (slotService != null && slotService.getAllSlots() != null) 
+            ? slotService.getAllSlots().size() : 0;
+        int bookingCount = (bookingService != null && bookingService.getAllBookings() != null) 
+            ? bookingService.getAllBookings().size() : 0;
+        int waitlistCount = (waitlistService != null && waitlistService.getAllWaitlistEntries() != null) 
+            ? waitlistService.getAllWaitlistEntries().size() : 0;
+        int registrationCount = (adminService != null && adminService.getAllPendingRegistrations() != null) 
+            ? adminService.getAllPendingRegistrations().size() : 0;
+        
+        System.out.println("   - Users: " + userCount);
+        System.out.println("   - Gym Centers: " + centerCount);
+        System.out.println("   - Slots: " + slotCount);
+        System.out.println("   - Bookings: " + bookingCount);
+        System.out.println("   - Waitlist Entries: " + waitlistCount);
+        System.out.println("   - Pending Registrations: " + registrationCount);
         System.out.println();
     }
     

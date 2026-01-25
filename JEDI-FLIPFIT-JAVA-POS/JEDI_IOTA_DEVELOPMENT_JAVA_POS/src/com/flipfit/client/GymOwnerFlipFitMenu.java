@@ -207,7 +207,7 @@ public class GymOwnerFlipFitMenu implements FlipFitMenuInterface {
         System.out.println("   ⏳ Pending: " + pending.size());
     }
     
-    // 5. Add slot to center
+ // 5. Add slot to center
     private void addSlotToCenter(Scanner scanner) {
         System.out.println("\n═══ ADD SLOT TO CENTER ═══");
         
@@ -239,10 +239,22 @@ public class GymOwnerFlipFitMenu implements FlipFitMenuInterface {
         int totalSeats = scanner.nextInt();
         scanner.nextLine();
         
+        // FIXED: Add validation for totalSeats > 0
+        if (totalSeats <= 0) {
+            System.out.println("❌ Total seats must be greater than 0!");
+            return;
+        }
+        
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
             LocalTime startTime = LocalTime.parse(startTimeStr, formatter);
             LocalTime endTime = LocalTime.parse(endTimeStr, formatter);
+            
+            // FIXED: Validate that end time is after start time
+            if (!endTime.isAfter(startTime)) {
+                System.out.println("❌ End time must be after start time!");
+                return;
+            }
             
             boolean success = gymOwnerService.addSlotToCenter(
                 loggedInOwner.getUserId(), 
