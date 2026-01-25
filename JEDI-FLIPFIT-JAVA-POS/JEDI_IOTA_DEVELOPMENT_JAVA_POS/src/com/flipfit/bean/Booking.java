@@ -7,7 +7,7 @@ public class Booking {
 	private int userId;
     private int slotId;
     private Date bookingDate;
-    //private BookingStatus status; // CONFIRMED, CANCELLED, WAITLISTED 
+    private BookingStatus status; // CONFIRMED, CANCELLED, WAITLISTED 
     
     
     public int getBookingId() {
@@ -34,11 +34,11 @@ public class Booking {
 	public void setBookingDate(Date bookingDate) {
 		this.bookingDate = bookingDate;
 	}
-//	public BookingStatus getStatus() {
-//		return status;
-//	}
-//	public void setStatus(BookingStatus status) {
-//		this.status = status;
-//	}
+	public BookingStatus getStatus() {
+		return status;
+	}
+	public void setStatus(BookingStatus status) {
+		this.status = status;
+	}
 	
 }
