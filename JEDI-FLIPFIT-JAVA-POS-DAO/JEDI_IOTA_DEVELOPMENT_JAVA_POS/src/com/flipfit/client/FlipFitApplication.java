@@ -4,7 +4,6 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import com.flipfit.bean.*;
 import com.flipfit.business.*;
-import com.flipfit.dao.TestDAO;
 
 public class FlipFitApplication {
 
@@ -12,12 +11,10 @@ public class FlipFitApplication {
     private static User loggedInUser = null;
 
     public static void main(String[] args) {
-        TestDAO testDAO = new TestDAO();
-        testDAO.insertCustomer(23, "sdc", "add@dcw.com", "4354343");
 
         Scanner scanner = new Scanner(System.in);
 
-        // Initialize all services via ServiceFactory
+        // Welcome banner
         System.out.println("\n");
         System.out.println("████████████████████████████████████████");
         System.out.println("█                                      █");
@@ -27,6 +24,15 @@ public class FlipFitApplication {
         System.out.println("████████████████████████████████████████");
         System.out.println();
 
+        // Test database connection FIRST
+        if (!com.flipfit.utils.DBConnection.testConnection()) {
+            System.out.println("\n❌ Cannot start application without database connection!");
+            System.out.println("Please fix the database connection and try again.\n");
+            scanner.close();
+            return;
+        }
+
+        // Initialize all services via ServiceFactory
         ServiceFactory factory = ServiceFactory.getInstance();
         gymUserService = factory.getGymUserService();
 
@@ -93,6 +99,16 @@ public class FlipFitApplication {
         if (user != null) {
             loggedInUser = user;
 
+            // DEBUG PRINTS
+            System.out.println("\n🔍 DEBUG LOG:");
+            System.out.println("   - User Class: " + user.getClass().getName());
+            if (user.getRole() != null) {
+                System.out.println("   - Role ID: " + user.getRole().getRoleId());
+                System.out.println("   - Role Name: " + user.getRole().getRoleName());
+            } else {
+                System.out.println("   - Role is NULL!");
+            }
+
             // Route to appropriate menu based on role
             if (user instanceof GymAdmin) {
                 System.out.println("\n🔑 Admin Access Granted!");
@@ -107,7 +123,7 @@ public class FlipFitApplication {
                 CustomerFlipFitMenu customerMenu = new CustomerFlipFitMenu(user);
                 customerMenu.displayMenu(scanner);
             } else {
-                System.out.println("\n✅ Login Successful!");
+                System.out.println("\n✅ Login Successful (Generic User Object)!");
                 System.out.println("   Welcome, " + user.getName() + "!");
             }
 

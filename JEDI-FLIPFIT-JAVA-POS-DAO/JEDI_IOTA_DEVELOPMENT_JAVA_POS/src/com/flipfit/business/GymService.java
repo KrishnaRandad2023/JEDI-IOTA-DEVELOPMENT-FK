@@ -59,61 +59,35 @@ public class GymService implements GymServiceInterface {
 
     // 4. Update gym center details
     public boolean updateGymCenter(GymCenter center) {
-        if (!gymCenters.containsKey(center.getCenterId())) {
+        if (gymOwnerDAO.getGymCenterById(center.getCenterId()) == null) {
             System.out.println("❌ Center not found!");
             return false;
         }
-
-        GymCenter oldCenter = gymCenters.get(center.getCenterId());
-
-        // Update in main map
-        gymCenters.put(center.getCenterId(), center);
-
-        // Update in owner's list
-        List<GymCenter> ownerCenterList = ownerCenters.get(center.getOwnerId());
-        if (ownerCenterList != null) {
-            for (int i = 0; i < ownerCenterList.size(); i++) {
-                if (ownerCenterList.get(i).getCenterId() == center.getCenterId()) {
-                    ownerCenterList.set(i, center);
-                    break;
-                }
-            }
+        boolean success = gymOwnerDAO.updateGymCenter(center);
+        if (success) {
+            System.out.println("✅ Center updated successfully!");
         }
-
-        // Update in city list (if city changed)
-        if (!oldCenter.getCity().equals(center.getCity())) {
-            // Remove from old city
-            List<GymCenter> oldCityList = cityCenters.get(oldCenter.getCity());
-            if (oldCityList != null) {
-                oldCityList.removeIf(c -> c.getCenterId() == center.getCenterId());
-            }
-
-            // Add to new city
-            cityCenters.computeIfAbsent(center.getCity(), k -> new ArrayList<>()).add(center);
-        }
-
-        System.out.println("✅ Center updated successfully!");
-        return true;
+        return success;
     }
 
     // 5. Get center by ID
     public GymCenter getCenterById(int centerId) {
-        return gymCenters.get(centerId);
+        return gymOwnerDAO.getGymCenterById(centerId);
     }
 
     // 6. Get all centers owned by a specific owner
     public List<GymCenter> getCentersByOwner(int ownerId) {
-        return ownerCenters.getOrDefault(ownerId, new ArrayList<>());
+        return gymOwnerDAO.viewMyGymCenters(ownerId);
     }
 
     // 7. Get centers pending admin approval
     public List<GymCenter> getPendingApprovals() {
-        return new ArrayList<>(pendingApprovals);
+        return gymAdminDAO.viewPendingGymCenters();
     }
 
     // 8. Admin approves a gym center
     public boolean approveCenterRegistration(int centerId) {
-        GymCenter center = gymCenters.get(centerId);
+        GymCenter center = gymOwnerDAO.getGymCenterById(centerId);
 
         if (center == null) {
             System.out.println("❌ Center not found!");
@@ -125,90 +99,57 @@ public class GymService implements GymServiceInterface {
             return false;
         }
 
-        // Approve the center
-        center.setApproved(true);
-        approvedCenterIds.add(centerId);
+        // Approve the center using GymAdminDAO
+        boolean success = gymAdminDAO.approveGymCenter(centerId);
 
-        // Remove from pending list
-        pendingApprovals.removeIf(c -> c.getCenterId() == centerId);
-
-        System.out.println("✅ Center approved successfully!");
-        System.out.println("   Center: " + center.getCenterName());
-        return true;
+        if (success) {
+            System.out.println("✅ Center approved successfully!");
+        }
+        return success;
     }
 
     // 9. Admin rejects a gym center
     public boolean rejectCenterRegistration(int centerId) {
-        GymCenter center = gymCenters.get(centerId);
+        GymCenter center = gymOwnerDAO.getGymCenterById(centerId);
 
         if (center == null) {
             System.out.println("❌ Center not found!");
             return false;
         }
 
-        // Remove from all collections
-        gymCenters.remove(centerId);
-        pendingApprovals.removeIf(c -> c.getCenterId() == centerId);
+        // Rejecting usually implies deleting or setting status to rejected.
+        // Assuming deletion for rejection as per original in-memory logic.
+        boolean success = gymOwnerDAO.deleteGymCenter(centerId);
 
-        // Remove from owner's list
-        List<GymCenter> ownerCenterList = ownerCenters.get(center.getOwnerId());
-        if (ownerCenterList != null) {
-            ownerCenterList.removeIf(c -> c.getCenterId() == centerId);
+        if (success) {
+            System.out.println("✅ Center registration rejected and removed!");
         }
-
-        // Remove from city list
-        List<GymCenter> cityCenterList = cityCenters.get(center.getCity());
-        if (cityCenterList != null) {
-            cityCenterList.removeIf(c -> c.getCenterId() == centerId);
-        }
-
-        System.out.println("✅ Center registration rejected and removed!");
-        return true;
+        return success;
     }
 
     // 10. Get all gym centers (Admin view)
     public List<GymCenter> getAllCenters() {
-        return new ArrayList<>(gymCenters.values());
+        return gymAdminDAO.viewGymCenters();
     }
 
     // 11. Get only approved centers
     public List<GymCenter> getApprovedCenters() {
-        List<GymCenter> approved = new ArrayList<>();
-        for (GymCenter center : gymCenters.values()) {
-            if (center.isApproved()) {
-                approved.add(center);
-            }
-        }
-        return approved;
+        return gymCustomerDAO.viewGyms();
     }
 
     // 12. Delete gym center (Owner or Admin)
     public boolean deleteGymCenter(int centerId) {
-        GymCenter center = gymCenters.remove(centerId);
-
-        if (center != null) {
-            // Remove from owner's list
-            List<GymCenter> ownerCenterList = ownerCenters.get(center.getOwnerId());
-            if (ownerCenterList != null) {
-                ownerCenterList.removeIf(c -> c.getCenterId() == centerId);
-            }
-
-            // Remove from city list
-            List<GymCenter> cityCenterList = cityCenters.get(center.getCity());
-            if (cityCenterList != null) {
-                cityCenterList.removeIf(c -> c.getCenterId() == centerId);
-            }
-
-            // Remove from approval lists
-            approvedCenterIds.remove(centerId);
-            pendingApprovals.removeIf(c -> c.getCenterId() == centerId);
-
-            System.out.println("✅ Center deleted successfully!");
-            return true;
+        if (gymOwnerDAO.getGymCenterById(centerId) == null) {
+            System.out.println("❌ Center not found!");
+            return false;
         }
-
-        System.out.println("❌ Center not found!");
-        return false;
+        boolean success = gymOwnerDAO.deleteGymCenter(centerId);
+        if (success) {
+            System.out.println("✅ Center deleted successfully!");
+        } else {
+            System.out.println("❌ Failed to delete center.");
+        }
+        return success;
     }
 
     // 13. Display center details (helper method)
@@ -241,6 +182,7 @@ public class GymService implements GymServiceInterface {
 
     // 15. Display pending approvals
     public void displayPendingApprovals() {
+        List<GymCenter> pendingApprovals = getPendingApprovals();
         if (pendingApprovals.isEmpty()) {
             System.out.println("No pending approvals!");
         } else {
