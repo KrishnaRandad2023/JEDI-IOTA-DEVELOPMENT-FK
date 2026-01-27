@@ -5,23 +5,23 @@ import com.flipfit.bean.*;
 import com.flipfit.business.*;
 
 public class CustomerFlipFitMenu implements FlipFitMenuInterface {
-    
+
     private CustomerService customerService;
     private User loggedInCustomer;
-    
+
     public CustomerFlipFitMenu(User customer) {
         // Get services from factory
         ServiceFactory factory = ServiceFactory.getInstance();
         this.customerService = factory.getCustomerService();
         this.loggedInCustomer = customer;
     }
-    
+
     @Override
     public void displayMenu(Scanner scanner) {
         int choice = 0;
-        
+
         System.out.println("\n👋 Welcome, " + loggedInCustomer.getName() + "!");
-        
+
         while (choice != 11) {
             System.out.println("\n╔════════════════════════════════════╗");
             System.out.println("║       GYM CUSTOMER MENU            ║");
@@ -39,11 +39,11 @@ public class CustomerFlipFitMenu implements FlipFitMenuInterface {
             System.out.println("║ 11. Logout                         ║");
             System.out.println("╚════════════════════════════════════╝");
             System.out.print("Enter choice: ");
-            
+
             try {
                 choice = scanner.nextInt();
                 scanner.nextLine(); // Consume newline
-                
+
                 switch (choice) {
                     case 1:
                         viewGymsInCity(scanner);
@@ -87,24 +87,24 @@ public class CustomerFlipFitMenu implements FlipFitMenuInterface {
             }
         }
     }
-    
+
     // 1. View gyms in a city
     private void viewGymsInCity(Scanner scanner) {
         System.out.println("\n═══ VIEW GYMS BY CITY ═══");
         System.out.print("Enter City Name: ");
         String city = scanner.nextLine();
-        
+
         customerService.displayGymsInCity(city);
     }
-    
+
     // 2. Search gyms by name
     private void searchGymsByName(Scanner scanner) {
         System.out.println("\n═══ SEARCH GYMS ═══");
         System.out.print("Enter Gym Name (or part of it): ");
         String searchTerm = scanner.nextLine();
-        
+
         List<GymCenter> matchingGyms = customerService.searchGymsByName(searchTerm);
-        
+
         if (matchingGyms.isEmpty()) {
             System.out.println("❌ No gyms found matching '" + searchTerm + "'");
         } else {
@@ -119,132 +119,147 @@ public class CustomerFlipFitMenu implements FlipFitMenuInterface {
             }
         }
     }
-    
+
     // 3. View gym details with slots
     private void viewGymDetails(Scanner scanner) {
         System.out.println("\n═══ VIEW GYM DETAILS ═══");
         System.out.print("Enter Gym Center ID: ");
         int centerId = scanner.nextInt();
         scanner.nextLine();
-        
+
         customerService.displayGymWithSlots(centerId);
     }
-    
+
     // 4. Book a slot
     private void bookSlot(Scanner scanner) {
         System.out.println("\n═══ BOOK A SLOT ═══");
-        
+
         // First, show available gyms
         System.out.print("Enter City to view gyms: ");
         String city = scanner.nextLine();
-        
+
         List<GymCenter> gyms = customerService.viewGymsInCity(city);
-        
+
         if (gyms.isEmpty()) {
             System.out.println("❌ No gyms found in " + city);
             return;
         }
-        
+
         System.out.println("\nAvailable Gyms:");
         for (GymCenter center : gyms) {
             System.out.println("  ID: " + center.getCenterId() + " - " + center.getCenterName());
         }
-        
+
         System.out.print("\nEnter Gym Center ID to view slots: ");
         int centerId = scanner.nextInt();
         scanner.nextLine();
-        
+
         // Show available slots
         List<Slot> availableSlots = customerService.viewAvailableSlotsForGym(centerId);
-        
+
         if (availableSlots.isEmpty()) {
             System.out.println("❌ No available slots for this gym!");
             return;
         }
-        
+
         System.out.println("\nAvailable Slots:");
         for (Slot slot : availableSlots) {
-            System.out.println("  Slot ID: " + slot.getSlotId() + 
-                             " | Time: " + slot.getStartTime() + " - " + slot.getEndTime() + 
-                             " | Available: " + slot.getAvailableSeats() + "/" + slot.getTotalSeats());
+            System.out.println("  Slot ID: " + slot.getSlotId() +
+                    " | Time: " + slot.getStartTime() + " - " + slot.getEndTime() +
+                    " | Available: " + slot.getAvailableSeats() + "/" + slot.getTotalSeats());
         }
-        
+
         System.out.print("\nEnter Slot ID to book (0 to cancel): ");
         int slotId = scanner.nextInt();
         scanner.nextLine();
-        
+
         if (slotId == 0) {
             System.out.println("Cancelled.");
             return;
         }
-        
+
         System.out.print("Confirm booking? (y/n): ");
         String confirm = scanner.nextLine();
-        
+
         if (confirm.equalsIgnoreCase("y")) {
-            customerService.bookSlot(loggedInCustomer.getUserId(), slotId);
+            // INTEGRATED PAYMENT STEP via Payment Menu
+            PaymentFlipFitMenu paymentMenu = new PaymentFlipFitMenu();
+            double amount = 500.00; // Mock amount
+
+            boolean paymentSuccess = paymentMenu.showPaymentMenu(scanner, amount);
+
+            if (paymentSuccess) {
+                boolean bookingSuccess = customerService.bookSlot(loggedInCustomer.getUserId(), slotId);
+                if (!bookingSuccess) {
+                    System.out.println("⚠️ Booking failed (refund initiated in real system). slot might be full.");
+                } else {
+                    System.out.println("\n✅ Booking Confirmed!");
+                }
+            } else {
+                System.out.println("❌ Payment failed or cancelled! Booking aborted.");
+            }
         } else {
             System.out.println("Booking cancelled.");
         }
     }
-    
+
     // 5. Cancel a booking
     private void cancelBooking(Scanner scanner) {
         System.out.println("\n═══ CANCEL BOOKING ═══");
-        
+
         // Show user's active bookings
         List<Booking> activeBookings = customerService.viewMyActiveBookings(loggedInCustomer.getUserId());
-        
+
         if (activeBookings.isEmpty()) {
             System.out.println("❌ You have no active bookings to cancel.");
             return;
         }
-        
+
         System.out.println("\nYour Active Bookings:");
         for (Booking booking : activeBookings) {
             Slot slot = customerService.getSlotDetails(booking.getSlotId());
-            System.out.println("  Booking ID: " + booking.getBookingId() + 
-                             " | Slot: " + (slot != null ? slot.getStartTime() + "-" + slot.getEndTime() : booking.getSlotId()) + 
-                             " | Date: " + booking.getBookingDate());
+            System.out.println("  Booking ID: " + booking.getBookingId() +
+                    " | Slot: " + (slot != null ? slot.getStartTime() + "-" + slot.getEndTime() : booking.getSlotId()) +
+                    " | Date: " + booking.getBookingDate());
         }
-        
+
         System.out.print("\nEnter Booking ID to cancel (0 to go back): ");
         int bookingId = scanner.nextInt();
         scanner.nextLine();
-        
+
         if (bookingId == 0) {
             System.out.println("Cancelled.");
             return;
         }
-        
+
         System.out.print("⚠️ Are you sure you want to cancel this booking? (y/n): ");
         String confirm = scanner.nextLine();
-        
+
         if (confirm.equalsIgnoreCase("y")) {
             customerService.cancelBooking(loggedInCustomer.getUserId(), bookingId);
         } else {
             System.out.println("Cancellation aborted.");
         }
     }
-    
+
     // 6. View all my bookings
     private void viewMyBookings() {
         System.out.println("\n═══ MY BOOKINGS ═══");
         customerService.displayMyBookings(loggedInCustomer.getUserId());
     }
-    
+
     // 7. View my active bookings
     private void viewMyActiveBookings() {
         System.out.println("\n═══ MY ACTIVE BOOKINGS ═══");
         customerService.displayMyActiveBookings(loggedInCustomer.getUserId());
     }
-    
+
     // 8. View waitlist status
     private void viewMyWaitlistStatus() {
         System.out.println("\n═══ MY WAITLIST STATUS ═══");
         customerService.displayMyWaitlistStatus(loggedInCustomer.getUserId());
     }
-    
+
     // 9. Update profile
     private void updateProfile(Scanner scanner) {
         System.out.println("\n═══ UPDATE PROFILE ═══");
@@ -253,10 +268,10 @@ public class CustomerFlipFitMenu implements FlipFitMenuInterface {
         System.out.println("3. Change Password");
         System.out.println("4. Back");
         System.out.print("Enter choice: ");
-        
+
         int choice = scanner.nextInt();
         scanner.nextLine();
-        
+
         switch (choice) {
             case 1:
                 System.out.print("Enter New Name: ");
@@ -266,7 +281,7 @@ public class CustomerFlipFitMenu implements FlipFitMenuInterface {
                     System.out.println("✅ Name updated successfully!");
                 }
                 break;
-                
+
             case 2:
                 System.out.print("Enter New Mobile Number: ");
                 String newMobile = scanner.nextLine();
@@ -275,7 +290,7 @@ public class CustomerFlipFitMenu implements FlipFitMenuInterface {
                     System.out.println("✅ Mobile number updated successfully!");
                 }
                 break;
-                
+
             case 3:
                 System.out.print("Enter Old Password: ");
                 String oldPassword = scanner.nextLine();
@@ -283,26 +298,25 @@ public class CustomerFlipFitMenu implements FlipFitMenuInterface {
                 String newPassword = scanner.nextLine();
                 System.out.print("Confirm New Password: ");
                 String confirmPassword = scanner.nextLine();
-                
+
                 if (!newPassword.equals(confirmPassword)) {
                     System.out.println("❌ Passwords don't match!");
                 } else {
                     customerService.changeMyPassword(
-                        loggedInCustomer.getUserId(), 
-                        oldPassword, 
-                        newPassword
-                    );
+                            loggedInCustomer.getUserId(),
+                            oldPassword,
+                            newPassword);
                 }
                 break;
-                
+
             case 4:
                 return;
-                
+
             default:
                 System.out.println("❌ Invalid choice!");
         }
     }
-    
+
     // 10. View statistics
     private void viewMyStatistics() {
         System.out.println("\n═══ MY STATISTICS ═══");
