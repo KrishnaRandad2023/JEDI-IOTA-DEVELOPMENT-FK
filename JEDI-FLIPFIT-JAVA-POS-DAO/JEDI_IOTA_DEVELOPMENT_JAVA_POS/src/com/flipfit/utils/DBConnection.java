@@ -18,4 +18,37 @@ public class DBConnection {
         }
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
+
+    /**
+     * Test database connection and print status
+     * 
+     * @return true if connection successful, false otherwise
+     */
+    public static boolean testConnection() {
+        System.out.println("\n╔════════════════════════════════════════╗");
+        System.out.println("║   TESTING DATABASE CONNECTION          ║");
+        System.out.println("╚════════════════════════════════════════╝");
+        System.out.println("📍 Database URL: " + URL);
+        System.out.println("👤 User: " + USER);
+
+        try (Connection conn = getConnection()) {
+            if (conn != null && !conn.isClosed()) {
+                System.out.println("✅ Database connection successful!");
+                System.out.println("🔗 Connected to: " + conn.getCatalog());
+                return true;
+            } else {
+                System.out.println("❌ Database connection failed!");
+                return false;
+            }
+        } catch (SQLException e) {
+            System.out.println("❌ Database connection failed!");
+            System.out.println("⚠️  Error: " + e.getMessage());
+            System.out.println("\n💡 Troubleshooting:");
+            System.out.println("   1. Check if MySQL server is running");
+            System.out.println("   2. Verify database 'flipfit_schema' exists");
+            System.out.println("   3. Confirm username/password are correct");
+            System.out.println("   4. Run init_data.sql to populate Role table");
+            return false;
+        }
+    }
 }

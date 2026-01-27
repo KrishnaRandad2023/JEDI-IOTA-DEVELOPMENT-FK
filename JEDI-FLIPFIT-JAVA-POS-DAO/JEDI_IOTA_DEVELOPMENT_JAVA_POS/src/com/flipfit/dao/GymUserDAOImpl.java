@@ -2,6 +2,9 @@ package com.flipfit.dao;
 
 import com.flipfit.bean.Role;
 import com.flipfit.bean.User;
+import com.flipfit.bean.GymAdmin;
+import com.flipfit.bean.GymOwner;
+import com.flipfit.bean.GymCustomer;
 import com.flipfit.utils.DBConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -47,21 +50,31 @@ public class GymUserDAOImpl implements GymUserDAO {
 
     @Override
     public User getUserByEmail(String email) {
-        String query = "SELECT * FROM User WHERE email = ?";
+        String query = "SELECT u.*, r.roleName FROM User u " +
+                "LEFT JOIN Role r ON u.roleId = r.roleId " +
+                "WHERE u.email = ?";
         try (Connection conn = DBConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, email);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                User user = new User();
+                int roleId = rs.getInt("roleId");
+                String roleName = rs.getString("roleName");
+
+                // Create the appropriate user subclass based on role
+                User user = createUserByRole(roleId, roleName);
+
                 user.setUserId(rs.getInt("userId"));
                 user.setName(rs.getString("name"));
                 user.setEmail(rs.getString("email"));
                 user.setPassword(rs.getString("password"));
                 user.setMobileNumber(rs.getString("mobileNumber"));
+
                 Role role = new Role();
-                role.setRoleId(rs.getInt("roleId"));
+                role.setRoleId(roleId);
+                role.setRoleName(roleName);
                 user.setRole(role);
+
                 return user;
             }
         } catch (SQLException e) {
@@ -72,27 +85,52 @@ public class GymUserDAOImpl implements GymUserDAO {
 
     @Override
     public User getUserById(int userId) {
-        String query = "SELECT * FROM User WHERE userId = ?";
+        String query = "SELECT u.*, r.roleName FROM User u " +
+                "LEFT JOIN Role r ON u.roleId = r.roleId " +
+                "WHERE u.userId = ?";
         try (Connection conn = DBConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setInt(1, userId);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                User user = new User();
+                int roleId = rs.getInt("roleId");
+                String roleName = rs.getString("roleName");
+
+                // Create the appropriate user subclass based on role
+                User user = createUserByRole(roleId, roleName);
+
                 user.setUserId(rs.getInt("userId"));
                 user.setName(rs.getString("name"));
                 user.setEmail(rs.getString("email"));
                 user.setPassword(rs.getString("password"));
                 user.setMobileNumber(rs.getString("mobileNumber"));
+
                 Role role = new Role();
-                role.setRoleId(rs.getInt("roleId"));
+                role.setRoleId(roleId);
+                role.setRoleName(roleName);
                 user.setRole(role);
+
                 return user;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    /**
+     * Helper method to create correct User subclass based on roleId and roleName
+     */
+    private User createUserByRole(int roleId, String roleName) {
+        if (roleId == 1 || (roleName != null && roleName.equalsIgnoreCase("ADMIN"))) {
+            return new GymAdmin();
+        } else if (roleId == 2 || (roleName != null && roleName.equalsIgnoreCase("GYM_OWNER"))) {
+            return new GymOwner();
+        } else if (roleId == 3 || (roleName != null && roleName.equalsIgnoreCase("CUSTOMER"))) {
+            return new GymCustomer();
+        } else {
+            return new User();
+        }
     }
 
     @Override
@@ -144,20 +182,27 @@ public class GymUserDAOImpl implements GymUserDAO {
     @Override
     public List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
-        String query = "SELECT * FROM User";
+        String query = "SELECT u.*, r.roleName FROM User u " +
+                "LEFT JOIN Role r ON u.roleId = r.roleId";
         try (Connection conn = DBConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(query);
                 ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
-                User user = new User();
+                int roleId = rs.getInt("roleId");
+                String roleName = rs.getString("roleName");
+                User user = createUserByRole(roleId, roleName);
+
                 user.setUserId(rs.getInt("userId"));
                 user.setName(rs.getString("name"));
                 user.setEmail(rs.getString("email"));
                 user.setPassword(rs.getString("password"));
                 user.setMobileNumber(rs.getString("mobileNumber"));
+
                 Role role = new Role();
-                role.setRoleId(rs.getInt("roleId"));
+                role.setRoleId(roleId);
+                role.setRoleName(roleName);
                 user.setRole(role);
+
                 users.add(user);
             }
         } catch (SQLException e) {
@@ -169,21 +214,28 @@ public class GymUserDAOImpl implements GymUserDAO {
     @Override
     public List<User> getUsersByRole(int roleId) {
         List<User> users = new ArrayList<>();
-        String query = "SELECT * FROM User WHERE roleId = ?";
+        String query = "SELECT u.*, r.roleName FROM User u " +
+                "LEFT JOIN Role r ON u.roleId = r.roleId " +
+                "WHERE u.roleId = ?";
         try (Connection conn = DBConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setInt(1, roleId);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                User user = new User();
+                String roleName = rs.getString("roleName");
+                User user = createUserByRole(roleId, roleName);
+
                 user.setUserId(rs.getInt("userId"));
                 user.setName(rs.getString("name"));
                 user.setEmail(rs.getString("email"));
                 user.setPassword(rs.getString("password"));
                 user.setMobileNumber(rs.getString("mobileNumber"));
+
                 Role role = new Role();
-                role.setRoleId(rs.getInt("roleId"));
+                role.setRoleId(roleId);
+                role.setRoleName(roleName);
                 user.setRole(role);
+
                 users.add(user);
             }
         } catch (SQLException e) {
