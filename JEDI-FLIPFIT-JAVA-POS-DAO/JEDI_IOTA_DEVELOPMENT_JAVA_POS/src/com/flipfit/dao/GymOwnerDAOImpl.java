@@ -2,6 +2,7 @@ package com.flipfit.dao;
 
 import com.flipfit.bean.GymCenter;
 import com.flipfit.bean.Slot;
+import com.flipfit.constants.SQLConstants;
 import com.flipfit.utils.DBConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,7 +16,7 @@ public class GymOwnerDAOImpl implements GymOwnerDAO {
 
     @Override
     public boolean addGymCenter(GymCenter gymCenter) {
-        String query = "INSERT INTO GymCenter (ownerId, centerName, address, city, capacity, isApproved) VALUES (?, ?, ?, ?, ?, ?)";
+        String query = SQLConstants.ADD_GYM_CENTER;
         try (Connection conn = DBConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setInt(1, gymCenter.getOwnerId());
@@ -34,7 +35,7 @@ public class GymOwnerDAOImpl implements GymOwnerDAO {
 
     @Override
     public boolean addSlot(Slot slot) {
-        String query = "INSERT INTO Slot (centerId, startTime, endTime, totalSeats, availableSeats) VALUES (?, ?, ?, ?, ?)";
+        String query = SQLConstants.ADD_SLOT;
         try (Connection conn = DBConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setInt(1, slot.getCenterId());
@@ -53,7 +54,7 @@ public class GymOwnerDAOImpl implements GymOwnerDAO {
     @Override
     public List<GymCenter> viewMyGymCenters(int ownerId) {
         List<GymCenter> gyms = new ArrayList<>();
-        String query = "SELECT * FROM GymCenter WHERE ownerId = ?";
+        String query = SQLConstants.GET_MY_GYM_CENTERS;
         try (Connection conn = DBConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setInt(1, ownerId);
@@ -77,7 +78,7 @@ public class GymOwnerDAOImpl implements GymOwnerDAO {
 
     @Override
     public boolean updateGymCenter(GymCenter gymCenter) {
-        String query = "UPDATE GymCenter SET centerName = ?, address = ?, city = ?, capacity = ? WHERE centerId = ?";
+        String query = SQLConstants.UPDATE_GYM_CENTER;
         try (Connection conn = DBConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, gymCenter.getCenterName());
@@ -95,7 +96,7 @@ public class GymOwnerDAOImpl implements GymOwnerDAO {
 
     @Override
     public boolean deleteGymCenter(int centerId) {
-        String query = "DELETE FROM GymCenter WHERE centerId = ?";
+        String query = SQLConstants.DELETE_GYM_CENTER;
         try (Connection conn = DBConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setInt(1, centerId);
@@ -109,7 +110,7 @@ public class GymOwnerDAOImpl implements GymOwnerDAO {
 
     @Override
     public GymCenter getGymCenterById(int centerId) {
-        String query = "SELECT * FROM GymCenter WHERE centerId = ?";
+        String query = SQLConstants.GET_GYM_CENTER_BY_ID;
         try (Connection conn = DBConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setInt(1, centerId);
