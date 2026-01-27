@@ -3,6 +3,7 @@ package com.flipfit.dao;
 import com.flipfit.bean.Booking;
 import com.flipfit.bean.BookingStatus;
 import com.flipfit.bean.GymCenter;
+import com.flipfit.constants.SQLConstants;
 import com.flipfit.utils.DBConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,7 +18,7 @@ public class GymCustomerDAOImpl implements GymCustomerDAO {
     @Override
     public List<GymCenter> viewGyms() {
         List<GymCenter> gyms = new ArrayList<>();
-        String query = "SELECT * FROM GymCenter WHERE isApproved = true";
+        String query = SQLConstants.GET_APPROVED_GYMS;
         try (Connection conn = DBConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(query);
                 ResultSet rs = stmt.executeQuery()) {
@@ -40,7 +41,7 @@ public class GymCustomerDAOImpl implements GymCustomerDAO {
 
     @Override
     public boolean bookSlot(int bookingId, int slotId, int userId, Date date) {
-        String query = "INSERT INTO Booking (userId, slotId, bookingDate, status) VALUES (?, ?, ?, 'CONFIRMED')";
+        String query = SQLConstants.BOOK_SLOT;
         try (Connection conn = DBConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setInt(1, userId);
@@ -57,7 +58,7 @@ public class GymCustomerDAOImpl implements GymCustomerDAO {
     @Override
     public List<Booking> viewBookings(int userId) {
         List<Booking> bookings = new ArrayList<>();
-        String query = "SELECT * FROM Booking WHERE userId = ?";
+        String query = SQLConstants.GET_MY_BOOKINGS;
         try (Connection conn = DBConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setInt(1, userId);
@@ -79,7 +80,7 @@ public class GymCustomerDAOImpl implements GymCustomerDAO {
 
     @Override
     public boolean cancelBooking(int bookingId) {
-        String query = "UPDATE Booking SET status = 'CANCELLED' WHERE bookingId = ?";
+        String query = SQLConstants.CANCEL_BOOKING;
         try (Connection conn = DBConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setInt(1, bookingId);

@@ -5,6 +5,7 @@ import com.flipfit.bean.User;
 import com.flipfit.bean.GymAdmin;
 import com.flipfit.bean.GymOwner;
 import com.flipfit.bean.GymCustomer;
+import com.flipfit.constants.SQLConstants;
 import com.flipfit.utils.DBConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,7 +18,7 @@ public class GymUserDAOImpl implements GymUserDAO {
 
     @Override
     public boolean authenticateUser(User user) {
-        String query = "SELECT * FROM User WHERE email = ? AND password = ?";
+        String query = SQLConstants.AUTHENTICATE_USER;
         try (Connection conn = DBConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, user.getEmail());
@@ -32,7 +33,7 @@ public class GymUserDAOImpl implements GymUserDAO {
 
     @Override
     public boolean registerUser(User user) {
-        String query = "INSERT INTO User (name, email, password, mobileNumber, roleId) VALUES (?, ?, ?, ?, ?)";
+        String query = SQLConstants.REGISTER_USER;
         try (Connection conn = DBConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, user.getName());
@@ -50,9 +51,7 @@ public class GymUserDAOImpl implements GymUserDAO {
 
     @Override
     public User getUserByEmail(String email) {
-        String query = "SELECT u.*, r.roleName FROM User u " +
-                "LEFT JOIN Role r ON u.roleId = r.roleId " +
-                "WHERE u.email = ?";
+        String query = SQLConstants.GET_USER_BY_EMAIL;
         try (Connection conn = DBConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, email);
@@ -85,9 +84,7 @@ public class GymUserDAOImpl implements GymUserDAO {
 
     @Override
     public User getUserById(int userId) {
-        String query = "SELECT u.*, r.roleName FROM User u " +
-                "LEFT JOIN Role r ON u.roleId = r.roleId " +
-                "WHERE u.userId = ?";
+        String query = SQLConstants.GET_USER_BY_ID;
         try (Connection conn = DBConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setInt(1, userId);
@@ -135,7 +132,7 @@ public class GymUserDAOImpl implements GymUserDAO {
 
     @Override
     public boolean updateUserProfile(User user) {
-        String query = "UPDATE User SET name = ?, email = ?, mobileNumber = ? WHERE userId = ?";
+        String query = SQLConstants.UPDATE_USER_PROFILE;
         try (Connection conn = DBConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, user.getName());
@@ -152,7 +149,7 @@ public class GymUserDAOImpl implements GymUserDAO {
 
     @Override
     public boolean deleteUser(int userId) {
-        String query = "DELETE FROM User WHERE userId = ?";
+        String query = SQLConstants.DELETE_USER;
         try (Connection conn = DBConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setInt(1, userId);
@@ -166,7 +163,7 @@ public class GymUserDAOImpl implements GymUserDAO {
 
     @Override
     public boolean changePassword(int userId, String newPassword) {
-        String query = "UPDATE User SET password = ? WHERE userId = ?";
+        String query = SQLConstants.CHANGE_PASSWORD;
         try (Connection conn = DBConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, newPassword);
@@ -182,8 +179,7 @@ public class GymUserDAOImpl implements GymUserDAO {
     @Override
     public List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
-        String query = "SELECT u.*, r.roleName FROM User u " +
-                "LEFT JOIN Role r ON u.roleId = r.roleId";
+        String query = SQLConstants.GET_ALL_USERS;
         try (Connection conn = DBConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(query);
                 ResultSet rs = stmt.executeQuery()) {
@@ -214,9 +210,7 @@ public class GymUserDAOImpl implements GymUserDAO {
     @Override
     public List<User> getUsersByRole(int roleId) {
         List<User> users = new ArrayList<>();
-        String query = "SELECT u.*, r.roleName FROM User u " +
-                "LEFT JOIN Role r ON u.roleId = r.roleId " +
-                "WHERE u.roleId = ?";
+        String query = SQLConstants.GET_USERS_BY_ROLE;
         try (Connection conn = DBConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setInt(1, roleId);

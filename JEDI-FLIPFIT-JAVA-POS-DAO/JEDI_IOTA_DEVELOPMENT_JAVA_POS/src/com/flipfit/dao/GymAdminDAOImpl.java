@@ -2,6 +2,7 @@ package com.flipfit.dao;
 
 import com.flipfit.bean.GymCenter;
 import com.flipfit.bean.GymOwner;
+import com.flipfit.constants.SQLConstants;
 import com.flipfit.utils.DBConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,7 +16,7 @@ public class GymAdminDAOImpl implements GymAdminDAO {
     @Override
     public List<GymOwner> viewGymOwners() {
         List<GymOwner> owners = new ArrayList<>();
-        String query = "SELECT * FROM GymOwner JOIN User ON GymOwner.userId = User.userId";
+        String query = SQLConstants.GET_ALL_GYM_OWNERS;
         try (Connection conn = DBConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(query);
                 ResultSet rs = stmt.executeQuery()) {
@@ -38,7 +39,7 @@ public class GymAdminDAOImpl implements GymAdminDAO {
     @Override
     public List<GymCenter> viewGymCenters() {
         List<GymCenter> gyms = new ArrayList<>();
-        String query = "SELECT * FROM GymCenter";
+        String query = SQLConstants.GET_ALL_GYM_CENTERS;
         try (Connection conn = DBConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(query);
                 ResultSet rs = stmt.executeQuery()) {
@@ -97,7 +98,7 @@ public class GymAdminDAOImpl implements GymAdminDAO {
         // Registration table: ... isApproved.
         // So approval happens at registration.
 
-        String regQuery = "UPDATE Registration SET isApproved = true WHERE registrationId = ?";
+        String regQuery = SQLConstants.APPROVE_REGISTRATION;
         try (Connection conn = DBConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(regQuery)) {
             stmt.setInt(1, ownerId); // Identifying ID might vary
@@ -111,7 +112,7 @@ public class GymAdminDAOImpl implements GymAdminDAO {
 
     @Override
     public boolean approveGymCenter(int centerId) {
-        String query = "UPDATE GymCenter SET isApproved = true WHERE centerId = ?";
+        String query = SQLConstants.APPROVE_GYM_CENTER;
         try (Connection conn = DBConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setInt(1, centerId);
@@ -126,7 +127,7 @@ public class GymAdminDAOImpl implements GymAdminDAO {
     @Override
     public List<GymCenter> viewPendingGymCenters() {
         List<GymCenter> gyms = new ArrayList<>();
-        String query = "SELECT * FROM GymCenter WHERE isApproved = false";
+        String query = SQLConstants.GET_PENDING_GYM_CENTERS;
         try (Connection conn = DBConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(query);
                 ResultSet rs = stmt.executeQuery()) {
