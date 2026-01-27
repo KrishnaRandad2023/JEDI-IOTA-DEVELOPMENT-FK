@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ed61ea2d-cdae-4efe-9759-bf0a0e5097b8" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/.classpath" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/.project" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/.settings/org.eclipse.core.resources.prefs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/.settings/org.eclipse.jdt.core.prefs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/bin/com/flipfit/bean/Booking.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/bin/com/flipfit/bean/BookingNotification.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/bin/com/flipfit/bean/BookingStatus.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/bin/com/flipfit/bean/GymAdmin.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/bin/com/flipfit/bean/GymCenter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/bin/com/flipfit/bean/GymCustomer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/bin/com/flipfit/bean/GymOwner.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/bin/com/flipfit/bean/Notification.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/bin/com/flipfit/bean/Payment.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/bin/com/flipfit/bean/PromotionalNotification.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/bin/com/flipfit/bean/Registration.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/bin/com/flipfit/bean/Role.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/bin/com/flipfit/bean/Slot.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/bin/com/flipfit/bean/User.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/bin/com/flipfit/bean/WaitListNotification.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/bin/com/flipfit/bean/Waitlist.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/bin/com/flipfit/business/AdminService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/bin/com/flipfit/business/BookingService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/bin/com/flipfit/business/BookingServiceInterface.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/bin/com/flipfit/business/CustomerService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/bin/com/flipfit/business/GymOwnerService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/bin/com/flipfit/business/GymService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/bin/com/flipfit/business/GymServiceInterface.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/bin/com/flipfit/business/GymUserInterface.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/bin/com/flipfit/business/GymUserService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/bin/com/flipfit/business/PaymentService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/bin/com/flipfit/business/PaymentServiceInterface.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/bin/com/flipfit/business/SlotService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/bin/com/flipfit/business/WaitlistService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/bin/com/flipfit/business/WaitlistServiceInterface.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/bin/com/flipfit/client/AdminFlipFitMenu.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/bin/com/flipfit/client/CustomerFlipFitMenu.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/bin/com/flipfit/client/FlipFitApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/bin/com/flipfit/client/FlipFitMenuInterface.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/bin/com/flipfit/client/GymOwnerFlipFitMenu.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/bin/com/flipfit/client/PaymentFlipFitMenu.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/bin/com/flipfit/client/PaymentTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/bin/com/flipfit/client/ServiceFactory.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/bin/com/flipfit/client/UserMenu.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/bin/module-info.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/src/com/flipfit/bean/Booking.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/src/com/flipfit/bean/BookingNotification.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/src/com/flipfit/bean/BookingStatus.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/src/com/flipfit/bean/GymAdmin.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/src/com/flipfit/bean/GymCenter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/src/com/flipfit/bean/GymCustomer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/src/com/flipfit/bean/GymOwner.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/src/com/flipfit/bean/Notification.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/src/com/flipfit/bean/Payment.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/src/com/flipfit/bean/PromotionalNotification.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/src/com/flipfit/bean/Registration.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/src/com/flipfit/bean/Role.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/src/com/flipfit/bean/Slot.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/src/com/flipfit/bean/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/src/com/flipfit/bean/WaitListNotification.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/src/com/flipfit/bean/Waitlist.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/src/com/flipfit/business/AdminService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/src/com/flipfit/business/BookingService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/src/com/flipfit/business/BookingServiceInterface.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/src/com/flipfit/business/CustomerService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/src/com/flipfit/business/GymOwnerService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/src/com/flipfit/business/GymService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/src/com/flipfit/business/GymServiceInterface.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/src/com/flipfit/business/GymUserInterface.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/src/com/flipfit/business/GymUserService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/src/com/flipfit/business/PaymentService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/src/com/flipfit/business/PaymentServiceInterface.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/src/com/flipfit/business/SlotService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/src/com/flipfit/business/WaitlistService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/src/com/flipfit/business/WaitlistServiceInterface.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/src/com/flipfit/client/AdminFlipFitMenu.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/src/com/flipfit/client/CustomerFlipFitMenu.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/src/com/flipfit/client/FlipFitApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/src/com/flipfit/client/FlipFitMenuInterface.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/src/com/flipfit/client/GymOwnerFlipFitMenu.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/src/com/flipfit/client/PaymentFlipFitMenu.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/src/com/flipfit/client/PaymentTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/src/com/flipfit/client/ServiceFactory.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/src/com/flipfit/client/UserMenu.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/src/module-info.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 1
+}]]></component>
+  <component name="ProjectId" id="38phyvOgy0jI6rnyKPUYl9C0xdQ" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "feature/flipfit-updates",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/krishnavijaykuma.r/Desktop/submission/JEDI-IOTA-DEVELOPMENT-FK/JEDI-FLIPFIT-JAVA-POS-DAO"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-26cb7f24e5b0-intellij.indexing.shared.core-IU-253.29346.240" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ed61ea2d-cdae-4efe-9759-bf0a0e5097b8" name="Changes" comment="" />
+      <created>1769502679047</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1769502679047</updated>
+    </task>
+    <servers />
+  </component>
+</project>
