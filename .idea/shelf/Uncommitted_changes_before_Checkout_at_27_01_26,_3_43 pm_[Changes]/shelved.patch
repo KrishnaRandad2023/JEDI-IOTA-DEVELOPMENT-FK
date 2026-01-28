@@ -1,0 +1,399 @@
+Index: JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/src/com/flipfit/client/GymOwnerFlipFitMenu.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.flipfit.client;\n\nimport java.time.LocalTime;\nimport java.time.format.DateTimeFormatter;\nimport java.time.format.DateTimeParseException;\nimport java.util.*;\nimport com.flipfit.bean.*;\nimport com.flipfit.business.*;\n\npublic class GymOwnerFlipFitMenu implements FlipFitMenuInterface {\n    \n    private GymOwnerService gymOwnerService;\n    private User loggedInOwner;\n    \n    public GymOwnerFlipFitMenu(User owner) {\n        // Get services from factory\n        ServiceFactory factory = ServiceFactory.getInstance();\n        this.gymOwnerService = factory.getGymOwnerService();\n        this.loggedInOwner = owner;\n    }\n    \n    @Override\n    public void displayMenu(Scanner scanner) {\n        int choice = 0;\n        \n        System.out.println(\"\\n\uD83D\uDC4B Welcome, \" + loggedInOwner.getName() + \"!\");\n        \n        while (choice != 10) {\n            System.out.println(\"\\n╔════════════════════════════════════╗\");\n            System.out.println(\"║       GYM OWNER MENU               ║\");\n            System.out.println(\"╠════════════════════════════════════╣\");\n            System.out.println(\"║ 1. Add Gym Center                  ║\");\n            System.out.println(\"║ 2. Update Gym Center               ║\");\n            System.out.println(\"║ 3. Delete Gym Center               ║\");\n            System.out.println(\"║ 4. View My Centers                 ║\");\n            System.out.println(\"║ 5. Add Slot to Center              ║\");\n            System.out.println(\"║ 6. View Slots for My Centers       ║\");\n            System.out.println(\"║ 7. Delete Slot                     ║\");\n            System.out.println(\"║ 8. View Bookings for My Centers    ║\");\n            System.out.println(\"║ 9. View My Statistics              ║\");\n            System.out.println(\"║ 10. Logout                         ║\");\n            System.out.println(\"╚════════════════════════════════════╝\");\n            System.out.print(\"Enter choice: \");\n            \n            try {\n                choice = scanner.nextInt();\n                scanner.nextLine(); // Consume newline\n                \n                switch (choice) {\n                    case 1:\n                        addGymCenter(scanner);\n                        break;\n                    case 2:\n                        updateGymCenter(scanner);\n                        break;\n                    case 3:\n                        deleteGymCenter(scanner);\n                        break;\n                    case 4:\n                        viewMyCenters();\n                        break;\n                    case 5:\n                        addSlotToCenter(scanner);\n                        break;\n                    case 6:\n                        viewMySlots();\n                        break;\n                    case 7:\n                        deleteSlot(scanner);\n                        break;\n                    case 8:\n                        viewMyBookings(scanner);\n                        break;\n                    case 9:\n                        viewMyStatistics();\n                        break;\n                    case 10:\n                        System.out.println(\"\uD83D\uDC4B Logging out from Gym Owner...\");\n                        break;\n                    default:\n                        System.out.println(\"❌ Invalid choice! Please try again.\");\n                }\n            } catch (InputMismatchException e) {\n                System.out.println(\"❌ Invalid input! Please enter a number.\");\n                scanner.nextLine(); // Clear invalid input\n            }\n        }\n    }\n    \n    // 1. Add gym center\n    private void addGymCenter(Scanner scanner) {\n        System.out.println(\"\\n═══ ADD NEW GYM CENTER ═══\");\n        \n        System.out.print(\"Enter Center Name: \");\n        String name = scanner.nextLine();\n        \n        System.out.print(\"Enter Address: \");\n        String address = scanner.nextLine();\n        \n        System.out.print(\"Enter City: \");\n        String city = scanner.nextLine();\n        \n        System.out.print(\"Enter Capacity: \");\n        int capacity = scanner.nextInt();\n        scanner.nextLine();\n        \n        boolean success = gymOwnerService.addGymCenter(\n            loggedInOwner.getUserId(), \n            name, \n            address, \n            city, \n            capacity\n        );\n        \n        if (success) {\n            System.out.println(\"✅ Center added successfully!\");\n            System.out.println(\"⏳ Pending admin approval...\");\n        }\n    }\n    \n    // 2. Update gym center\n    private void updateGymCenter(Scanner scanner) {\n        System.out.println(\"\\n═══ UPDATE GYM CENTER ═══\");\n        \n        // Show owner's centers\n        gymOwnerService.displayMyCenters(loggedInOwner.getUserId());\n        \n        List<GymCenter> myCenters = gymOwnerService.viewMyCenters(loggedInOwner.getUserId());\n        if (myCenters.isEmpty()) {\n            return;\n        }\n        \n        System.out.print(\"\\nEnter Center ID to update (0 to cancel): \");\n        int centerId = scanner.nextInt();\n        scanner.nextLine();\n        \n        if (centerId == 0) {\n            System.out.println(\"Cancelled.\");\n            return;\n        }\n        \n        System.out.print(\"Enter New Center Name: \");\n        String name = scanner.nextLine();\n        \n        System.out.print(\"Enter New Address: \");\n        String address = scanner.nextLine();\n        \n        System.out.print(\"Enter New City: \");\n        String city = scanner.nextLine();\n        \n        System.out.print(\"Enter New Capacity: \");\n        int capacity = scanner.nextInt();\n        scanner.nextLine();\n        \n        gymOwnerService.updateGymCenter(\n            loggedInOwner.getUserId(), \n            centerId, \n            name, \n            address, \n            city, \n            capacity\n        );\n    }\n    \n    // 3. Delete gym center\n    private void deleteGymCenter(Scanner scanner) {\n        System.out.println(\"\\n═══ DELETE GYM CENTER ═══\");\n        \n        // Show owner's centers\n        gymOwnerService.displayMyCenters(loggedInOwner.getUserId());\n        \n        List<GymCenter> myCenters = gymOwnerService.viewMyCenters(loggedInOwner.getUserId());\n        if (myCenters.isEmpty()) {\n            return;\n        }\n        \n        System.out.print(\"\\nEnter Center ID to delete (0 to cancel): \");\n        int centerId = scanner.nextInt();\n        scanner.nextLine();\n        \n        if (centerId == 0) {\n            System.out.println(\"Cancelled.\");\n            return;\n        }\n        \n        System.out.print(\"⚠\uFE0F Are you sure you want to delete this center? (y/n): \");\n        String confirm = scanner.nextLine();\n        \n        if (confirm.equalsIgnoreCase(\"y\")) {\n            gymOwnerService.deleteGymCenter(loggedInOwner.getUserId(), centerId);\n        } else {\n            System.out.println(\"Cancelled.\");\n        }\n    }\n    \n    // 4. View my centers\n    private void viewMyCenters() {\n        System.out.println(\"\\n═══ MY GYM CENTERS ═══\");\n        gymOwnerService.displayMyCenters(loggedInOwner.getUserId());\n        \n        // Show pending vs approved\n        List<GymCenter> approved = gymOwnerService.viewMyApprovedCenters(loggedInOwner.getUserId());\n        List<GymCenter> pending = gymOwnerService.viewMyPendingCenters(loggedInOwner.getUserId());\n        \n        System.out.println(\"\\n\uD83D\uDCCA Summary:\");\n        System.out.println(\"   ✅ Approved: \" + approved.size());\n        System.out.println(\"   ⏳ Pending: \" + pending.size());\n    }\n    \n // 5. Add slot to center\n    private void addSlotToCenter(Scanner scanner) {\n        System.out.println(\"\\n═══ ADD SLOT TO CENTER ═══\");\n        \n        // Show only approved centers\n        List<GymCenter> approvedCenters = gymOwnerService.viewMyApprovedCenters(loggedInOwner.getUserId());\n        \n        if (approvedCenters.isEmpty()) {\n            System.out.println(\"❌ You have no approved centers yet!\");\n            System.out.println(\"   Slots can only be added to approved centers.\");\n            return;\n        }\n        \n        System.out.println(\"\\nYour Approved Centers:\");\n        for (GymCenter center : approvedCenters) {\n            System.out.println(\"  ID: \" + center.getCenterId() + \" - \" + center.getCenterName());\n        }\n        \n        System.out.print(\"\\nEnter Center ID: \");\n        int centerId = scanner.nextInt();\n        scanner.nextLine();\n        \n        System.out.print(\"Enter Start Time (HH:mm format, e.g., 06:00): \");\n        String startTimeStr = scanner.nextLine();\n        \n        System.out.print(\"Enter End Time (HH:mm format, e.g., 07:00): \");\n        String endTimeStr = scanner.nextLine();\n        \n        System.out.print(\"Enter Total Seats: \");\n        int totalSeats = scanner.nextInt();\n        scanner.nextLine();\n        \n        // FIXED: Add validation for totalSeats > 0\n        if (totalSeats <= 0) {\n            System.out.println(\"❌ Total seats must be greater than 0!\");\n            return;\n        }\n        \n        try {\n            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(\"HH:mm\");\n            LocalTime startTime = LocalTime.parse(startTimeStr, formatter);\n            LocalTime endTime = LocalTime.parse(endTimeStr, formatter);\n            \n            // FIXED: Validate that end time is after start time\n            if (!endTime.isAfter(startTime)) {\n                System.out.println(\"❌ End time must be after start time!\");\n                return;\n            }\n            \n            boolean success = gymOwnerService.addSlotToCenter(\n                loggedInOwner.getUserId(), \n                centerId, \n                startTime, \n                endTime, \n                totalSeats\n            );\n            \n            if (success) {\n                System.out.println(\"✅ Slot added successfully!\");\n            }\n        } catch (DateTimeParseException e) {\n            System.out.println(\"❌ Invalid time format! Please use HH:mm (e.g., 06:00)\");\n        }\n    }\n    \n    // 6. View my slots\n    private void viewMySlots() {\n        System.out.println(\"\\n═══ MY SLOTS ═══\");\n        gymOwnerService.displayMySlots(loggedInOwner.getUserId());\n    }\n    \n    // 7. Delete slot\n    private void deleteSlot(Scanner scanner) {\n        System.out.println(\"\\n═══ DELETE SLOT ═══\");\n        \n        // Show owner's slots\n        gymOwnerService.displayMySlots(loggedInOwner.getUserId());\n        \n        List<Slot> mySlots = gymOwnerService.viewMySlots(loggedInOwner.getUserId());\n        if (mySlots.isEmpty()) {\n            return;\n        }\n        \n        System.out.print(\"\\nEnter Slot ID to delete (0 to cancel): \");\n        int slotId = scanner.nextInt();\n        scanner.nextLine();\n        \n        if (slotId == 0) {\n            System.out.println(\"Cancelled.\");\n            return;\n        }\n        \n        System.out.print(\"⚠\uFE0F Are you sure you want to delete this slot? (y/n): \");\n        String confirm = scanner.nextLine();\n        \n        if (confirm.equalsIgnoreCase(\"y\")) {\n            gymOwnerService.deleteSlot(loggedInOwner.getUserId(), slotId);\n        } else {\n            System.out.println(\"Cancelled.\");\n        }\n    }\n    \n    // 8. View bookings for my centers\n    private void viewMyBookings(Scanner scanner) {\n        System.out.println(\"\\n═══ BOOKINGS FOR MY CENTERS ═══\");\n        System.out.println(\"1. View All Bookings\");\n        System.out.println(\"2. View Bookings for Specific Center\");\n        System.out.print(\"Enter choice: \");\n        \n        int choice = scanner.nextInt();\n        scanner.nextLine();\n        \n        if (choice == 1) {\n            List<Booking> myBookings = gymOwnerService.viewBookingsForMyCenters(loggedInOwner.getUserId());\n            \n            if (myBookings.isEmpty()) {\n                System.out.println(\"No bookings for your centers yet.\");\n            } else {\n                System.out.println(\"\\nTotal Bookings: \" + myBookings.size());\n                for (Booking booking : myBookings) {\n                    System.out.println(\"Booking ID: \" + booking.getBookingId() + \n                                     \" | User: \" + booking.getUserId() + \n                                     \" | Slot: \" + booking.getSlotId() + \n                                     \" | Status: \" + booking.getStatus());\n                }\n            }\n        } else if (choice == 2) {\n            gymOwnerService.displayMyCenters(loggedInOwner.getUserId());\n            \n            System.out.print(\"\\nEnter Center ID: \");\n            int centerId = scanner.nextInt();\n            scanner.nextLine();\n            \n            gymOwnerService.displayBookingsForCenter(loggedInOwner.getUserId(), centerId);\n        }\n    }\n    \n    // 9. View statistics\n    private void viewMyStatistics() {\n        System.out.println(\"\\n═══ MY STATISTICS ═══\");\n        gymOwnerService.displayMyStatistics(loggedInOwner.getUserId());\n    }\n}
+===================================================================
+diff --git a/JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/src/com/flipfit/client/GymOwnerFlipFitMenu.java b/JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/src/com/flipfit/client/GymOwnerFlipFitMenu.java
+--- a/JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/src/com/flipfit/client/GymOwnerFlipFitMenu.java	(revision 1c824a5b0766c61948d12677b1a86020b0d5bdb5)
++++ b/JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/src/com/flipfit/client/GymOwnerFlipFitMenu.java	(date 1769508800019)
+@@ -1,352 +1,47 @@
+ package com.flipfit.client;
+ 
+-import java.time.LocalTime;
+-import java.time.format.DateTimeFormatter;
+-import java.time.format.DateTimeParseException;
+-import java.util.*;
+-import com.flipfit.bean.*;
+-import com.flipfit.business.*;
++import java.util.Scanner;
++import com.flipfit.bean.User;
++import com.flipfit.business.GymService;
+ 
+ public class GymOwnerFlipFitMenu implements FlipFitMenuInterface {
+     
+-    private GymOwnerService gymOwnerService;
+-    private User loggedInOwner;
+-    
+-    public GymOwnerFlipFitMenu(User owner) {
+-        // Get services from factory
+-        ServiceFactory factory = ServiceFactory.getInstance();
+-        this.gymOwnerService = factory.getGymOwnerService();
+-        this.loggedInOwner = owner;
+-    }
+-    
+-    @Override
++	@Override
+     public void displayMenu(Scanner scanner) {
+         int choice = 0;
+-        
+-        System.out.println("\n👋 Welcome, " + loggedInOwner.getName() + "!");
+-        
+-        while (choice != 10) {
+-            System.out.println("\n╔════════════════════════════════════╗");
+-            System.out.println("║       GYM OWNER MENU               ║");
+-            System.out.println("╠════════════════════════════════════╣");
+-            System.out.println("║ 1. Add Gym Center                  ║");
+-            System.out.println("║ 2. Update Gym Center               ║");
+-            System.out.println("║ 3. Delete Gym Center               ║");
+-            System.out.println("║ 4. View My Centers                 ║");
+-            System.out.println("║ 5. Add Slot to Center              ║");
+-            System.out.println("║ 6. View Slots for My Centers       ║");
+-            System.out.println("║ 7. Delete Slot                     ║");
+-            System.out.println("║ 8. View Bookings for My Centers    ║");
+-            System.out.println("║ 9. View My Statistics              ║");
+-            System.out.println("║ 10. Logout                         ║");
+-            System.out.println("╚════════════════════════════════════╝");
++        while (choice != 4) {
++            System.out.println("\n--- Gym Owner Menu ---");
++            System.out.println("1. Add Gym Center");
++            System.out.println("2. Add Slot to Center");
++            System.out.println("3. View My Centers");
++            System.out.println("4. Logout");
+             System.out.print("Enter choice: ");
+-            
+-            try {
+-                choice = scanner.nextInt();
+-                scanner.nextLine(); // Consume newline
+-                
+-                switch (choice) {
+-                    case 1:
+-                        addGymCenter(scanner);
+-                        break;
+-                    case 2:
+-                        updateGymCenter(scanner);
+-                        break;
+-                    case 3:
+-                        deleteGymCenter(scanner);
+-                        break;
+-                    case 4:
+-                        viewMyCenters();
+-                        break;
+-                    case 5:
+-                        addSlotToCenter(scanner);
+-                        break;
+-                    case 6:
+-                        viewMySlots();
+-                        break;
+-                    case 7:
+-                        deleteSlot(scanner);
+-                        break;
+-                    case 8:
+-                        viewMyBookings(scanner);
+-                        break;
+-                    case 9:
+-                        viewMyStatistics();
+-                        break;
+-                    case 10:
+-                        System.out.println("👋 Logging out from Gym Owner...");
+-                        break;
+-                    default:
+-                        System.out.println("❌ Invalid choice! Please try again.");
+-                }
+-            } catch (InputMismatchException e) {
+-                System.out.println("❌ Invalid input! Please enter a number.");
+-                scanner.nextLine(); // Clear invalid input
+-            }
+-        }
+-    }
+-    
+-    // 1. Add gym center
+-    private void addGymCenter(Scanner scanner) {
+-        System.out.println("\n═══ ADD NEW GYM CENTER ═══");
+-        
+-        System.out.print("Enter Center Name: ");
+-        String name = scanner.nextLine();
+-        
+-        System.out.print("Enter Address: ");
+-        String address = scanner.nextLine();
+-        
+-        System.out.print("Enter City: ");
+-        String city = scanner.nextLine();
+-        
+-        System.out.print("Enter Capacity: ");
+-        int capacity = scanner.nextInt();
+-        scanner.nextLine();
+-        
+-        boolean success = gymOwnerService.addGymCenter(
+-            loggedInOwner.getUserId(), 
+-            name, 
+-            address, 
+-            city, 
+-            capacity
+-        );
+-        
+-        if (success) {
+-            System.out.println("✅ Center added successfully!");
+-            System.out.println("⏳ Pending admin approval...");
+-        }
+-    }
+-    
+-    // 2. Update gym center
+-    private void updateGymCenter(Scanner scanner) {
+-        System.out.println("\n═══ UPDATE GYM CENTER ═══");
+-        
+-        // Show owner's centers
+-        gymOwnerService.displayMyCenters(loggedInOwner.getUserId());
+-        
+-        List<GymCenter> myCenters = gymOwnerService.viewMyCenters(loggedInOwner.getUserId());
+-        if (myCenters.isEmpty()) {
+-            return;
+-        }
+-        
+-        System.out.print("\nEnter Center ID to update (0 to cancel): ");
+-        int centerId = scanner.nextInt();
+-        scanner.nextLine();
+-        
+-        if (centerId == 0) {
+-            System.out.println("Cancelled.");
+-            return;
+-        }
+-        
+-        System.out.print("Enter New Center Name: ");
+-        String name = scanner.nextLine();
+-        
+-        System.out.print("Enter New Address: ");
+-        String address = scanner.nextLine();
+-        
+-        System.out.print("Enter New City: ");
+-        String city = scanner.nextLine();
+-        
+-        System.out.print("Enter New Capacity: ");
+-        int capacity = scanner.nextInt();
+-        scanner.nextLine();
+-        
+-        gymOwnerService.updateGymCenter(
+-            loggedInOwner.getUserId(), 
+-            centerId, 
+-            name, 
+-            address, 
+-            city, 
+-            capacity
+-        );
+-    }
+-    
+-    // 3. Delete gym center
+-    private void deleteGymCenter(Scanner scanner) {
+-        System.out.println("\n═══ DELETE GYM CENTER ═══");
+-        
+-        // Show owner's centers
+-        gymOwnerService.displayMyCenters(loggedInOwner.getUserId());
+-        
+-        List<GymCenter> myCenters = gymOwnerService.viewMyCenters(loggedInOwner.getUserId());
+-        if (myCenters.isEmpty()) {
+-            return;
+-        }
+-        
+-        System.out.print("\nEnter Center ID to delete (0 to cancel): ");
+-        int centerId = scanner.nextInt();
+-        scanner.nextLine();
+-        
+-        if (centerId == 0) {
+-            System.out.println("Cancelled.");
+-            return;
+-        }
+-        
+-        System.out.print("⚠️ Are you sure you want to delete this center? (y/n): ");
+-        String confirm = scanner.nextLine();
+-        
+-        if (confirm.equalsIgnoreCase("y")) {
+-            gymOwnerService.deleteGymCenter(loggedInOwner.getUserId(), centerId);
+-        } else {
+-            System.out.println("Cancelled.");
+-        }
+-    }
+-    
+-    // 4. View my centers
+-    private void viewMyCenters() {
+-        System.out.println("\n═══ MY GYM CENTERS ═══");
+-        gymOwnerService.displayMyCenters(loggedInOwner.getUserId());
+-        
+-        // Show pending vs approved
+-        List<GymCenter> approved = gymOwnerService.viewMyApprovedCenters(loggedInOwner.getUserId());
+-        List<GymCenter> pending = gymOwnerService.viewMyPendingCenters(loggedInOwner.getUserId());
+-        
+-        System.out.println("\n📊 Summary:");
+-        System.out.println("   ✅ Approved: " + approved.size());
+-        System.out.println("   ⏳ Pending: " + pending.size());
+-    }
+-    
+- // 5. Add slot to center
+-    private void addSlotToCenter(Scanner scanner) {
+-        System.out.println("\n═══ ADD SLOT TO CENTER ═══");
+-        
+-        // Show only approved centers
+-        List<GymCenter> approvedCenters = gymOwnerService.viewMyApprovedCenters(loggedInOwner.getUserId());
+-        
+-        if (approvedCenters.isEmpty()) {
+-            System.out.println("❌ You have no approved centers yet!");
+-            System.out.println("   Slots can only be added to approved centers.");
+-            return;
+-        }
+-        
+-        System.out.println("\nYour Approved Centers:");
+-        for (GymCenter center : approvedCenters) {
+-            System.out.println("  ID: " + center.getCenterId() + " - " + center.getCenterName());
+-        }
+-        
+-        System.out.print("\nEnter Center ID: ");
+-        int centerId = scanner.nextInt();
+-        scanner.nextLine();
+-        
+-        System.out.print("Enter Start Time (HH:mm format, e.g., 06:00): ");
+-        String startTimeStr = scanner.nextLine();
+-        
+-        System.out.print("Enter End Time (HH:mm format, e.g., 07:00): ");
+-        String endTimeStr = scanner.nextLine();
+-        
+-        System.out.print("Enter Total Seats: ");
+-        int totalSeats = scanner.nextInt();
+-        scanner.nextLine();
+-        
+-        // FIXED: Add validation for totalSeats > 0
+-        if (totalSeats <= 0) {
+-            System.out.println("❌ Total seats must be greater than 0!");
+-            return;
+-        }
+-        
+-        try {
+-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+-            LocalTime startTime = LocalTime.parse(startTimeStr, formatter);
+-            LocalTime endTime = LocalTime.parse(endTimeStr, formatter);
+-            
+-            // FIXED: Validate that end time is after start time
+-            if (!endTime.isAfter(startTime)) {
+-                System.out.println("❌ End time must be after start time!");
+-                return;
+-            }
+-            
+-            boolean success = gymOwnerService.addSlotToCenter(
+-                loggedInOwner.getUserId(), 
+-                centerId, 
+-                startTime, 
+-                endTime, 
+-                totalSeats
+-            );
+-            
+-            if (success) {
+-                System.out.println("✅ Slot added successfully!");
+-            }
+-        } catch (DateTimeParseException e) {
+-            System.out.println("❌ Invalid time format! Please use HH:mm (e.g., 06:00)");
+-        }
+-    }
+-    
+-    // 6. View my slots
+-    private void viewMySlots() {
+-        System.out.println("\n═══ MY SLOTS ═══");
+-        gymOwnerService.displayMySlots(loggedInOwner.getUserId());
+-    }
+-    
+-    // 7. Delete slot
+-    private void deleteSlot(Scanner scanner) {
+-        System.out.println("\n═══ DELETE SLOT ═══");
+-        
+-        // Show owner's slots
+-        gymOwnerService.displayMySlots(loggedInOwner.getUserId());
+-        
+-        List<Slot> mySlots = gymOwnerService.viewMySlots(loggedInOwner.getUserId());
+-        if (mySlots.isEmpty()) {
+-            return;
+-        }
+-        
+-        System.out.print("\nEnter Slot ID to delete (0 to cancel): ");
+-        int slotId = scanner.nextInt();
+-        scanner.nextLine();
+-        
+-        if (slotId == 0) {
+-            System.out.println("Cancelled.");
+-            return;
+-        }
+-        
+-        System.out.print("⚠️ Are you sure you want to delete this slot? (y/n): ");
+-        String confirm = scanner.nextLine();
+-        
+-        if (confirm.equalsIgnoreCase("y")) {
+-            gymOwnerService.deleteSlot(loggedInOwner.getUserId(), slotId);
+-        } else {
+-            System.out.println("Cancelled.");
+-        }
+-    }
+-    
+-    // 8. View bookings for my centers
+-    private void viewMyBookings(Scanner scanner) {
+-        System.out.println("\n═══ BOOKINGS FOR MY CENTERS ═══");
+-        System.out.println("1. View All Bookings");
+-        System.out.println("2. View Bookings for Specific Center");
+-        System.out.print("Enter choice: ");
+-        
+-        int choice = scanner.nextInt();
+-        scanner.nextLine();
+-        
+-        if (choice == 1) {
+-            List<Booking> myBookings = gymOwnerService.viewBookingsForMyCenters(loggedInOwner.getUserId());
+-            
+-            if (myBookings.isEmpty()) {
+-                System.out.println("No bookings for your centers yet.");
+-            } else {
+-                System.out.println("\nTotal Bookings: " + myBookings.size());
+-                for (Booking booking : myBookings) {
+-                    System.out.println("Booking ID: " + booking.getBookingId() + 
+-                                     " | User: " + booking.getUserId() + 
+-                                     " | Slot: " + booking.getSlotId() + 
+-                                     " | Status: " + booking.getStatus());
+-                }
+-            }
+-        } else if (choice == 2) {
+-            gymOwnerService.displayMyCenters(loggedInOwner.getUserId());
+-            
+-            System.out.print("\nEnter Center ID: ");
+-            int centerId = scanner.nextInt();
+-            scanner.nextLine();
+-            
+-            gymOwnerService.displayBookingsForCenter(loggedInOwner.getUserId(), centerId);
+-        }
+-    }
+-    
+-    // 9. View statistics
+-    private void viewMyStatistics() {
+-        System.out.println("\n═══ MY STATISTICS ═══");
+-        gymOwnerService.displayMyStatistics(loggedInOwner.getUserId());
++            choice = scanner.nextInt();
++
++            switch (choice) {
++                case 1:
++                    System.out.print("Enter Center Name: ");
++                    String name = scanner.next();
++                    System.out.print("Enter City: ");
++                    String city = scanner.next();
++                    System.out.println("Center added and sent for Admin approval.");
++                    break;
++                case 2:
++                    System.out.print("Enter Center ID: ");
++                    int id = scanner.nextInt();
++                    System.out.print("Enter Time (e.g., 18:00): ");
++                    String time = scanner.next();
++                    System.out.println("Slot added successfully."); 
++                    break;
++                case 3:
++                    System.out.println("Listing your registered centers...");
++                    break;
++                case 4:
++                    System.out.println("Logging out from Owner...");
++                    break;
++                default:
++                    System.out.println("Invalid selection.");
++            }
++        }
+     }
+ }
+\ No newline at end of file

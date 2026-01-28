@@ -1,0 +1,29 @@
+Index: JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/src/com/flipfit/client/GymOwnerFlipFitMenu.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.flipfit.client;\n\nimport java.util.Scanner;\nimport com.flipfit.bean.User;\nimport com.flipfit.business.GymService;\n\npublic class GymOwnerFlipFitMenu implements FlipFitMenuInterface {\n    \n\t@Override\n    public void displayMenu(Scanner scanner) {\n        int choice = 0;\n        while (choice != 4) {\n            System.out.println(\"\\n--- Gym Owner Menu ---\");\n            System.out.println(\"1. Add Gym Center\");\n            System.out.println(\"2. Add Slot to Center\");\n            System.out.println(\"3. View My Centers\");\n            System.out.println(\"4. Logout\");\n            System.out.print(\"Enter choice: \");\n            choice = scanner.nextInt();\n\n            switch (choice) {\n                case 1:\n                    System.out.print(\"Enter Center Name: \");\n                    String name = scanner.next();\n                    System.out.print(\"Enter City: \");\n                    String city = scanner.next();\n                    System.out.println(\"Center added and sent for Admin approval.\");\n                    break;\n                case 2:\n                    System.out.print(\"Enter Center ID: \");\n                    int id = scanner.nextInt();\n                    System.out.print(\"Enter Time (e.g., 18:00): \");\n                    String time = scanner.next();\n                    System.out.println(\"Slot added successfully.\"); \n                    break;\n                case 3:\n                    System.out.println(\"Listing your registered centers...\");\n                    break;\n                case 4:\n                    System.out.println(\"Logging out from Owner...\");\n                    break;\n                default:\n                    System.out.println(\"Invalid selection.\");\n            }\n        }\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/src/com/flipfit/client/GymOwnerFlipFitMenu.java b/JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/src/com/flipfit/client/GymOwnerFlipFitMenu.java
+--- a/JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/src/com/flipfit/client/GymOwnerFlipFitMenu.java	(revision 4b65aaa89ea5954df9102632e543652322526f27)
++++ b/JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS/src/com/flipfit/client/GymOwnerFlipFitMenu.java	(date 1769168076477)
+@@ -31,7 +31,9 @@
+                     int id = scanner.nextInt();
+                     System.out.print("Enter Time (e.g., 18:00): ");
+                     String time = scanner.next();
+-                    System.out.println("Slot added successfully."); 
++                    System.out.println("Slot added successfully.");
++                    System.out.println("ID:"+id);
++                    System.out.println("Time:"+time);
+                     break;
+                 case 3:
+                     System.out.println("Listing your registered centers...");
+@@ -41,6 +43,7 @@
+                     break;
+                 default:
+                     System.out.println("Invalid selection.");
++
+             }
+         }
+     }
