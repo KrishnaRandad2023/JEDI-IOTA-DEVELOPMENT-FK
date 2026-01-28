@@ -2,7 +2,13 @@ package com.flipfit.bean;
 
 import java.util.Date;
 
+
 public class Booking {
+	/**
+	 *
+	 *
+	 */
+
 	private int bookingId;
 	private int userId;
     private int slotId;

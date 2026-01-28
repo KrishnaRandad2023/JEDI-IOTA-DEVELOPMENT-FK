@@ -3,6 +3,7 @@ package com.flipfit.bean;
 import java.util.Date;
 
 public class Registration {
+
     private int registrationId;
     private String name;
     private String email;

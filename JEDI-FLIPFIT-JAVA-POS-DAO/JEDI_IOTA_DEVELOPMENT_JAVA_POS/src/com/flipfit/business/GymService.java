@@ -14,6 +14,8 @@ public class GymService implements GymServiceInterface {
     private GymOwnerDAO gymOwnerDAO = new GymOwnerDAOImpl();
     private GymAdminDAO gymAdminDAO = new GymAdminDAOImpl();
     private GymCustomerDAO gymCustomerDAO = new GymCustomerDAOImpl();
+    private List<GymCenter> gymCenters = gymCustomerDAO.viewGyms();
+
 
     // Constructor
     public GymService() {
@@ -59,18 +61,21 @@ public class GymService implements GymServiceInterface {
 
     // 4. Update gym center details
     public boolean updateGymCenter(GymCenter center) {
-        if (!gymCenters.containsKey(center.getCenterId())) {
+//
+    for(GymCenter gymCenter:gymCenters) {
+        if (!(center.getCenterId()==gymCenter.getCenterId())) {
             System.out.println("❌ Center not found!");
             return false;
         }
+    }
 
         GymCenter oldCenter = gymCenters.get(center.getCenterId());
 
         // Update in main map
-        gymCenters.put(center.getCenterId(), center);
+        gymCenters.add(center.getCenterId(), center);
 
         // Update in owner's list
-        List<GymCenter> ownerCenterList = ownerCenters.get(center.getOwnerId());
+        List<GymCenter> ownerCenterList = gymOwnerDAO.viewMyGymCenters();
         if (ownerCenterList != null) {
             for (int i = 0; i < ownerCenterList.size(); i++) {
                 if (ownerCenterList.get(i).getCenterId() == center.getCenterId()) {
