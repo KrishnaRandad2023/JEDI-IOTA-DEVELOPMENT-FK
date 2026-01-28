@@ -3,12 +3,31 @@ package com.flipfit.client;
 import java.util.*;
 import com.flipfit.bean.*;
 import com.flipfit.business.*;
+import com.flipfit.exception.BookingNotDoneException;
+import com.flipfit.exception.SlotNotAvailableException;
+import com.flipfit.exception.UserNotFoundException;
 
+/// Classs level Comminting
+
+/**
+ * The Class CustomerFlipFitMenu.
+ *
+ * @author krishna
+ * @ClassName "CustomerFlipFitMenu"
+ */
 public class CustomerFlipFitMenu implements FlipFitMenuInterface {
 
+    /** The customer service. */
     private CustomerService customerService;
+
+    /** The logged in customer. */
     private User loggedInCustomer;
 
+    /**
+     * Instantiates a new customer flip fit menu.
+     *
+     * @param customer the customer
+     */
     public CustomerFlipFitMenu(User customer) {
         // Get services from factory
         ServiceFactory factory = ServiceFactory.getInstance();
@@ -16,6 +35,11 @@ public class CustomerFlipFitMenu implements FlipFitMenuInterface {
         this.loggedInCustomer = customer;
     }
 
+    /**
+     * Display menu.
+     *
+     * @param scanner the scanner
+     */
     @Override
     public void displayMenu(Scanner scanner) {
         int choice = 0;
@@ -88,6 +112,11 @@ public class CustomerFlipFitMenu implements FlipFitMenuInterface {
         }
     }
 
+    /**
+     * View gyms in city.
+     *
+     * @param scanner the scanner
+     */
     // 1. View gyms in a city
     private void viewGymsInCity(Scanner scanner) {
         System.out.println("\n═══ VIEW GYMS BY CITY ═══");
@@ -97,6 +126,11 @@ public class CustomerFlipFitMenu implements FlipFitMenuInterface {
         customerService.displayGymsInCity(city);
     }
 
+    /**
+     * Search gyms by name.
+     *
+     * @param scanner the scanner
+     */
     // 2. Search gyms by name
     private void searchGymsByName(Scanner scanner) {
         System.out.println("\n═══ SEARCH GYMS ═══");
@@ -120,6 +154,11 @@ public class CustomerFlipFitMenu implements FlipFitMenuInterface {
         }
     }
 
+    /**
+     * View gym details.
+     *
+     * @param scanner the scanner
+     */
     // 3. View gym details with slots
     private void viewGymDetails(Scanner scanner) {
         System.out.println("\n═══ VIEW GYM DETAILS ═══");
@@ -130,6 +169,11 @@ public class CustomerFlipFitMenu implements FlipFitMenuInterface {
         customerService.displayGymWithSlots(centerId);
     }
 
+    /**
+     * Book slot.
+     *
+     * @param scanner the scanner
+     */
     // 4. Book a slot
     private void bookSlot(Scanner scanner) {
         System.out.println("\n═══ BOOK A SLOT ═══");
@@ -189,11 +233,15 @@ public class CustomerFlipFitMenu implements FlipFitMenuInterface {
             boolean paymentSuccess = paymentMenu.showPaymentMenu(scanner, amount);
 
             if (paymentSuccess) {
-                boolean bookingSuccess = customerService.bookSlot(loggedInCustomer.getUserId(), slotId);
-                if (!bookingSuccess) {
-                    System.out.println("⚠️ Booking failed (refund initiated in real system). slot might be full.");
-                } else {
-                    System.out.println("\n✅ Booking Confirmed!");
+                try {
+                    boolean bookingSuccess = customerService.bookSlot(loggedInCustomer.getUserId(), slotId);
+                    if (!bookingSuccess) {
+                        System.out.println("⚠️ Added to waitlist as slot was full.");
+                    } else {
+                        System.out.println("\n✅ Booking Confirmed!");
+                    }
+                } catch (UserNotFoundException | SlotNotAvailableException e) {
+                    System.out.println("❌ Booking failed: " + e.getMessage());
                 }
             } else {
                 System.out.println("❌ Payment failed or cancelled! Booking aborted.");
@@ -203,6 +251,11 @@ public class CustomerFlipFitMenu implements FlipFitMenuInterface {
         }
     }
 
+    /**
+     * Cancel booking.
+     *
+     * @param scanner the scanner
+     */
     // 5. Cancel a booking
     private void cancelBooking(Scanner scanner) {
         System.out.println("\n═══ CANCEL BOOKING ═══");
@@ -236,30 +289,48 @@ public class CustomerFlipFitMenu implements FlipFitMenuInterface {
         String confirm = scanner.nextLine();
 
         if (confirm.equalsIgnoreCase("y")) {
-            customerService.cancelBooking(loggedInCustomer.getUserId(), bookingId);
+            try {
+                customerService.cancelBooking(loggedInCustomer.getUserId(), bookingId);
+            } catch (BookingNotDoneException e) {
+                System.out.println("❌ Cancellation failed: " + e.getMessage());
+            }
         } else {
             System.out.println("Cancellation aborted.");
         }
     }
 
+    /**
+     * View my bookings.
+     */
     // 6. View all my bookings
     private void viewMyBookings() {
         System.out.println("\n═══ MY BOOKINGS ═══");
         customerService.displayMyBookings(loggedInCustomer.getUserId());
     }
 
+    /**
+     * View my active bookings.
+     */
     // 7. View my active bookings
     private void viewMyActiveBookings() {
         System.out.println("\n═══ MY ACTIVE BOOKINGS ═══");
         customerService.displayMyActiveBookings(loggedInCustomer.getUserId());
     }
 
+    /**
+     * View my waitlist status.
+     */
     // 8. View waitlist status
     private void viewMyWaitlistStatus() {
         System.out.println("\n═══ MY WAITLIST STATUS ═══");
         customerService.displayMyWaitlistStatus(loggedInCustomer.getUserId());
     }
 
+    /**
+     * Update profile.
+     *
+     * @param scanner the scanner
+     */
     // 9. Update profile
     private void updateProfile(Scanner scanner) {
         System.out.println("\n═══ UPDATE PROFILE ═══");
@@ -272,51 +343,58 @@ public class CustomerFlipFitMenu implements FlipFitMenuInterface {
         int choice = scanner.nextInt();
         scanner.nextLine();
 
-        switch (choice) {
-            case 1:
-                System.out.print("Enter New Name: ");
-                String newName = scanner.nextLine();
-                loggedInCustomer.setName(newName);
-                if (customerService.updateMyProfile(loggedInCustomer)) {
-                    System.out.println("✅ Name updated successfully!");
-                }
-                break;
+        try {
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter New Name: ");
+                    String newName = scanner.nextLine();
+                    loggedInCustomer.setName(newName);
+                    if (customerService.updateMyProfile(loggedInCustomer)) {
+                        System.out.println("✅ Name updated successfully!");
+                    }
+                    break;
 
-            case 2:
-                System.out.print("Enter New Mobile Number: ");
-                String newMobile = scanner.nextLine();
-                loggedInCustomer.setMobileNumber(newMobile);
-                if (customerService.updateMyProfile(loggedInCustomer)) {
-                    System.out.println("✅ Mobile number updated successfully!");
-                }
-                break;
+                case 2:
+                    System.out.print("Enter New Mobile Number: ");
+                    String newMobile = scanner.nextLine();
+                    loggedInCustomer.setMobileNumber(newMobile);
+                    if (customerService.updateMyProfile(loggedInCustomer)) {
+                        System.out.println("✅ Mobile number updated successfully!");
+                    }
+                    break;
 
-            case 3:
-                System.out.print("Enter Old Password: ");
-                String oldPassword = scanner.nextLine();
-                System.out.print("Enter New Password: ");
-                String newPassword = scanner.nextLine();
-                System.out.print("Confirm New Password: ");
-                String confirmPassword = scanner.nextLine();
+                case 3:
+                    System.out.print("Enter Old Password: ");
+                    String oldPassword = scanner.nextLine();
+                    System.out.print("Enter New Password: ");
+                    String newPassword = scanner.nextLine();
+                    System.out.print("Confirm New Password: ");
+                    String confirmPassword = scanner.nextLine();
 
-                if (!newPassword.equals(confirmPassword)) {
-                    System.out.println("❌ Passwords don't match!");
-                } else {
-                    customerService.changeMyPassword(
-                            loggedInCustomer.getUserId(),
-                            oldPassword,
-                            newPassword);
-                }
-                break;
+                    if (!newPassword.equals(confirmPassword)) {
+                        System.out.println("❌ Passwords don't match!");
+                    } else {
+                        customerService.changeMyPassword(
+                                loggedInCustomer.getUserId(),
+                                oldPassword,
+                                newPassword);
+                    }
+                    break;
 
-            case 4:
-                return;
+                case 4:
+                    return;
 
-            default:
-                System.out.println("❌ Invalid choice!");
+                default:
+                    System.out.println("❌ Invalid choice!");
+            }
+        } catch (UserNotFoundException e) {
+            System.out.println("❌ Profile update failed: " + e.getMessage());
         }
     }
 
+    /**
+     * View my statistics.
+     */
     // 10. View statistics
     private void viewMyStatistics() {
         System.out.println("\n═══ MY STATISTICS ═══");

@@ -67,16 +67,6 @@ public class GymAdminDAOImpl implements GymAdminDAO {
         // but often there is a registration table.
         // However, if we need to approve a gym owner in the Registration logic, that's
         // different.
-        // For now, let's assume we maintain approval in GymOwner or logic is about
-        // approving their centers/registrations.
-        // Based on schema, only Registration has isApproved.
-        // Let's assume we approve registration for the owner.
-        String query = "UPDATE Registration SET isApproved = true WHERE registrationId = ? AND roleType = 'GYM_OWNER'";
-        // Note: The interface accepts 'ownerId'. If ownerId refers to 'GymOwner.id', we
-        // need to join or assume logic.
-        // Let's assume for this step we are approving the GymOwner logic which might
-        // simply be a placeholder or updating a status if we added one.
-        // Given the schema instructions, 'Registration' has 'isApproved'.
         // Let's implement a 'viewPendingRegistrations' and 'approveRegistration'
         // instead?
         // Staying faithful to the request 'GymAdminDAO interface and GymAdmin dao
