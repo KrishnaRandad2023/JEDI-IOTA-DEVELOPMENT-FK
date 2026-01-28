@@ -2,6 +2,7 @@ package com.flipfit.dao;
 
 import com.flipfit.bean.GymCenter;
 import com.flipfit.bean.GymOwner;
+import com.flipfit.bean.Registration;
 import com.flipfit.constants.SQLConstants;
 import com.flipfit.utils.DBConnection;
 import java.sql.Connection;
@@ -120,5 +121,34 @@ public class GymAdminDAOImpl implements GymAdminDAO {
             e.printStackTrace();
         }
         return gyms;
+    }
+
+    @Override
+    public List<Registration> viewPendingRegistrations() {
+        List<Registration> registrations = new ArrayList<>();
+        String query = SQLConstants.GET_ALL_PENDING_REGISTRATIONS;
+        try (Connection conn = DBConnection.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(query);
+                ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                Registration reg = new Registration();
+                reg.setRegistrationId(rs.getInt("registrationId"));
+                reg.setName(rs.getString("name"));
+                reg.setEmail(rs.getString("email"));
+                reg.setMobileNumber(rs.getString("mobileNumber"));
+                reg.setRoleType(rs.getString("roleType"));
+                reg.setRegistrationDate(rs.getTimestamp("registrationDate"));
+                reg.setApproved(rs.getBoolean("isApproved"));
+                reg.setCity(rs.getString("city"));
+                reg.setPanNumber(rs.getString("panNumber"));
+                reg.setGstNumber(rs.getString("gstNumber"));
+                reg.setCin(rs.getString("cin"));
+                reg.setAadhaarNumber(rs.getString("aadhaarNumber"));
+                registrations.add(reg);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return registrations;
     }
 }

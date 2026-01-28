@@ -61,15 +61,22 @@ public class ServiceFactory {
         bookingService = new BookingService();
         waitlistService = new WaitlistService();
 
+        // Step 2.5: Inject DAOs (persistence)
+        System.out.println("\n🗄️ Step 2.5: Injecting DAO implementations...");
+        slotService.setSlotDAO(new com.flipfit.dao.SlotDAOImpl());
+        bookingService.setBookingDAO(new com.flipfit.dao.BookingDAOImpl());
+        waitlistService.setWaitlistDAO(new com.flipfit.dao.WaitlistDAOImpl());
+        paymentService.setPaymentDAO(new com.flipfit.dao.PaymentDAOImpl());
+        adminService = new AdminService();
+        adminService.setGymAdminDAO(new com.flipfit.dao.GymAdminDAOImpl());
+
         // Step 3: Set cross-dependencies
         System.out.println("\n🔗 Step 3: Setting service dependencies...");
         bookingService.setSlotService(slotService);
         bookingService.setWaitlistService(waitlistService);
         waitlistService.setBookingService(bookingService);
 
-        // Step 4: Create high-level services
-        System.out.println("\n📦 Step 4: Creating high-level services...");
-        adminService = new AdminService();
+        // adminService already created and injected above
         adminService.setGymUserService(gymUserService);
         adminService.setGymService(gymService);
         adminService.setBookingService(bookingService);
@@ -89,11 +96,8 @@ public class ServiceFactory {
         customerService.setWaitlistService(waitlistService);
         customerService.setGymUserService(gymUserService);
 
-        // Step 5: Initialize hard-coded data
-        System.out.println("\n💾 Step 5: Loading hard-coded data...");
-        bookingService.initializeHardcodedBookings();
-        waitlistService.initializeHardcodedWaitlist();
-        adminService.initializeHardcodedRegistrations();
+        // Step 5: Data is now persistent in database
+        System.out.println("\n💾 Step 5: Data loaded from Database.");
 
         System.out.println("\n╔════════════════════════════════════════╗");
         System.out.println("║   ✅ ALL SERVICES INITIALIZED!         ║");

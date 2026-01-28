@@ -41,6 +41,9 @@ public class SQLConstants {
     public static final String UPDATE_GYM_CENTER = "UPDATE GymCenter SET centerName = ?, address = ?, city = ?, capacity = ? WHERE centerId = ?";
     public static final String DELETE_GYM_CENTER = "DELETE FROM GymCenter WHERE centerId = ?";
     public static final String GET_GYM_CENTER_BY_ID = "SELECT * FROM GymCenter WHERE centerId = ?";
+    public static final String GET_SLOTS_BY_CENTER = "SELECT * FROM Slot WHERE centerId = ?";
+    public static final String GET_SLOT_BY_ID = "SELECT * FROM Slot WHERE slotId = ?";
+    public static final String UPDATE_SLOT_SEATS = "UPDATE Slot SET availableSeats = ? WHERE slotId = ?";
 
     // GymAdmin Queries
     public static final String GET_ALL_GYM_OWNERS = "SELECT * FROM GymOwner JOIN User ON GymOwner.userId = User.userId";
@@ -50,10 +53,28 @@ public class SQLConstants {
     public static final String APPROVE_REGISTRATION = "UPDATE Registration SET isApproved = true WHERE registrationId = ?";
     public static final String APPROVE_GYM_CENTER = "UPDATE GymCenter SET isApproved = true WHERE centerId = ?";
     public static final String GET_PENDING_GYM_CENTERS = "SELECT * FROM GymCenter WHERE isApproved = false";
+    public static final String GET_ALL_PENDING_REGISTRATIONS = "SELECT * FROM Registration WHERE isApproved = false";
 
     // GymCustomer Queries
     public static final String GET_APPROVED_GYMS = "SELECT * FROM GymCenter WHERE isApproved = true";
     public static final String BOOK_SLOT = "INSERT INTO Booking (userId, slotId, bookingDate, status) VALUES (?, ?, ?, 'CONFIRMED')";
     public static final String GET_MY_BOOKINGS = "SELECT * FROM Booking WHERE userId = ?";
     public static final String CANCEL_BOOKING = "UPDATE Booking SET status = 'CANCELLED' WHERE bookingId = ?";
+    public static final String GET_BOOKINGS_BY_SLOT = "SELECT * FROM Booking WHERE slotId = ?";
+    public static final String GET_BOOKING_BY_ID = "SELECT * FROM Booking WHERE bookingId = ?";
+    public static final String UPDATE_BOOKING_STATUS = "UPDATE Booking SET status = ? WHERE bookingId = ?";
+    public static final String DELETE_BOOKING = "DELETE FROM Booking WHERE bookingId = ?";
+    public static final String GET_BOOKING_COUNT_FOR_SLOT = "SELECT COUNT(*) FROM Booking WHERE slotId = ? AND status = 'CONFIRMED'";
+
+    // Waitlist Queries
+    public static final String ADD_TO_WAITLIST = "INSERT INTO Waitlist (userId, slotId, requestDate, priorityPosition) VALUES (?, ?, ?, ?)";
+    public static final String REMOVE_FROM_WAITLIST = "DELETE FROM Waitlist WHERE waitlistId = ?";
+    public static final String GET_WAITLIST_BY_SLOT = "SELECT * FROM Waitlist WHERE slotId = ? ORDER BY priorityPosition ASC";
+    public static final String GET_WAITLIST_BY_USER = "SELECT * FROM Waitlist WHERE userId = ?";
+    public static final String GET_WAITLIST_BY_ID = "SELECT * FROM Waitlist WHERE waitlistId = ?";
+    public static final String UPDATE_WAITLIST_POSITION = "UPDATE Waitlist SET priorityPosition = ? WHERE waitlistId = ?";
+
+    // Payment Queries
+    public static final String ADD_PAYMENT = "INSERT INTO Payment (bookingId, amount, transactionId) VALUES (?, ?, ?)";
+    public static final String GET_PAYMENT_BY_ID = "SELECT * FROM Payment WHERE paymentId = ?";
 }

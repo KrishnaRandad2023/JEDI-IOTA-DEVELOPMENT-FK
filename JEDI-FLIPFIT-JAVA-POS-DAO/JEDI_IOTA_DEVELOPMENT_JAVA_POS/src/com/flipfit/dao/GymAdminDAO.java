@@ -2,6 +2,7 @@ package com.flipfit.dao;
 
 import com.flipfit.bean.GymCenter;
 import com.flipfit.bean.GymOwner;
+import com.flipfit.bean.Registration;
 import java.util.List;
 
 /**
@@ -19,4 +20,6 @@ public interface GymAdminDAO {
     boolean approveGymCenter(int centerId);
 
     List<GymCenter> viewPendingGymCenters();
+
+    List<Registration> viewPendingRegistrations();
 }
