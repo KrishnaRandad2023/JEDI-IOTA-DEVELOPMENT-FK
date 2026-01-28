@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fa64e301-fe53-40f3-9821-a6b8ed984208" name="Changes" comment="generated javadocs">
+    <list default="true" id="fa64e301-fe53-40f3-9821-a6b8ed984208" name="Changes" comment="--">
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JEDI-IOTA-DEVELOPMENT-FK.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/bean/Booking.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/bean/BookingNotification.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/bean/BookingStatus.html" beforeDir="false" />
@@ -222,6 +225,7 @@
       <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/serialized-form.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/tag-search-index.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/type-search-index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/src/com/flipfit/business/AdminService.java" beforeDir="false" afterPath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/src/com/flipfit/business/AdminService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -263,20 +267,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.FlipFitApplication.executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;#5 on feature/flipfit-updates&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;fileTemplates&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.FlipFitApplication.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "#5 on feature/flipfit-updates",
+    "kotlin-language-version-configured": "true",
+    "onboarding.tips.debug.path": "/Users/saumit.pradhan/Downloads/JEDI-IOTA-DEVELOPMENT-FK/src/Main.java",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "fileTemplates"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="FlipFitApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.flipfit.client.FlipFitApplication" />
@@ -331,11 +337,31 @@
       <option name="project" value="LOCAL" />
       <updated>1769585802867</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="--">
+      <option name="closed" value="true" />
+      <created>1769593930932</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1769593930932</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="generated javadocs" />
-    <option name="LAST_COMMIT_MESSAGE" value="generated javadocs" />
+    <MESSAGE value="--" />
+    <option name="LAST_COMMIT_MESSAGE" value="--" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Main.java</url>
+          <line>10</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
