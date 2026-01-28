@@ -2,6 +2,8 @@ package com.flipfit.business;
 
 import java.util.*;
 import com.flipfit.bean.*;
+import com.flipfit.dao.GymAdminDAO;
+import com.flipfit.dao.GymAdminDAOImpl;
 import com.flipfit.exception.RegistrationNotDoneException;
 import com.flipfit.exception.IssueWithApprovalException;
 import com.flipfit.exception.UserNotFoundException;
@@ -18,7 +20,9 @@ import com.flipfit.exception.InvalidAadhaarException;
  * @author team IOTA
  */
 public class AdminService {
+
     private GymAdminDAO gymAdminDAO = new GymAdminDAOImpl();
+
     private GymUserService gymUserService;
     private GymService gymService;
     private BookingService bookingService;
