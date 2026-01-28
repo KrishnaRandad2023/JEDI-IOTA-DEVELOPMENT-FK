@@ -8,12 +8,10 @@ import com.flipfit.bean.*;
 import com.flipfit.business.*;
 import com.flipfit.exception.UserNotFoundException;
 
-/// Classs level Comminting
-
 /**
  * The Class GymOwnerFlipFitMenu.
  *
- * @author krishna
+ * @author team IOTA
  * @ClassName "GymOwnerFlipFitMenu"
  */
 public class GymOwnerFlipFitMenu implements FlipFitMenuInterface {

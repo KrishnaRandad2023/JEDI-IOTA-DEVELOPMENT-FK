@@ -5,12 +5,10 @@ import java.util.*;
 import com.flipfit.bean.*;
 import com.flipfit.exception.UserNotFoundException;
 
-/// Classs level Comminting
-
 /**
  * The Class GymOwnerService.
  *
- * @author Shravya
+ * @author team IOTA
  * @ClassName "GymOwnerService"
  */
 public class GymOwnerService {

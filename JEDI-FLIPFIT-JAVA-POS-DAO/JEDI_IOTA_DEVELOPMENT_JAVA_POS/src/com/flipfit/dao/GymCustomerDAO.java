@@ -5,6 +5,11 @@ import com.flipfit.bean.GymCenter;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Interface for Gym Customer DAO
+ * 
+ * @author team IOTA
+ */
 public interface GymCustomerDAO {
     List<GymCenter> viewGyms();
 

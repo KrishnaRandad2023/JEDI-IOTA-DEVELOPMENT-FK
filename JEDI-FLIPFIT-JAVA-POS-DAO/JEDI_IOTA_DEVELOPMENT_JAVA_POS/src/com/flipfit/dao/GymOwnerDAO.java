@@ -4,6 +4,11 @@ import com.flipfit.bean.GymCenter;
 import com.flipfit.bean.Slot;
 import java.util.List;
 
+/**
+ * Interface for Gym Owner DAO
+ * 
+ * @author team IOTA
+ */
 public interface GymOwnerDAO {
     boolean addGymCenter(GymCenter gymCenter);
 

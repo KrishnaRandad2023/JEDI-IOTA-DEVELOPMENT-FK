@@ -6,12 +6,10 @@ import com.flipfit.exception.UserNotFoundException;
 import com.flipfit.exception.SlotNotAvailableException;
 import com.flipfit.exception.BookingNotDoneException;
 
-/// Classs level Comminting
-
 /**
  * The Class CustomerService.
  *
- * @author Shravya
+ * @author team IOTA
  * @ClassName "CustomerService"
  */
 public class CustomerService {

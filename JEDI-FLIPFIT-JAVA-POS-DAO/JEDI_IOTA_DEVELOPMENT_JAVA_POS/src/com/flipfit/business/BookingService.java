@@ -11,7 +11,7 @@ import com.flipfit.exception.BookingNotDoneException;
 /**
  * The Class BookingService.
  *
- * @author Shravya
+ * @author team IOTA
  * @ClassName "BookingService"
  */
 public class BookingService implements BookingServiceInterface {

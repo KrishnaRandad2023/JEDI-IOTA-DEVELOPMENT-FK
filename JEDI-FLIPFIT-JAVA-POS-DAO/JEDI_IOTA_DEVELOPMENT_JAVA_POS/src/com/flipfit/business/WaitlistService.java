@@ -9,7 +9,7 @@ import com.flipfit.exception.SlotNotAvailableException;
 /**
  * The Class WaitlistService.
  *
- * @author Shravya
+ * @author team IOTA
  * @ClassName "WaitlistService"
  */
 public class WaitlistService implements WaitlistServiceInterface {

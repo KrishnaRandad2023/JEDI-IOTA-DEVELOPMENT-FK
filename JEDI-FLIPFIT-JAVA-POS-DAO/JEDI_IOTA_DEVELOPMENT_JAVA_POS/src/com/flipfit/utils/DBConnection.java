@@ -4,6 +4,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * The Class DBConnection.
+ * 
+ * @author team IOTA
+ */
 public class DBConnection {
     private static final String URL = "jdbc:mysql://localhost:3306/flipfit_schema";
     private static final String USER = "root"; // Replace with your DB username

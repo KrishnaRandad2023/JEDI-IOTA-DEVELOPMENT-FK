@@ -5,6 +5,11 @@ import java.util.Map;
 import java.util.UUID;
 import com.flipfit.bean.Payment;
 
+/**
+ * The Class PaymentService.
+ * 
+ * @author team IOTA
+ */
 public class PaymentService implements PaymentServiceInterface {
     private Map<Integer, Payment> payments;
     private int paymentIdCounter;

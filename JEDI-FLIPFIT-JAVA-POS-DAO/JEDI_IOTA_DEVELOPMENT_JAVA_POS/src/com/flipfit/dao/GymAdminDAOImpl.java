@@ -11,6 +11,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Implementation of Gym Admin DAO
+ * 
+ * @author team IOTA
+ */
 public class GymAdminDAOImpl implements GymAdminDAO {
 
     @Override
@@ -63,31 +68,9 @@ public class GymAdminDAOImpl implements GymAdminDAO {
 
     @Override
     public boolean approveGymOwner(int ownerId) {
-        // Assuming there isn't an explicit status in GymOwner table based on previous
-        // schema,
-        // but often there is a registration table.
-        // However, if we need to approve a gym owner in the Registration logic, that's
-        // different.
-        // Let's implement a 'viewPendingRegistrations' and 'approveRegistration'
-        // instead?
-        // Staying faithful to the request 'GymAdminDAO interface and GymAdmin dao
-        // implementation'
-        // and standard operations.
-        // I will implement a query that conceptually acts as approval, or simply
-        // returns false if no appropriate column.
-        // Re-reading schema: GymOwner table doesn't have isApproved. Registration does.
-        // I'll update the implementation to query Registration or just standard update
-        // if schema allowed.
-        // For now, I will use a placeholder query on Registration table assuming
-        // ownerId maps to something there,
-        // OR simply return false with a comment if it doesn't fit the schema perfectly
-        // 1:1.
-
-        // BETTER APPROACH: Updating 'Registration' based on some logic.
-        // Or, maybe I missed 'isApproved' in GymOwner in my own schema?
-        // I checked schema: GymORwner table: id, userId, gst, cin, pan.
-        // Registration table: ... isApproved.
-        // So approval happens at registration.
+        /**
+         * Approval happens at registration.
+         */
 
         String regQuery = SQLConstants.APPROVE_REGISTRATION;
         try (Connection conn = DBConnection.getConnection();

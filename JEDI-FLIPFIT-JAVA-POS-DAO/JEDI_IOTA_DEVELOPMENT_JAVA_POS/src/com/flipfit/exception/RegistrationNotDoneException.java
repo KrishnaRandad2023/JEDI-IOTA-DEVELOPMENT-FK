@@ -1,10 +1,9 @@
 package com.flipfit.exception;
 
-/// Classs level Comminting
 /**
  * The Class RegistrationNotDoneException.
  *
- * @author krishna
+ * @author team IOTA
  * @ClassName "RegistrationNotDoneException"
  */
 public class RegistrationNotDoneException extends Exception {

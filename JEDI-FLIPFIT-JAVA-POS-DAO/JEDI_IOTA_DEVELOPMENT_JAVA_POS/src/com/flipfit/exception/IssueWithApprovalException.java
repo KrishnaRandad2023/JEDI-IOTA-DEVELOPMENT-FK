@@ -1,10 +1,9 @@
 package com.flipfit.exception;
 
-/// Classs level Comminting
 /**
  * The Class IssueWithApprovalException.
  *
- * @author krishna
+ * @author team IOTA
  * @ClassName "IssueWithApprovalException"
  */
 public class IssueWithApprovalException extends Exception {

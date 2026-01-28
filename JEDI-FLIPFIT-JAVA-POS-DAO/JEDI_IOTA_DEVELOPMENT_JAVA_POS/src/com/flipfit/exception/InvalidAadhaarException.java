@@ -3,7 +3,7 @@ package com.flipfit.exception;
 /**
  * The Class InvalidAadhaarException.
  *
- * @author krishna
+ * @author team IOTA
  * @ClassName "InvalidAadhaarException"
  */
 public class InvalidAadhaarException extends Exception {

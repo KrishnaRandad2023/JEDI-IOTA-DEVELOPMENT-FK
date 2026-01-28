@@ -1,10 +1,9 @@
 package com.flipfit.exception;
 
-/// Classs level Comminting
 /**
  * The Class BookingNotDoneException.
  *
- * @author krishna
+ * @author team IOTA
  * @ClassName "BookingNotDoneException"
  */
 public class BookingNotDoneException extends Exception {

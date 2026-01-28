@@ -3,12 +3,10 @@ package com.flipfit.business;
 import java.util.List;
 import com.flipfit.bean.Waitlist;
 
-/// Classs level Comminting
-
 /**
  * The Interface WaitlistServiceInterface.
  *
- * @author Shravya
+ * @author team IOTA
  * @ClassName "WaitlistServiceInterface"
  */
 public interface WaitlistServiceInterface {

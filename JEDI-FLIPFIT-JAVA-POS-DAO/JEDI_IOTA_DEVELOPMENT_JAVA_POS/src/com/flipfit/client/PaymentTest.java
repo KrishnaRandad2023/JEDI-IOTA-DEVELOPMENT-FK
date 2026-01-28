@@ -2,6 +2,11 @@ package com.flipfit.client;
 
 import com.flipfit.business.PaymentService;
 
+/**
+ * Test class for PaymentService verification.
+ * 
+ * @author team IOTA
+ */
 public class PaymentTest {
     public static void main(String[] args) {
         System.out.println("Starting Payment Service Verification...");

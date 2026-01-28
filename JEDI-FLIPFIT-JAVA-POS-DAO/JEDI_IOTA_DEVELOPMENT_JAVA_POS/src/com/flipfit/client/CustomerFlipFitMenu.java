@@ -7,12 +7,10 @@ import com.flipfit.exception.BookingNotDoneException;
 import com.flipfit.exception.SlotNotAvailableException;
 import com.flipfit.exception.UserNotFoundException;
 
-/// Classs level Comminting
-
 /**
  * The Class CustomerFlipFitMenu.
  *
- * @author krishna
+ * @author team IOTA
  * @ClassName "CustomerFlipFitMenu"
  */
 public class CustomerFlipFitMenu implements FlipFitMenuInterface {
