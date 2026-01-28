@@ -119,7 +119,7 @@ public class CustomerFlipFitMenu implements FlipFitMenuInterface {
     private void viewGymsInCity(Scanner scanner) {
         System.out.println("\n═══ VIEW GYMS BY CITY ═══");
         System.out.print("Enter City Name: ");
-        String city = scanner.nextLine();
+        String city = scanner.nextLine().trim();
 
         customerService.displayGymsInCity(city);
     }
@@ -133,7 +133,7 @@ public class CustomerFlipFitMenu implements FlipFitMenuInterface {
     private void searchGymsByName(Scanner scanner) {
         System.out.println("\n═══ SEARCH GYMS ═══");
         System.out.print("Enter Gym Name (or part of it): ");
-        String searchTerm = scanner.nextLine();
+        String searchTerm = scanner.nextLine().trim();
 
         List<GymCenter> matchingGyms = customerService.searchGymsByName(searchTerm);
 
@@ -178,7 +178,7 @@ public class CustomerFlipFitMenu implements FlipFitMenuInterface {
 
         // First, show available gyms
         System.out.print("Enter City to view gyms: ");
-        String city = scanner.nextLine();
+        String city = scanner.nextLine().trim();
 
         List<GymCenter> gyms = customerService.viewGymsInCity(city);
 
