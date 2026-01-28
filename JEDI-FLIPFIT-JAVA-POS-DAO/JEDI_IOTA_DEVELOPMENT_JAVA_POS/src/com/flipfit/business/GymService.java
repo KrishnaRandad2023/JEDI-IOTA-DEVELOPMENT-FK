@@ -35,7 +35,7 @@ public class GymService implements GymServiceInterface {
         List<GymCenter> cityGyms = new ArrayList<>();
 
         for (GymCenter gym : allApprovedGyms) {
-            if (gym.getCity().equalsIgnoreCase(city)) {
+            if (gym.getCity().trim().equalsIgnoreCase(city.trim())) {
                 cityGyms.add(gym);
             }
         }
