@@ -1,1 +1,1 @@
-moduleSearchIndex = [{"l":"JEDI_IOTA_DEVELOPMENT_JAVA_POS"}];updateSearchResults();
+moduleSearchIndex = [];updateSearchResults();

@@ -10,7 +10,7 @@ import com.flipfit.business.PaymentService;
  */
 public class PaymentFlipFitMenu {
 
-    private PaymentService paymentService;
+    private final PaymentService paymentService;
 
     public PaymentFlipFitMenu() {
         this.paymentService = ServiceFactory.getInstance().getPaymentService();
