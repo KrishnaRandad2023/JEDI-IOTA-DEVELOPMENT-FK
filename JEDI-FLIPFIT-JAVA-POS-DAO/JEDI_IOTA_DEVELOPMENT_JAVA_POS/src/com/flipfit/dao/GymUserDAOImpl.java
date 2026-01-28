@@ -11,8 +11,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import com.flipfit.bean.Registration;
 
 public class GymUserDAOImpl implements GymUserDAO {
 
@@ -35,12 +37,63 @@ public class GymUserDAOImpl implements GymUserDAO {
     public boolean registerUser(User user) {
         String query = SQLConstants.REGISTER_USER;
         try (Connection conn = DBConnection.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(query)) {
+                PreparedStatement stmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, user.getName());
             stmt.setString(2, user.getEmail());
             stmt.setString(3, user.getPassword());
             stmt.setString(4, user.getMobileNumber());
             stmt.setInt(5, user.getRole().getRoleId());
+            int rows = stmt.executeUpdate();
+
+            if (rows > 0) {
+                ResultSet rs = stmt.getGeneratedKeys();
+                if (rs.next()) {
+                    int userId = rs.getInt(1);
+                    user.setUserId(userId);
+
+                    if (user instanceof GymOwner) {
+                        GymOwner owner = (GymOwner) user;
+                        try (PreparedStatement ownerStmt = conn.prepareStatement(SQLConstants.ADD_GYM_OWNER_DETAILS)) {
+                            ownerStmt.setInt(1, userId);
+                            ownerStmt.setString(2, owner.getGstNumber());
+                            ownerStmt.setString(3, owner.getCin());
+                            ownerStmt.setString(4, owner.getPanNumber());
+                            ownerStmt.setString(5, owner.getAadhaarNumber());
+                            ownerStmt.executeUpdate();
+                        }
+                    } else if (user instanceof GymCustomer) {
+                        GymCustomer customer = (GymCustomer) user;
+                        try (PreparedStatement customerStmt = conn
+                                .prepareStatement(SQLConstants.ADD_GYM_CUSTOMER_DETAILS)) {
+                            customerStmt.setInt(1, userId);
+                            customerStmt.setString(2, customer.getAadhaarNumber());
+                            customerStmt.executeUpdate();
+                        }
+                    }
+                }
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean addRegistration(Registration reg) {
+        String query = SQLConstants.REGISTER_REGISTRATION;
+        try (Connection conn = DBConnection.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setString(1, reg.getName());
+            stmt.setString(2, reg.getEmail());
+            stmt.setString(3, reg.getPassword());
+            stmt.setString(4, reg.getMobileNumber());
+            stmt.setString(5, reg.getRoleType());
+            stmt.setString(6, reg.getCity());
+            stmt.setString(7, reg.getPanNumber());
+            stmt.setString(8, reg.getGstNumber());
+            stmt.setString(9, reg.getCin());
+            stmt.setString(10, reg.getAadhaarNumber());
             int rows = stmt.executeUpdate();
             return rows > 0;
         } catch (SQLException e) {

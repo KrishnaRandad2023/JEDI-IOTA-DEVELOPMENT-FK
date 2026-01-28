@@ -22,6 +22,9 @@ public class SQLConstants {
     public static final String GET_USERS_BY_ROLE = "SELECT u.*, r.roleName FROM User u " +
             "LEFT JOIN Role r ON u.roleId = r.roleId " +
             "WHERE u.roleId = ?";
+    public static final String REGISTER_REGISTRATION = "INSERT INTO Registration (name, email, password, mobileNumber, roleType, city, panNumber, gstNumber, cin, aadhaarNumber) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    public static final String ADD_GYM_OWNER_DETAILS = "INSERT INTO GymOwner (userId, gstNumber, cin, panNumber, aadhaarNumber) VALUES (?, ?, ?, ?, ?)";
+    public static final String ADD_GYM_CUSTOMER_DETAILS = "INSERT INTO GymCustomer (userId, aadhaarNumber) VALUES (?, ?)";
 
     // GymOwner Queries
     public static final String ADD_GYM_CENTER = "INSERT INTO GymCenter (ownerId, centerName, address, city, capacity, isApproved) VALUES (?, ?, ?, ?, ?, ?)";
@@ -33,6 +36,7 @@ public class SQLConstants {
 
     // GymAdmin Queries
     public static final String GET_ALL_GYM_OWNERS = "SELECT * FROM GymOwner JOIN User ON GymOwner.userId = User.userId";
+    public static final String GET_PENDING_REGISTRATIONS = "SELECT * FROM Registration WHERE isApproved = false";
     public static final String GET_ALL_GYM_CENTERS = "SELECT * FROM GymCenter";
     public static final String APPROVE_GYM_OWNER = "UPDATE Registration SET isApproved = true WHERE registrationId = ? AND roleType = 'GYM_OWNER'";
     public static final String APPROVE_REGISTRATION = "UPDATE Registration SET isApproved = true WHERE registrationId = ?";

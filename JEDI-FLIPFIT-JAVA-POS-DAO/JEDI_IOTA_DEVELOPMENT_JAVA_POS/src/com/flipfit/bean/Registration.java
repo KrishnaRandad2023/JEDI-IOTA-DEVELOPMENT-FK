@@ -15,6 +15,7 @@ public class Registration {
     private String panNumber; // For gym owners - PAN card for verification
     private String gstNumber; // NEW: GST Number
     private String cin; // NEW: Corporate Identification Number
+    private String aadhaarNumber; // NEW: Aadhaar Number
 
     // Constructors
     public Registration() {
@@ -131,6 +132,14 @@ public class Registration {
         this.cin = cin;
     }
 
+    public String getAadhaarNumber() {
+        return aadhaarNumber;
+    }
+
+    public void setAadhaarNumber(String aadhaarNumber) {
+        this.aadhaarNumber = aadhaarNumber;
+    }
+
     @Override
     public String toString() {
         return "Registration{" +
@@ -145,6 +154,7 @@ public class Registration {
                 ", panNumber='" + panNumber + '\'' +
                 ", gstNumber='" + gstNumber + '\'' +
                 ", cin='" + cin + '\'' +
+                ", aadhaarNumber='" + aadhaarNumber + '\'' +
                 '}';
     }
 }

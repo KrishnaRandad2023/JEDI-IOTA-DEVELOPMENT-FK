@@ -26,6 +26,7 @@ CREATE TABLE IF NOT EXISTS GymOwner (
     gstNumber VARCHAR(50),
     cin VARCHAR(50),
     panNumber VARCHAR(50),
+    aadhaarNumber VARCHAR(12),
     FOREIGN KEY (userId) REFERENCES User(userId) ON DELETE CASCADE
 );
 
@@ -56,6 +57,7 @@ CREATE TABLE IF NOT EXISTS Slot (
 CREATE TABLE IF NOT EXISTS GymCustomer (
     id INT AUTO_INCREMENT PRIMARY KEY,
     userId INT,
+    aadhaarNumber VARCHAR(12),
     FOREIGN KEY (userId) REFERENCES User(userId) ON DELETE CASCADE
 );
 
@@ -103,7 +105,8 @@ CREATE TABLE IF NOT EXISTS Registration (
     city VARCHAR(50),
     panNumber VARCHAR(50),
     gstNumber VARCHAR(50),
-    cin VARCHAR(50)
+    cin VARCHAR(50),
+    aadhaarNumber VARCHAR(12)
 );
 
 -- 11. Waitlist Table
