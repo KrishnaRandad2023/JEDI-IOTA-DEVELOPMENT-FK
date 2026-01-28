@@ -28,6 +28,7 @@ public class GymAdminDAOImpl implements GymAdminDAO {
                 owner.setGstNumber(rs.getString("gstNumber"));
                 owner.setCin(rs.getString("cin"));
                 owner.setPanNumber(rs.getString("panNumber"));
+                owner.setAadhaarNumber(rs.getString("aadhaarNumber"));
                 owners.add(owner);
             }
         } catch (SQLException e) {

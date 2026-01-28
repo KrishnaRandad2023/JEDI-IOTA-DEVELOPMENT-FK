@@ -8,6 +8,8 @@ public interface GymUserDAO {
 
     boolean registerUser(User user);
 
+    boolean addRegistration(com.flipfit.bean.Registration reg);
+
     User getUserByEmail(String email);
 
     User getUserById(int userId);

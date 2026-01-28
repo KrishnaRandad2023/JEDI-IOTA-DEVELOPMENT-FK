@@ -5,13 +5,16 @@ import com.flipfit.bean.*;
 import com.flipfit.exception.RegistrationNotDoneException;
 import com.flipfit.exception.IssueWithApprovalException;
 import com.flipfit.exception.UserNotFoundException;
+import com.flipfit.exception.InvalidEmailException;
+import com.flipfit.exception.InvalidMobileException;
+import com.flipfit.exception.InvalidAadhaarException;
 
 /// Classs level Comminting
 
 /**
  * The Class AdminService.
  *
- * @author Shravya
+ * @author krishna
  * @ClassName "AdminService"
  */
 public class AdminService {
@@ -118,6 +121,7 @@ public class AdminService {
         ownerReg1.setRoleType("GYM_OWNER");
         ownerReg1.setCity("Bangalore");
         ownerReg1.setPanNumber("ABCDE1234F");
+        ownerReg1.setAadhaarNumber("123456789012");
         ownerReg1.setApproved(false);
         addPendingRegistration(ownerReg1);
 
@@ -131,6 +135,7 @@ public class AdminService {
         ownerReg2.setRoleType("GYM_OWNER");
         ownerReg2.setCity("Bangalore");
         ownerReg2.setPanNumber("FGHIJ5678K");
+        ownerReg2.setAadhaarNumber("234567890123");
         ownerReg2.setApproved(false);
         addPendingRegistration(ownerReg2);
 
@@ -143,6 +148,7 @@ public class AdminService {
         customerReg.setMobileNumber("9123456783");
         customerReg.setRoleType("CUSTOMER");
         customerReg.setCity("Bangalore");
+        customerReg.setAadhaarNumber("345678901234");
         customerReg.setApproved(false);
         addPendingRegistration(customerReg);
 
@@ -253,7 +259,8 @@ public class AdminService {
                     System.out.println("   User ID: " + owner.getUserId());
                     return true;
                 }
-            } catch (RegistrationNotDoneException e) {
+            } catch (RegistrationNotDoneException | InvalidEmailException | InvalidMobileException
+                    | InvalidAadhaarException e) {
                 throw new IssueWithApprovalException("Failed to register owner during approval: " + e.getMessage());
             }
         }
@@ -311,7 +318,8 @@ public class AdminService {
                     System.out.println("   User ID: " + customer.getUserId());
                     return true;
                 }
-            } catch (RegistrationNotDoneException e) {
+            } catch (RegistrationNotDoneException | InvalidEmailException | InvalidMobileException
+                    | InvalidAadhaarException e) {
                 throw new IssueWithApprovalException("Failed to register customer during approval: " + e.getMessage());
             }
         }
@@ -606,6 +614,7 @@ public class AdminService {
             System.out.println("City: " + reg.getCity());
             System.out.println("PAN: " + reg.getPanNumber());
         }
+        System.out.println("Aadhaar: " + reg.getAadhaarNumber());
 
         System.out.println("Registration Date: " + reg.getRegistrationDate());
         System.out.println("Status: " + (reg.isApproved() ? "✅ Approved" : "⏳ Pending"));

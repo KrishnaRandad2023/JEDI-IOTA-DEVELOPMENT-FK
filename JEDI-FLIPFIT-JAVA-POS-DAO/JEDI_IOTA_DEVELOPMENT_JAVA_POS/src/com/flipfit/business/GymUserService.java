@@ -6,13 +6,17 @@ import com.flipfit.dao.GymUserDAO;
 import com.flipfit.dao.GymUserDAOImpl;
 import com.flipfit.exception.RegistrationNotDoneException;
 import com.flipfit.exception.UserNotFoundException;
+import com.flipfit.exception.InvalidEmailException;
+import com.flipfit.exception.InvalidMobileException;
+import com.flipfit.exception.InvalidAadhaarException;
+import java.util.regex.Pattern;
 
 /// Classs level Comminting
 
 /**
  * The Class GymUserService.
  *
- * @author Shravya
+ * @author krishna
  * @ClassName "GymUserService"
  */
 public class GymUserService {
@@ -33,8 +37,23 @@ public class GymUserService {
      * @param user the user
      * @return true, if successful
      * @throws RegistrationNotDoneException the registration not done exception
+     * @throws InvalidEmailException        the invalid email exception
+     * @throws InvalidMobileException       the invalid mobile exception
+     * @throws InvalidAadhaarException      the invalid aadhaar exception
      */
-    public boolean registerUser(User user) throws RegistrationNotDoneException {
+    public boolean registerUser(User user) throws RegistrationNotDoneException, InvalidEmailException,
+            InvalidMobileException, InvalidAadhaarException {
+
+        // Validate basic inputs
+        validateEmail(user.getEmail());
+        validateMobile(user.getMobileNumber());
+
+        if (user instanceof GymOwner) {
+            validateAadhaar(((GymOwner) user).getAadhaarNumber());
+        } else if (user instanceof GymCustomer) {
+            validateAadhaar(((GymCustomer) user).getAadhaarNumber());
+        }
+
         // Check if email already exists
         if (gymUserDAO.getUserByEmail(user.getEmail()) != null) {
             System.out.println("❌ Email already registered!");
@@ -49,6 +68,43 @@ public class GymUserService {
             throw new RegistrationNotDoneException("Registration failed in Database!");
         }
         return success;
+    }
+
+    /**
+     * Add registration request.
+     *
+     * @param reg the registration
+     * @return true, if successful
+     * @throws InvalidEmailException   the invalid email exception
+     * @throws InvalidMobileException  the invalid mobile exception
+     * @throws InvalidAadhaarException the invalid aadhaar exception
+     */
+    public boolean addRegistration(Registration reg)
+            throws InvalidEmailException, InvalidMobileException, InvalidAadhaarException {
+        validateEmail(reg.getEmail());
+        validateMobile(reg.getMobileNumber());
+        validateAadhaar(reg.getAadhaarNumber());
+
+        return gymUserDAO.addRegistration(reg);
+    }
+
+    private void validateEmail(String email) throws InvalidEmailException {
+        String emailRegex = "^[A-Za-z0-9+_.-]+@(.+)$";
+        if (email == null || !Pattern.compile(emailRegex).matcher(email).matches()) {
+            throw new InvalidEmailException("Invalid email format: " + email);
+        }
+    }
+
+    private void validateMobile(String mobile) throws InvalidMobileException {
+        if (mobile == null || !mobile.matches("\\d{10}")) {
+            throw new InvalidMobileException("Invalid mobile number: " + mobile + ". Must be 10 digits.");
+        }
+    }
+
+    private void validateAadhaar(String aadhaar) throws InvalidAadhaarException {
+        if (aadhaar == null || !aadhaar.matches("\\d{12}")) {
+            throw new InvalidAadhaarException("Invalid Aadhaar number: " + aadhaar + ". Must be 12 digits.");
+        }
     }
 
     /**

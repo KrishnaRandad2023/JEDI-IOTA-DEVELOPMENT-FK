@@ -6,6 +6,9 @@ import com.flipfit.bean.*;
 import com.flipfit.business.*;
 import com.flipfit.exception.RegistrationNotDoneException;
 import com.flipfit.exception.UserNotFoundException;
+import com.flipfit.exception.InvalidEmailException;
+import com.flipfit.exception.InvalidMobileException;
+import com.flipfit.exception.InvalidAadhaarException;
 
 /// Classs level Comminting
 
@@ -180,12 +183,16 @@ public class FlipFitApplication {
         System.out.print("Enter Mobile Number: ");
         String mobile = scanner.nextLine();
 
+        System.out.print("Enter Aadhaar Number: ");
+        String aadhaar = scanner.nextLine();
+
         // Create customer
         GymCustomer customer = new GymCustomer();
         customer.setName(name);
         customer.setEmail(email);
         customer.setPassword(password);
         customer.setMobileNumber(mobile);
+        customer.setAadhaarNumber(aadhaar);
 
         // Set role
         Role customerRole = new Role(3, "CUSTOMER", "Customer who books slots");
@@ -198,7 +205,8 @@ public class FlipFitApplication {
                 System.out.println("   You can now login with your credentials.");
                 System.out.println("   Email: " + email);
             }
-        } catch (RegistrationNotDoneException e) {
+        } catch (RegistrationNotDoneException | InvalidEmailException | InvalidMobileException
+                | InvalidAadhaarException e) {
             System.out.println("❌ Registration failed: " + e.getMessage());
         }
     }
@@ -239,6 +247,9 @@ public class FlipFitApplication {
         System.out.print("Enter PAN Number: ");
         String panNumber = scanner.nextLine();
 
+        System.out.print("Enter Aadhaar Number: ");
+        String aadhaar = scanner.nextLine();
+
         // FIXED: Actually integrate with AdminService
         ServiceFactory factory = ServiceFactory.getInstance();
 
@@ -251,6 +262,7 @@ public class FlipFitApplication {
         registration.setRoleType("GYM_OWNER");
         registration.setCity(city);
         registration.setPanNumber(panNumber);
+        registration.setAadhaarNumber(aadhaar);
 
         System.out.print("Enter GST Number: ");
         String gstNumber = scanner.nextLine();
@@ -276,6 +288,7 @@ public class FlipFitApplication {
             owner.setPanNumber(panNumber);
             owner.setGstNumber(gstNumber);
             owner.setCin(cin);
+            owner.setAadhaarNumber(aadhaar);
 
             GymUserService gymUserService = factory.getGymUserService();
             Role ownerRole = new Role(2, "GYM_OWNER", "Gym owner who manages centers");
@@ -285,7 +298,8 @@ public class FlipFitApplication {
                 if (gymUserService.registerUser(owner)) {
                     System.out.println("✅ Auto-approved! You can now login.");
                 }
-            } catch (RegistrationNotDoneException e) {
+            } catch (RegistrationNotDoneException | InvalidEmailException | InvalidMobileException
+                    | InvalidAadhaarException e) {
                 System.out.println("❌ Auto-approval failed: " + e.getMessage());
             }
         } else {

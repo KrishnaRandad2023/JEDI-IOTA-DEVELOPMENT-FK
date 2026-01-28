@@ -4,6 +4,7 @@ public class GymOwner extends User {
     private String gstNumber;
     private String cin;
     private String panNumber;
+    private String aadhaarNumber;
 
     public String getGstNumber() {
         return gstNumber;
@@ -27,5 +28,13 @@ public class GymOwner extends User {
 
     public void setPanNumber(String panNumber) {
         this.panNumber = panNumber;
+    }
+
+    public String getAadhaarNumber() {
+        return aadhaarNumber;
+    }
+
+    public void setAadhaarNumber(String aadhaarNumber) {
+        this.aadhaarNumber = aadhaarNumber;
     }
 }
