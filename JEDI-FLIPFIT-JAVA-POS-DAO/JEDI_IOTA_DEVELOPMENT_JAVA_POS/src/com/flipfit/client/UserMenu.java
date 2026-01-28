@@ -1,0 +1,10 @@
+package com.flipfit.client;
+
+/**
+ * The Class UserMenu.
+ * 
+ * @author team IOTA
+ */
+public class UserMenu {
+
+}
