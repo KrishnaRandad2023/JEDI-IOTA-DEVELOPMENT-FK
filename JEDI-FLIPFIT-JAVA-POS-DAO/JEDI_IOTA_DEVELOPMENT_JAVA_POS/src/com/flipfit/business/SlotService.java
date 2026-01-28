@@ -9,75 +9,50 @@ import com.flipfit.bean.Slot;
  * 
  * @author team IOTA
  */
+import com.flipfit.dao.SlotDAO;
+import com.flipfit.dao.SlotDAOImpl;
+
+/**
+ * The Class SlotService.
+ * 
+ * @author team IOTA
+ */
 public class SlotService {
-    // Collections - Using Map for fast lookups and List for grouping
-    private Map<Integer, Slot> slots; // slotId -> Slot
-    private Map<Integer, List<Slot>> centerSlots; // centerId -> List of Slots
-    private int slotIdCounter;
+    private SlotDAO slotDAO = new SlotDAOImpl();
 
-    // Constructor with hard-coded data
     public SlotService() {
-        this.slots = new HashMap<>();
-        this.centerSlots = new HashMap<>();
-        this.slotIdCounter = 1;
-
-        // Initialize with hard-coded slots
-        initializeHardcodedSlots();
+        System.out.println("✅ SlotService initialized with Database DAO");
     }
 
-    // Initialize hard-coded data
-    private void initializeHardcodedSlots() {
-        // Slots for Center 1 (Bellandur Fitness)
-        addSlot(1, LocalTime.of(6, 0), LocalTime.of(7, 0), 20); // 6-7 AM
-        addSlot(1, LocalTime.of(7, 0), LocalTime.of(8, 0), 20); // 7-8 AM
-        addSlot(1, LocalTime.of(18, 0), LocalTime.of(19, 0), 25); // 6-7 PM
-        addSlot(1, LocalTime.of(19, 0), LocalTime.of(20, 0), 25); // 7-8 PM
-
-        // Slots for Center 2 (HSR Fitness Hub)
-        addSlot(2, LocalTime.of(6, 0), LocalTime.of(7, 0), 15); // 6-7 AM
-        addSlot(2, LocalTime.of(17, 0), LocalTime.of(18, 0), 20); // 5-6 PM
-        addSlot(2, LocalTime.of(18, 0), LocalTime.of(19, 0), 20); // 6-7 PM
-
-        // Slots for Center 3 (Indiranagar Gym)
-        addSlot(3, LocalTime.of(5, 0), LocalTime.of(6, 0), 10); // 5-6 AM
-        addSlot(3, LocalTime.of(6, 0), LocalTime.of(7, 0), 15); // 6-7 AM
-        addSlot(3, LocalTime.of(18, 0), LocalTime.of(19, 0), 15); // 6-7 PM
-
-        System.out.println("✅ SlotService initialized with " + slots.size() + " slots");
+    public void setSlotDAO(SlotDAO slotDAO) {
+        this.slotDAO = slotDAO;
     }
 
     // 1. Add new slot (used by Gym Owner)
     public boolean addSlot(int centerId, LocalTime startTime, LocalTime endTime, int totalSeats) {
         Slot slot = new Slot();
-        slot.setSlotId(slotIdCounter++);
         slot.setCenterId(centerId);
         slot.setStartTime(startTime);
         slot.setEndTime(endTime);
         slot.setTotalSeats(totalSeats);
-        slot.setAvailableSeats(totalSeats); // Initially all seats available
+        slot.setAvailableSeats(totalSeats);
 
-        // Add to main map
-        slots.put(slot.getSlotId(), slot);
-
-        // Add to center-specific list
-        centerSlots.computeIfAbsent(centerId, k -> new ArrayList<>()).add(slot);
-
-        return true;
+        return slotDAO.addSlot(slot);
     }
 
     // 2. Get slot by ID
     public Slot getSlotById(int slotId) {
-        return slots.get(slotId);
+        return slotDAO.getSlotById(slotId);
     }
 
     // 3. Get all slots for a specific gym center
     public List<Slot> getSlotsByCenter(int centerId) {
-        return centerSlots.getOrDefault(centerId, new ArrayList<>());
+        return slotDAO.getSlotsByCenter(centerId);
     }
 
     // 4. Get all available slots for a center (with seats > 0)
     public List<Slot> getAvailableSlotsByCenter(int centerId) {
-        List<Slot> centerSlotList = centerSlots.getOrDefault(centerId, new ArrayList<>());
+        List<Slot> centerSlotList = slotDAO.getSlotsByCenter(centerId);
         List<Slot> availableSlots = new ArrayList<>();
 
         for (Slot slot : centerSlotList) {
@@ -91,67 +66,45 @@ public class SlotService {
 
     // 5. Update slot (used by Gym Owner)
     public boolean updateSlot(Slot updatedSlot) {
-        if (slots.containsKey(updatedSlot.getSlotId())) {
-            slots.put(updatedSlot.getSlotId(), updatedSlot);
-
-            // Update in center list as well
-            List<Slot> centerSlotList = centerSlots.get(updatedSlot.getCenterId());
-            if (centerSlotList != null) {
-                for (int i = 0; i < centerSlotList.size(); i++) {
-                    if (centerSlotList.get(i).getSlotId() == updatedSlot.getSlotId()) {
-                        centerSlotList.set(i, updatedSlot);
-                        break;
-                    }
-                }
-            }
-            return true;
-        }
-        return false;
+        return slotDAO.updateSlot(updatedSlot);
     }
 
     // 6. Delete slot (used by Gym Owner)
     public boolean deleteSlot(int slotId) {
-        Slot slot = slots.remove(slotId);
-        if (slot != null) {
-            // Remove from center list
-            List<Slot> centerSlotList = centerSlots.get(slot.getCenterId());
-            if (centerSlotList != null) {
-                centerSlotList.removeIf(s -> s.getSlotId() == slotId);
-            }
-            return true;
-        }
-        return false;
+        return slotDAO.deleteSlot(slotId);
     }
 
     // 7. Check if slot has available seats
     public boolean hasAvailableSeats(int slotId) {
-        Slot slot = slots.get(slotId);
+        Slot slot = slotDAO.getSlotById(slotId);
         return slot != null && slot.getAvailableSeats() > 0;
     }
 
     // 8. Decrease available seats (when booking)
     public boolean decreaseAvailableSeats(int slotId) {
-        Slot slot = slots.get(slotId);
+        Slot slot = slotDAO.getSlotById(slotId);
         if (slot != null && slot.getAvailableSeats() > 0) {
             slot.setAvailableSeats(slot.getAvailableSeats() - 1);
-            return true;
+            return slotDAO.updateSlot(slot);
         }
         return false;
     }
 
     // 9. Increase available seats (when canceling)
     public boolean increaseAvailableSeats(int slotId) {
-        Slot slot = slots.get(slotId);
+        Slot slot = slotDAO.getSlotById(slotId);
         if (slot != null && slot.getAvailableSeats() < slot.getTotalSeats()) {
             slot.setAvailableSeats(slot.getAvailableSeats() + 1);
-            return true;
+            return slotDAO.updateSlot(slot);
         }
         return false;
     }
 
     // 10. Get all slots (for admin view)
     public List<Slot> getAllSlots() {
-        return new ArrayList<>(slots.values());
+        // This might need a new DAO method if actually used,
+        // but typically admin views centers then slots.
+        return new ArrayList<>();
     }
 
     // 11. Display slot details (helper method)
