@@ -1,5 +1,5 @@
 package com.flipfit.utils;
-
+import io.github.cdimascio.dotenv.Dotenv;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -10,9 +10,12 @@ import java.sql.SQLException;
  * @author team IOTA
  */
 public class DBConnection {
-    private static final String URL = "jdbc:mysql://localhost:3306/flipfit_schema";
-    private static final String USER = "root"; // Replace with your DB username
-    private static final String PASSWORD = "Engg@sql2026"; // Replace with your DB password
+    // 1. Load the .env file
+    private static final Dotenv dotenv = Dotenv.load();
+    // 2. Read variables using dotenv.get()
+    private static final String URL = dotenv.get("DB_URL");
+    private static final String USER = dotenv.get("DB_USER");
+    private static final String PASSWORD = dotenv.get("DB_PASSWORD");
 
     public static Connection getConnection() throws SQLException {
         try {
