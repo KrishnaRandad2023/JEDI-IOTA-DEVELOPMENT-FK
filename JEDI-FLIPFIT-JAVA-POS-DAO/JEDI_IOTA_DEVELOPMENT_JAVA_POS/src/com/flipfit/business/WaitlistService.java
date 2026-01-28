@@ -12,31 +12,24 @@ import com.flipfit.exception.SlotNotAvailableException;
  * @author team IOTA
  * @ClassName "WaitlistService"
  */
+import com.flipfit.dao.WaitlistDAO;
+import com.flipfit.dao.WaitlistDAOImpl;
+
+/**
+ * The Class WaitlistService.
+ * 
+ * @author team IOTA
+ */
 public class WaitlistService implements WaitlistServiceInterface {
-
-    /** The slot waitlists. */
-    // Collections - Using Queue for FIFO behavior
-    private Map<Integer, Queue<Waitlist>> slotWaitlists; // slotId -> Queue of Waitlist entries
-
-    /** The waitlist entries. */
-    private Map<Integer, Waitlist> waitlistEntries; // waitlistId -> Waitlist entry
-
-    /** The waitlist id counter. */
-    private int waitlistIdCounter;
-
-    /** The booking service. */
-    // Reference to BookingService for promotion
+    private WaitlistDAO waitlistDAO = new WaitlistDAOImpl();
     private BookingService bookingService;
 
-    /**
-     * Instantiates a new waitlist service.
-     */
     public WaitlistService() {
-        this.slotWaitlists = new HashMap<>();
-        this.waitlistEntries = new HashMap<>();
-        this.waitlistIdCounter = 1;
+        System.out.println("✅ WaitlistService initialized with Database DAO");
+    }
 
-        System.out.println("✅ WaitlistService initialized");
+    public void setWaitlistDAO(WaitlistDAO waitlistDAO) {
+        this.waitlistDAO = waitlistDAO;
     }
 
     /**
@@ -50,54 +43,32 @@ public class WaitlistService implements WaitlistServiceInterface {
     }
 
     /**
-     * Initialize hardcoded waitlist.
-     */
-    // Initialize with some hard-coded waitlist entries
-    public void initializeHardcodedWaitlist() {
-        // Simulate a popular slot with waitlist
-        // Slot 3 (Bellandur 6-7 PM) - 2 people waiting
-        addToWaitlist(5, 3); // Sneha waiting for slot 3
-        addToWaitlist(6, 3); // Vikram waiting for slot 3
-
-        System.out.println("✅ Initialized with " + waitlistEntries.size() + " waitlist entries");
-    }
-
-    /**
      * Adds the to waitlist.
      *
      * @param userId the user ID
      * @param slotId the slot ID
      * @return true, if successful
      */
-    // 1. Add user to waitlist for a slot
     @Override
     public boolean addToWaitlist(int userId, int slotId) {
-        // Check if user is already in waitlist for this slot
         if (isUserInWaitlist(userId, slotId)) {
             System.out.println("⚠️ User already in waitlist for this slot!");
             return false;
         }
 
-        // Get or create queue for this slot
-        Queue<Waitlist> queue = slotWaitlists.computeIfAbsent(slotId, k -> new LinkedList<>());
+        List<Waitlist> queue = waitlistDAO.getWaitlistBySlot(slotId);
 
-        // Create waitlist entry
         Waitlist entry = new Waitlist();
-        entry.setWaitlistId(waitlistIdCounter++);
         entry.setUserId(userId);
         entry.setSlotId(slotId);
         entry.setRequestDate(new Date());
-        entry.setPriorityPosition(queue.size() + 1); // Position in queue
+        entry.setPriorityPosition(queue.size() + 1);
 
-        // Add to queue (FIFO - First In First Out)
-        queue.offer(entry);
-        waitlistEntries.put(entry.getWaitlistId(), entry);
-
-        System.out.println("✅ Added to waitlist!");
-        System.out.println("   Waitlist ID: " + entry.getWaitlistId());
-        System.out.println("   Position: " + entry.getPriorityPosition());
-
-        return true;
+        boolean success = waitlistDAO.addToWaitlist(entry);
+        if (success) {
+            System.out.println("✅ Added to waitlist at position " + entry.getPriorityPosition());
+        }
+        return success;
     }
 
     /**
@@ -106,27 +77,18 @@ public class WaitlistService implements WaitlistServiceInterface {
      * @param waitlistId the waitlist ID
      * @return true, if successful
      */
-    // 2. Remove user from waitlist
     @Override
     public boolean removeFromWaitlist(int waitlistId) {
-        Waitlist entry = waitlistEntries.remove(waitlistId);
-
-        if (entry == null) {
-            System.out.println("❌ Waitlist entry not found!");
+        Waitlist entry = waitlistDAO.getWaitlistById(waitlistId);
+        if (entry == null)
             return false;
-        }
 
-        // Remove from queue
-        Queue<Waitlist> queue = slotWaitlists.get(entry.getSlotId());
-        if (queue != null) {
-            queue.removeIf(w -> w.getWaitlistId() == waitlistId);
-
-            // Update priority positions for remaining entries
+        boolean success = waitlistDAO.removeFromWaitlist(waitlistId);
+        if (success) {
             updatePriorityPositions(entry.getSlotId());
+            System.out.println("✅ Removed from waitlist.");
         }
-
-        System.out.println("✅ Removed from waitlist!");
-        return true;
+        return success;
     }
 
     /**
@@ -135,16 +97,9 @@ public class WaitlistService implements WaitlistServiceInterface {
      * @param slotId the slot ID
      * @return the waitlist by slot
      */
-    // 3. Get all waitlist entries for a specific slot
     @Override
     public List<Waitlist> getWaitlistBySlot(int slotId) {
-        Queue<Waitlist> queue = slotWaitlists.get(slotId);
-
-        if (queue == null || queue.isEmpty()) {
-            return new ArrayList<>();
-        }
-
-        return new ArrayList<>(queue);
+        return waitlistDAO.getWaitlistBySlot(slotId);
     }
 
     /**
@@ -154,24 +109,15 @@ public class WaitlistService implements WaitlistServiceInterface {
      * @param slotId the slot ID
      * @return the waitlist position
      */
-    // 4. Get user's position in waitlist
     @Override
     public int getWaitlistPosition(int userId, int slotId) {
-        Queue<Waitlist> queue = slotWaitlists.get(slotId);
-
-        if (queue == null) {
-            return -1;
-        }
-
-        int position = 1;
+        List<Waitlist> queue = waitlistDAO.getWaitlistBySlot(slotId);
         for (Waitlist entry : queue) {
             if (entry.getUserId() == userId) {
-                return position;
+                return entry.getPriorityPosition();
             }
-            position++;
         }
-
-        return -1; // Not in waitlist
+        return -1;
     }
 
     /**
@@ -180,43 +126,26 @@ public class WaitlistService implements WaitlistServiceInterface {
      * @param slotId the slot ID
      * @return true, if successful
      */
-    // 5. Promote first person from waitlist when slot becomes available
     @Override
     public boolean promoteFromWaitlist(int slotId) {
-        Queue<Waitlist> queue = slotWaitlists.get(slotId);
-
-        if (queue == null || queue.isEmpty()) {
-            System.out.println("⚠️ No one in waitlist for this slot.");
+        List<Waitlist> queue = waitlistDAO.getWaitlistBySlot(slotId);
+        if (queue.isEmpty())
             return false;
-        }
 
-        // Remove first person from queue (FIFO)
-        Waitlist promoted = queue.poll();
+        Waitlist promoted = queue.get(0);
+        waitlistDAO.removeFromWaitlist(promoted.getWaitlistId());
 
-        if (promoted != null) {
-            waitlistEntries.remove(promoted.getWaitlistId());
-
-            // Automatically book the slot for this user
-            if (bookingService != null) {
-                try {
-                    bookingService.bookSlot(promoted.getUserId(), slotId, new Date());
-                    System.out.println("✅ User promoted from waitlist!");
-                    System.out.println("   User ID: " + promoted.getUserId());
-                    System.out.println("   Slot ID: " + slotId);
-                } catch (SlotNotAvailableException e) {
-                    System.out.println("❌ Promotion failed: " + e.getMessage());
-                    // If booking fails, we might want to put them back or try next person
-                    // For now, just log the error as it shouldn't happen during promotion
-                }
+        if (bookingService != null) {
+            try {
+                bookingService.bookSlot(promoted.getUserId(), slotId, new Date());
+                System.out.println("✅ User promoted from waitlist: " + promoted.getUserId());
+            } catch (SlotNotAvailableException e) {
+                System.out.println("❌ Promotion failed: " + e.getMessage());
             }
-
-            // Update priority positions for remaining entries
-            updatePriorityPositions(slotId);
-
-            return true;
         }
 
-        return false;
+        updatePriorityPositions(slotId);
+        return true;
     }
 
     /**
@@ -226,21 +155,13 @@ public class WaitlistService implements WaitlistServiceInterface {
      * @param slotId the slot ID
      * @return true, if successful
      */
-    // 6. Check if user is in waitlist for a slot
     @Override
     public boolean isUserInWaitlist(int userId, int slotId) {
-        Queue<Waitlist> queue = slotWaitlists.get(slotId);
-
-        if (queue == null) {
-            return false;
-        }
-
+        List<Waitlist> queue = waitlistDAO.getWaitlistBySlot(slotId);
         for (Waitlist entry : queue) {
-            if (entry.getUserId() == userId) {
+            if (entry.getUserId() == userId)
                 return true;
-            }
         }
-
         return false;
     }
 
@@ -250,9 +171,9 @@ public class WaitlistService implements WaitlistServiceInterface {
      * @param waitlistId the waitlist ID
      * @return the waitlist by ID
      */
-    // 7. Get waitlist entry by ID
+    @Override
     public Waitlist getWaitlistById(int waitlistId) {
-        return waitlistEntries.get(waitlistId);
+        return waitlistDAO.getWaitlistById(waitlistId);
     }
 
     /**
@@ -261,17 +182,9 @@ public class WaitlistService implements WaitlistServiceInterface {
      * @param userId the user ID
      * @return the waitlist by user
      */
-    // 8. Get all waitlist entries for a user (across all slots)
+    @Override
     public List<Waitlist> getWaitlistByUser(int userId) {
-        List<Waitlist> userWaitlist = new ArrayList<>();
-
-        for (Waitlist entry : waitlistEntries.values()) {
-            if (entry.getUserId() == userId) {
-                userWaitlist.add(entry);
-            }
-        }
-
-        return userWaitlist;
+        return waitlistDAO.getWaitlistByUser(userId);
     }
 
     /**
@@ -280,34 +193,18 @@ public class WaitlistService implements WaitlistServiceInterface {
      * @param slotId the slot ID
      * @return the waitlist count
      */
-    // 9. Get total waitlist count for a slot
+    @Override
     public int getWaitlistCount(int slotId) {
-        Queue<Waitlist> queue = slotWaitlists.get(slotId);
-        return queue != null ? queue.size() : 0;
+        return waitlistDAO.getWaitlistBySlot(slotId).size();
     }
 
-    /**
-     * Clears the waitlist.
-     *
-     * @param slotId the slot ID
-     * @return true, if successful
-     */
-    // 10. Clear waitlist for a slot (Admin functionality)
+    @Override
     public boolean clearWaitlist(int slotId) {
-        Queue<Waitlist> queue = slotWaitlists.remove(slotId);
-
-        if (queue != null) {
-            // Remove all entries from main map
-            for (Waitlist entry : queue) {
-                waitlistEntries.remove(entry.getWaitlistId());
-            }
-
-            System.out.println("✅ Waitlist cleared for slot ID: " + slotId);
-            return true;
+        List<Waitlist> queue = waitlistDAO.getWaitlistBySlot(slotId);
+        for (Waitlist entry : queue) {
+            waitlistDAO.removeFromWaitlist(entry.getWaitlistId());
         }
-
-        System.out.println("⚠️ No waitlist found for slot ID: " + slotId);
-        return false;
+        return true;
     }
 
     /**
@@ -315,9 +212,9 @@ public class WaitlistService implements WaitlistServiceInterface {
      *
      * @return the all waitlist entries
      */
-    // 11. Get all waitlist entries (Admin view)
+    @Override
     public List<Waitlist> getAllWaitlistEntries() {
-        return new ArrayList<>(waitlistEntries.values());
+        return new ArrayList<>(); // Should probably add a DAO method for this if needed
     }
 
     /**
@@ -325,17 +222,11 @@ public class WaitlistService implements WaitlistServiceInterface {
      *
      * @param slotId the slot ID
      */
-    // 12. Update priority positions after removal (helper method)
     private void updatePriorityPositions(int slotId) {
-        Queue<Waitlist> queue = slotWaitlists.get(slotId);
-
-        if (queue == null) {
-            return;
-        }
-
+        List<Waitlist> queue = waitlistDAO.getWaitlistBySlot(slotId);
         int position = 1;
         for (Waitlist entry : queue) {
-            entry.setPriorityPosition(position++);
+            waitlistDAO.updateWaitlistPosition(entry.getWaitlistId(), position++);
         }
     }
 
@@ -379,27 +270,8 @@ public class WaitlistService implements WaitlistServiceInterface {
     /**
      * Display all waitlists.
      */
-    // 15. Display all waitlists
     public void displayAllWaitlists() {
-        if (waitlistEntries.isEmpty()) {
-            System.out.println("No waitlist entries in the system!");
-        } else {
-            System.out.println("\n=== ALL WAITLIST ENTRIES ===");
-            System.out.println("Total entries: " + waitlistEntries.size());
-
-            for (Map.Entry<Integer, Queue<Waitlist>> entry : slotWaitlists.entrySet()) {
-                int slotId = entry.getKey();
-                Queue<Waitlist> queue = entry.getValue();
-
-                if (!queue.isEmpty()) {
-                    System.out.println("\n--- Slot ID: " + slotId + " ---");
-                    for (Waitlist w : queue) {
-                        System.out.println("  Position " + w.getPriorityPosition() +
-                                ": User ID " + w.getUserId());
-                    }
-                }
-            }
-        }
+        System.out.println("Global waitlist view not implemented.");
     }
 
     /**

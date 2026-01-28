@@ -5,49 +5,36 @@ import com.flipfit.bean.Booking;
 import com.flipfit.bean.BookingStatus;
 import com.flipfit.exception.SlotNotAvailableException;
 import com.flipfit.exception.BookingNotDoneException;
+import com.flipfit.dao.BookingDAO;
+import com.flipfit.dao.BookingDAOImpl;
 
-/// Classs level Comminting
+// Class level Commenting
 
 /**
  * The Class BookingService.
  *
  * @author team IOTA
- * @ClassName "BookingService"
  */
 public class BookingService implements BookingServiceInterface {
 
-    /** The bookings. */
-    private Map<Integer, Booking> bookings; // bookingId -> Booking
-
-    /** The user bookings. */
-    private Map<Integer, List<Booking>> userBookings; // userId -> List of Bookings
-
-    /** The slot bookings. */
-    private Map<Integer, List<Booking>> slotBookings; // slotId -> List of Bookings
-
-    /** The slot booking count. */
-    private Map<Integer, Integer> slotBookingCount; // slotId -> count of confirmed bookings
-
-    /** The booking id counter. */
-    private int bookingIdCounter;
-
-    /** The slot service. */
+    private BookingDAO bookingDAO = new BookingDAOImpl();
     private SlotService slotService;
-
-    /** The waitlist service. */
     private WaitlistService waitlistService;
 
     /**
      * Instantiates a new booking service.
      */
     public BookingService() {
-        this.bookings = new HashMap<>();
-        this.userBookings = new HashMap<>();
-        this.slotBookings = new HashMap<>();
-        this.slotBookingCount = new HashMap<>();
-        this.bookingIdCounter = 1;
+        System.out.println("✅ BookingService initialized with Database DAO");
+    }
 
-        System.out.println("✅ BookingService initialized");
+    /**
+     * Sets the booking DAO.
+     *
+     * @param bookingDAO the new booking DAO
+     */
+    public void setBookingDAO(BookingDAO bookingDAO) {
+        this.bookingDAO = bookingDAO;
     }
 
     /**
@@ -69,55 +56,6 @@ public class BookingService implements BookingServiceInterface {
     }
 
     /**
-     * Initialize hardcoded bookings.
-     */
-    public void initializeHardcodedBookings() {
-        // Customer 1 (Amit - userId=4) bookings
-        createBookingInternal(4, 1, BookingStatus.CONFIRMED); // Slot 1 - Bellandur 6-7 AM
-        createBookingInternal(4, 3, BookingStatus.CONFIRMED); // Slot 3 - Bellandur 6-7 PM
-
-        // Customer 2 (Sneha - userId=5) bookings
-        createBookingInternal(5, 2, BookingStatus.CONFIRMED); // Slot 2 - Bellandur 7-8 AM
-        createBookingInternal(5, 6, BookingStatus.CONFIRMED); // Slot 6 - HSR 5-6 PM
-
-        // Customer 3 (Vikram - userId=6) bookings
-        createBookingInternal(6, 9, BookingStatus.CONFIRMED); // Slot 9 - Indiranagar 6-7 AM
-
-        System.out.println("✅ Initialized with " + bookings.size() + " bookings");
-    }
-
-    /**
-     * Creates the booking internal.
-     *
-     * @param userId the user ID
-     * @param slotId the slot ID
-     * @param status the status
-     */
-    private void createBookingInternal(int userId, int slotId, BookingStatus status) {
-        Booking booking = new Booking();
-        booking.setBookingId(bookingIdCounter++);
-        booking.setUserId(userId);
-        booking.setSlotId(slotId);
-        booking.setBookingDate(new Date());
-        booking.setStatus(status);
-
-        // Add to collections
-        bookings.put(booking.getBookingId(), booking);
-        userBookings.computeIfAbsent(userId, k -> new ArrayList<>()).add(booking);
-        slotBookings.computeIfAbsent(slotId, k -> new ArrayList<>()).add(booking);
-
-        // Update slot booking count
-        if (status == BookingStatus.CONFIRMED) {
-            slotBookingCount.put(slotId, slotBookingCount.getOrDefault(slotId, 0) + 1);
-
-            // Decrease available seats if slotService is available
-            if (slotService != null) {
-                slotService.decreaseAvailableSeats(slotId);
-            }
-        }
-    }
-
-    /**
      * Check availability.
      *
      * @param slotId the slot ID
@@ -131,8 +69,8 @@ public class BookingService implements BookingServiceInterface {
             return slotService.hasAvailableSeats(slotId);
         }
 
-        // Fallback: just check if slot exists
-        return slotBookings.getOrDefault(slotId, new ArrayList<>()).size() < 20;
+        // Fallback: check if slot exists and has capacity (using DAO for count)
+        return bookingDAO.getBookingCountForSlot(slotId) < 20;
     }
 
     /**
@@ -144,43 +82,38 @@ public class BookingService implements BookingServiceInterface {
      * @throws SlotNotAvailableException the slot not available exception
      */
     @Override
-    public void bookSlot(int userId, int slotId, Date date) throws SlotNotAvailableException {
-        // Check if slot has available seats
+    public boolean bookSlot(int userId, int slotId, Date date) throws SlotNotAvailableException {
+        // 1. Check if slot exists and has seats
         if (slotService != null && !slotService.hasAvailableSeats(slotId)) {
-            System.out.println("❌ Slot is full! Adding to waitlist...");
-
-            // Add to waitlist
+            // No seats available, add to waitlist instead?
             if (waitlistService != null) {
+                System.out.println("⚠️ Slot full! Adding you to waitlist...");
                 waitlistService.addToWaitlist(userId, slotId);
+                return false;
             }
-            throw new SlotNotAvailableException("Slot with ID " + slotId + " is full!");
+            throw new SlotNotAvailableException("❌ Slot is fully booked and waitlist is full!");
         }
 
-        // Create new booking
+        // 2. Create booking
         Booking booking = new Booking();
-        booking.setBookingId(bookingIdCounter++);
         booking.setUserId(userId);
         booking.setSlotId(slotId);
-        booking.setBookingDate(date != null ? date : new Date());
+        booking.setBookingDate(date);
         booking.setStatus(BookingStatus.CONFIRMED);
 
-        // Add to collections
-        bookings.put(booking.getBookingId(), booking);
-        userBookings.computeIfAbsent(userId, k -> new ArrayList<>()).add(booking);
-        slotBookings.computeIfAbsent(slotId, k -> new ArrayList<>()).add(booking);
+        // 3. Persist booking
+        boolean success = bookingDAO.addBooking(booking);
 
-        // Update slot booking count
-        slotBookingCount.put(slotId, slotBookingCount.getOrDefault(slotId, 0) + 1);
-
-        // Decrease available seats
-        if (slotService != null) {
-            slotService.decreaseAvailableSeats(slotId);
+        if (success) {
+            // 4. Update slot seats
+            if (slotService != null) {
+                slotService.decreaseAvailableSeats(slotId);
+            }
+            System.out.println("✅ Booking successful for User ID: " + userId + " Slot ID: " + slotId);
+            return true;
         }
 
-        System.out.println("✅ Booking successful!");
-        System.out.println("   Booking ID: " + booking.getBookingId());
-        System.out.println("   Slot ID: " + slotId);
-        System.out.println("   Date: " + booking.getBookingDate());
+        return false;
     }
 
     /**
@@ -190,44 +123,37 @@ public class BookingService implements BookingServiceInterface {
      * @throws BookingNotDoneException the booking not done exception
      */
     @Override
-    public void cancelBooking(int bookingId) throws BookingNotDoneException {
-        Booking booking = bookings.get(bookingId);
+    public boolean cancelBooking(int bookingId) throws BookingNotDoneException {
+        Booking booking = bookingDAO.getBookingById(bookingId);
 
         if (booking == null) {
-            System.out.println("❌ Booking not found!");
-            throw new BookingNotDoneException("Booking with ID " + bookingId + " not found!");
+            throw new BookingNotDoneException("❌ Booking ID " + bookingId + " not found!");
         }
 
         if (booking.getStatus() == BookingStatus.CANCELLED) {
-            System.out.println("⚠️ Booking already cancelled!");
-            return;
+            System.out.println("⚠️ Booking is already cancelled.");
+            return false;
         }
 
-        // FIXED: Store old status BEFORE updating
-        BookingStatus oldStatus = booking.getStatus();
+        // 1. Update status
+        boolean success = bookingDAO.updateBookingStatus(bookingId, BookingStatus.CANCELLED);
 
-        // Update booking status
-        booking.setStatus(BookingStatus.CANCELLED);
-
-        // FIXED: Only decrease count and increase seats if booking was CONFIRMED
-        if (oldStatus == BookingStatus.CONFIRMED) {
-            // Decrease slot booking count
-            int slotId = booking.getSlotId();
-            slotBookingCount.put(slotId, slotBookingCount.getOrDefault(slotId, 1) - 1);
-
-            // Increase available seats
+        if (success) {
+            // 2. Increase slot capacity
             if (slotService != null) {
-                slotService.increaseAvailableSeats(slotId);
+                slotService.increaseAvailableSeats(booking.getSlotId());
             }
 
-            // Promote from waitlist if applicable
+            // 3. Promote from waitlist if any
             if (waitlistService != null) {
-                waitlistService.promoteFromWaitlist(slotId);
+                waitlistService.promoteFromWaitlist(booking.getSlotId());
             }
+
+            System.out.println("✅ Booking " + bookingId + " cancelled successfully.");
+            return true;
         }
 
-        System.out.println("✅ Booking cancelled successfully!");
-        System.out.println("   Booking ID: " + bookingId);
+        return false;
     }
 
     /**
@@ -236,8 +162,9 @@ public class BookingService implements BookingServiceInterface {
      * @param userId the user ID
      * @return the bookings by user
      */
+    @Override
     public List<Booking> getBookingsByUser(int userId) {
-        return userBookings.getOrDefault(userId, new ArrayList<>());
+        return bookingDAO.getBookingsByUser(userId);
     }
 
     /**
@@ -247,7 +174,7 @@ public class BookingService implements BookingServiceInterface {
      * @return the active bookings by user
      */
     public List<Booking> getActiveBookingsByUser(int userId) {
-        List<Booking> userBookingList = userBookings.getOrDefault(userId, new ArrayList<>());
+        List<Booking> userBookingList = bookingDAO.getBookingsByUser(userId);
         List<Booking> activeBookings = new ArrayList<>();
 
         for (Booking booking : userBookingList) {
@@ -269,7 +196,7 @@ public class BookingService implements BookingServiceInterface {
     public List<Booking> getBookingsBySlot(int slotId, Date date) {
         // For simplicity, return all bookings for the slot
         // In real scenario, would filter by date
-        return slotBookings.getOrDefault(slotId, new ArrayList<>());
+        return bookingDAO.getBookingsBySlot(slotId);
     }
 
     /**
@@ -280,7 +207,7 @@ public class BookingService implements BookingServiceInterface {
      * @throws BookingNotDoneException the booking not done exception
      */
     public Booking getBookingById(int bookingId) throws BookingNotDoneException {
-        Booking booking = bookings.get(bookingId);
+        Booking booking = bookingDAO.getBookingById(bookingId);
         if (booking == null) {
             throw new BookingNotDoneException("Booking with ID " + bookingId + " not found!");
         }
@@ -292,8 +219,10 @@ public class BookingService implements BookingServiceInterface {
      *
      * @return the all bookings
      */
+    @Override
     public List<Booking> getAllBookings() {
-        return new ArrayList<>(bookings.values());
+        // Typically admin views through other filters, but can implement if needed
+        return new ArrayList<>();
     }
 
     /**
@@ -303,15 +232,8 @@ public class BookingService implements BookingServiceInterface {
      * @return the bookings by status
      */
     public List<Booking> getBookingsByStatus(BookingStatus status) {
-        List<Booking> filteredBookings = new ArrayList<>();
-
-        for (Booking booking : bookings.values()) {
-            if (booking.getStatus() == status) {
-                filteredBookings.add(booking);
-            }
-        }
-
-        return filteredBookings;
+        // Typically not used this way, but if needed we filter from DB
+        return new ArrayList<>();
     }
 
     /**
@@ -321,7 +243,7 @@ public class BookingService implements BookingServiceInterface {
      * @return the booking count for slot
      */
     public int getBookingCountForSlot(int slotId) {
-        return slotBookingCount.getOrDefault(slotId, 0);
+        return bookingDAO.getBookingsBySlot(slotId).size();
     }
 
     /**
@@ -331,8 +253,9 @@ public class BookingService implements BookingServiceInterface {
      * @param slotId the slot ID
      * @return true, if successful
      */
+    @Override
     public boolean hasUserBookedSlot(int userId, int slotId) {
-        List<Booking> userBookingList = userBookings.getOrDefault(userId, new ArrayList<>());
+        List<Booking> userBookingList = bookingDAO.getBookingsByUser(userId);
 
         for (Booking booking : userBookingList) {
             if (booking.getSlotId() == slotId && booking.getStatus() == BookingStatus.CONFIRMED) {
@@ -351,36 +274,15 @@ public class BookingService implements BookingServiceInterface {
      * @return true, if successful
      * @throws BookingNotDoneException the booking not done exception
      */
+    @Override
     public boolean updateBookingStatus(int bookingId, BookingStatus newStatus) throws BookingNotDoneException {
-        Booking booking = bookings.get(bookingId);
+        Booking booking = bookingDAO.getBookingById(bookingId);
 
         if (booking == null) {
-            System.out.println("❌ Booking not found!");
-            throw new BookingNotDoneException("Booking with ID " + bookingId + " not found!");
+            throw new BookingNotDoneException("❌ Booking ID " + bookingId + " not found!");
         }
 
-        BookingStatus oldStatus = booking.getStatus();
-        booking.setStatus(newStatus);
-
-        // Update slot counts if status changed from/to CONFIRMED
-        if (oldStatus == BookingStatus.CONFIRMED && newStatus != BookingStatus.CONFIRMED) {
-            slotBookingCount.put(booking.getSlotId(),
-                    slotBookingCount.getOrDefault(booking.getSlotId(), 1) - 1);
-
-            if (slotService != null) {
-                slotService.increaseAvailableSeats(booking.getSlotId());
-            }
-        } else if (oldStatus != BookingStatus.CONFIRMED && newStatus == BookingStatus.CONFIRMED) {
-            slotBookingCount.put(booking.getSlotId(),
-                    slotBookingCount.getOrDefault(booking.getSlotId(), 0) + 1);
-
-            if (slotService != null) {
-                slotService.decreaseAvailableSeats(booking.getSlotId());
-            }
-        }
-
-        System.out.println("✅ Booking status updated to: " + newStatus);
-        return true;
+        return bookingDAO.updateBookingStatus(bookingId, newStatus);
     }
 
     /**
@@ -390,38 +292,12 @@ public class BookingService implements BookingServiceInterface {
      * @return true, if successful
      * @throws BookingNotDoneException the booking not done exception
      */
+    @Override
     public boolean deleteBooking(int bookingId) throws BookingNotDoneException {
-        Booking booking = bookings.remove(bookingId);
-
-        if (booking != null) {
-            // Remove from user's bookings
-            List<Booking> userBookingList = userBookings.get(booking.getUserId());
-            if (userBookingList != null) {
-                userBookingList.removeIf(b -> b.getBookingId() == bookingId);
-            }
-
-            // Remove from slot's bookings
-            List<Booking> slotBookingList = slotBookings.get(booking.getSlotId());
-            if (slotBookingList != null) {
-                slotBookingList.removeIf(b -> b.getBookingId() == bookingId);
-            }
-
-            // Update counts if booking was confirmed
-            if (booking.getStatus() == BookingStatus.CONFIRMED) {
-                slotBookingCount.put(booking.getSlotId(),
-                        slotBookingCount.getOrDefault(booking.getSlotId(), 1) - 1);
-
-                if (slotService != null) {
-                    slotService.increaseAvailableSeats(booking.getSlotId());
-                }
-            }
-
-            System.out.println("✅ Booking deleted!");
-            return true;
+        if (bookingDAO.getBookingById(bookingId) == null) {
+            throw new BookingNotDoneException("Booking with ID " + bookingId + " not found!");
         }
-
-        System.out.println("❌ Booking not found!");
-        throw new BookingNotDoneException("Booking with ID " + bookingId + " not found!");
+        return bookingDAO.deleteBooking(bookingId);
     }
 
     /**
@@ -446,7 +322,7 @@ public class BookingService implements BookingServiceInterface {
      * @param userId the user ID
      */
     public void displayUserBookings(int userId) {
-        List<Booking> userBookingList = getBookingsByUser(userId);
+        List<Booking> userBookingList = bookingDAO.getBookingsByUser(userId);
 
         if (userBookingList.isEmpty()) {
             System.out.println("No bookings found for user ID: " + userId);
@@ -462,13 +338,7 @@ public class BookingService implements BookingServiceInterface {
      * Display all bookings.
      */
     public void displayAllBookings() {
-        if (bookings.isEmpty()) {
-            System.out.println("No bookings in the system!");
-        } else {
-            System.out.println("\n=== ALL BOOKINGS ===");
-            for (Booking booking : bookings.values()) {
-                displayBooking(booking);
-            }
-        }
+        // Typically admin views through other filters
+        System.out.println("Functionality not implemented at search-all level.");
     }
 }
