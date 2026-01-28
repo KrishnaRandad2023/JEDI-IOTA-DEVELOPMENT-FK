@@ -12,7 +12,7 @@ import java.sql.SQLException;
 public class DBConnection {
     private static final String URL = "jdbc:mysql://localhost:3306/flipfit_schema";
     private static final String USER = "root"; // Replace with your DB username
-    private static final String PASSWORD = "Engg@sql2026"; // Replace with your DB password
+    private static final String PASSWORD = "Ak@160305"; // Replace with your DB password
 
     public static Connection getConnection() throws SQLException {
         try {

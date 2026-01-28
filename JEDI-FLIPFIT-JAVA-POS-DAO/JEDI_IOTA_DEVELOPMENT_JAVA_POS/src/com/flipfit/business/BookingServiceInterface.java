@@ -34,7 +34,7 @@ public interface BookingServiceInterface {
 	 * @return true if booking is successful
 	 * @throws SlotNotAvailableException if the chosen slot has no available seats
 	 */
-	boolean bookSlot(int userId, int slotId, Date date) throws SlotNotAvailableException;
+	int bookSlot(int userId, int slotId, Date date) throws SlotNotAvailableException;
 
 	/**
 	 * Cancels an existing booking.

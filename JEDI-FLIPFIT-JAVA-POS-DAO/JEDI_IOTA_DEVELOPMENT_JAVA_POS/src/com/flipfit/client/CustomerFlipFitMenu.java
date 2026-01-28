@@ -224,25 +224,34 @@ public class CustomerFlipFitMenu implements FlipFitMenuInterface {
         String confirm = scanner.nextLine();
 
         if (confirm.equalsIgnoreCase("y")) {
-            // INTEGRATED PAYMENT STEP via Payment Menu
-            PaymentFlipFitMenu paymentMenu = new PaymentFlipFitMenu();
-            double amount = 500.00; // Mock amount
+            try {
+                // Step 1: Create booking first (confirmed or waitlisted)
+                int bookingId = customerService.bookSlot(loggedInCustomer.getUserId(), slotId);
 
-            boolean paymentSuccess = paymentMenu.showPaymentMenu(scanner, amount);
+                if (bookingId > 0) {
+                    // Step 2: Proceed to payment for confirmed booking
+                    PaymentFlipFitMenu paymentMenu = new PaymentFlipFitMenu();
+                    double amount = 500.00; // Mock amount
 
-            if (paymentSuccess) {
-                try {
-                    boolean bookingSuccess = customerService.bookSlot(loggedInCustomer.getUserId(), slotId);
-                    if (!bookingSuccess) {
-                        System.out.println("⚠️ Added to waitlist as slot was full.");
+                    boolean paymentSuccess = paymentMenu.showPaymentMenu(scanner, amount, bookingId);
+
+                    if (paymentSuccess) {
+                        System.out.println("\n✅ Booking and Payment Confirmed!");
                     } else {
-                        System.out.println("\n✅ Booking Confirmed!");
+                        // Step 3: ROLLBACK booking if payment fails or is cancelled
+                        System.out.println("⚠️ Cancelling booking due to failed/cancelled payment...");
+                        customerService.cancelBooking(loggedInCustomer.getUserId(), bookingId);
+                        System.out.println("❌ Booking aborted.");
                     }
-                } catch (UserNotFoundException | SlotNotAvailableException e) {
-                    System.out.println("❌ Booking failed: " + e.getMessage());
+                } else if (bookingId == -1) {
+                    // Waitlist case - no payment needed for waitlist (usually)
+                    System.out.println("⚠️ Added to waitlist as slot was full.");
+                    System.out.println("   No payment required until you are promoted.");
+                } else {
+                    System.out.println("❌ Booking failed for unknown reason.");
                 }
-            } else {
-                System.out.println("❌ Payment failed or cancelled! Booking aborted.");
+            } catch (UserNotFoundException | SlotNotAvailableException | BookingNotDoneException e) {
+                System.out.println("❌ Booking failed: " + e.getMessage());
             }
         } else {
             System.out.println("Booking cancelled.");

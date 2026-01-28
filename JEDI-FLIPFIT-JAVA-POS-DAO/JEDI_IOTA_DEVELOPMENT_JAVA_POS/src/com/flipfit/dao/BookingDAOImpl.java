@@ -19,19 +19,25 @@ import java.util.List;
 public class BookingDAOImpl implements BookingDAO {
 
     @Override
-    public boolean addBooking(Booking booking) {
+    public int addBooking(Booking booking) {
         String query = SQLConstants.BOOK_SLOT;
         try (Connection conn = DBConnection.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(query)) {
+                PreparedStatement stmt = conn.prepareStatement(query, java.sql.Statement.RETURN_GENERATED_KEYS)) {
             stmt.setInt(1, booking.getUserId());
             stmt.setInt(2, booking.getSlotId());
             stmt.setDate(3, new java.sql.Date(booking.getBookingDate().getTime()));
             int rows = stmt.executeUpdate();
-            return rows > 0;
+            if (rows > 0) {
+                try (ResultSet rs = stmt.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        return rs.getInt(1);
+                    }
+                }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return false;
+        return 0;
     }
 
     @Override

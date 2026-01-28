@@ -10,7 +10,7 @@ import java.util.List;
  * @author team IOTA
  */
 public interface BookingDAO {
-    boolean addBooking(Booking booking);
+    int addBooking(Booking booking);
 
     Booking getBookingById(int bookingId);
 

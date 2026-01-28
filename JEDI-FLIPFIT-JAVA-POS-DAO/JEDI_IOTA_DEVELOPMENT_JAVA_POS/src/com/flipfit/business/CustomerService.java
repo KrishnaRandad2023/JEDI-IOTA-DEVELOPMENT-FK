@@ -227,10 +227,10 @@ public class CustomerService {
      * @throws UserNotFoundException     the user not found exception
      * @throws SlotNotAvailableException the slot not available exception
      */
-    public boolean bookSlot(int userId, int slotId) throws UserNotFoundException, SlotNotAvailableException {
+    public int bookSlot(int userId, int slotId) throws UserNotFoundException, SlotNotAvailableException {
         if (bookingService == null || slotService == null) {
             System.out.println("❌ Required services not available!");
-            return false;
+            return 0;
         }
 
         // Verify user is a customer
@@ -243,7 +243,7 @@ public class CustomerService {
 
             if (!(user instanceof GymCustomer)) {
                 System.out.println("❌ Only customers can book slots!");
-                return false;
+                return 0;
             }
         }
 
@@ -251,24 +251,17 @@ public class CustomerService {
         Slot slot = slotService.getSlotById(slotId);
         if (slot == null) {
             System.out.println("❌ Slot not found!");
-            return false;
+            return 0;
         }
 
         // Check if user already booked this slot
         if (bookingService.hasUserBookedSlot(userId, slotId)) {
             System.out.println("❌ You have already booked this slot!");
-            return false;
+            return 0;
         }
 
-        // FIXED: Check availability BEFORE booking to return accurate result
-        boolean hasSeats = slotService.hasAvailableSeats(slotId);
-
-        // Try to book
-        bookingService.bookSlot(userId, slotId, new Date());
-
-        // FIXED: Return true only if seats were available (confirmed booking)
-        // If no seats, user was added to waitlist, so return false
-        return hasSeats;
+        // Try to book and return id/-1/0
+        return bookingService.bookSlot(userId, slotId, new Date());
     }
 
     /**

@@ -82,14 +82,14 @@ public class BookingService implements BookingServiceInterface {
      * @throws SlotNotAvailableException the slot not available exception
      */
     @Override
-    public boolean bookSlot(int userId, int slotId, Date date) throws SlotNotAvailableException {
+    public int bookSlot(int userId, int slotId, Date date) throws SlotNotAvailableException {
         // 1. Check if slot exists and has seats
         if (slotService != null && !slotService.hasAvailableSeats(slotId)) {
             // No seats available, add to waitlist instead?
             if (waitlistService != null) {
                 System.out.println("⚠️ Slot full! Adding you to waitlist...");
                 waitlistService.addToWaitlist(userId, slotId);
-                return false;
+                return -1; // Return -1 to indicate waitlist
             }
             throw new SlotNotAvailableException("❌ Slot is fully booked and waitlist is full!");
         }
@@ -102,18 +102,18 @@ public class BookingService implements BookingServiceInterface {
         booking.setStatus(BookingStatus.CONFIRMED);
 
         // 3. Persist booking
-        boolean success = bookingDAO.addBooking(booking);
+        int bookingId = bookingDAO.addBooking(booking);
 
-        if (success) {
+        if (bookingId > 0) {
             // 4. Update slot seats
             if (slotService != null) {
                 slotService.decreaseAvailableSeats(slotId);
             }
             System.out.println("✅ Booking successful for User ID: " + userId + " Slot ID: " + slotId);
-            return true;
+            return bookingId;
         }
 
-        return false;
+        return 0;
     }
 
     /**

@@ -23,52 +23,74 @@ public class PaymentFlipFitMenu {
      * @param amount  The amount to be paid
      * @return true if payment is successful, false otherwise
      */
-    public boolean showPaymentMenu(Scanner scanner, double amount) {
+    public boolean showPaymentMenu(Scanner scanner, double amount, int bookingId) {
         System.out.println("\n╔════════════════════════════════════╗");
         System.out.println("║          PAYMENT GATEWAY           ║");
         System.out.println("╠════════════════════════════════════╣");
         System.out.printf("║ Amount Due: %-22.2f ║%n", amount);
-        System.out.println("║                                    ║");
-        System.out.println("║ 1. Pay via UPI                     ║");
-        System.out.println("║ 2. Pay via Card                    ║");
-        System.out.println("║ 3. Cancel Payment                  ║");
         System.out.println("╚════════════════════════════════════╝");
-        System.out.print("Select Payment Method: ");
 
-        int choice = -1;
+        /**
+         * [DEVELOPMENT MODE]
+         * The following section automatically approves the payment to streamline the
+         * testing process.
+         * It bypasses the manual selection and simulated processing.
+         */
+        System.out.println("\n⚡ [DEVELOPMENT MODE] Auto-approving payment...");
+        System.out.println("🔗 Processing UPI transaction for booking ID: " + bookingId);
+
         try {
-            choice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
-        } catch (Exception e) {
-            scanner.nextLine(); // Clear invalid input
-            System.out.println("❌ Invalid input!");
-            return false;
+            // Simulated delay for UI feedback
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
         }
 
-        String paymentMethod = "Unknown";
+        // Proceed directly to processing payment with a default development method
+        return paymentService.processPayment(bookingId, amount, "UPI (Auto-Approved)");
 
-        switch (choice) {
-            case 1:
-                paymentMethod = "UPI";
-                System.out.print("Enter UPI ID: ");
-                scanner.nextLine(); // Simulate reading UPI ID
-                break;
-            case 2:
-                paymentMethod = "Card";
-                System.out.print("Enter Card Number: ");
-                scanner.nextLine(); // Simulate reading Card Number
-                break;
-            case 3:
-                System.out.println("Payment Cancelled.");
-                return false;
-            default:
-                System.out.println("❌ Invalid choice!");
-                return false;
-        }
-
-        System.out.println("\nProcessing Payment...");
-        // 0 is a placeholder for bookingId, which might be linked later often in a real
-        // system
-        return paymentService.processPayment(0, amount, paymentMethod);
+        /**
+         * ORIGINAL MANUAL LOGIC (Commented out for future reference or switch back)
+         * 
+         * System.out.println("║ 1. Pay via UPI ║");
+         * System.out.println("║ 2. Pay via Card ║");
+         * System.out.println("║ 3. Cancel Payment ║");
+         * System.out.println("╚════════════════════════════════════╝");
+         * System.out.print("Select Payment Method: ");
+         *
+         * int choice = -1;
+         * try {
+         * choice = scanner.nextInt();
+         * scanner.nextLine(); // Consume newline
+         * } catch (Exception e) {
+         * scanner.nextLine(); // Clear invalid input
+         * System.out.println("❌ Invalid input!");
+         * return false;
+         * }
+         *
+         * String paymentMethod = "Unknown";
+         *
+         * switch (choice) {
+         * case 1:
+         * paymentMethod = "UPI";
+         * System.out.print("Enter UPI ID: ");
+         * scanner.nextLine();
+         * break;
+         * case 2:
+         * paymentMethod = "Card";
+         * System.out.print("Enter Card Number: ");
+         * scanner.nextLine();
+         * break;
+         * case 3:
+         * System.out.println("Payment Cancelled.");
+         * return false;
+         * default:
+         * System.out.println("❌ Invalid choice!");
+         * return false;
+         * }
+         *
+         * System.out.println("\nProcessing Payment...");
+         * return paymentService.processPayment(bookingId, amount, paymentMethod);
+         */
     }
 }

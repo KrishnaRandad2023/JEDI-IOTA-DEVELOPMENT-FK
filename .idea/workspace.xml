@@ -5,227 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fa64e301-fe53-40f3-9821-a6b8ed984208" name="Changes" comment="--">
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JEDI-IOTA-DEVELOPMENT-FK.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/bean/Booking.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/bean/BookingNotification.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/bean/BookingStatus.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/bean/GymAdmin.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/bean/GymCenter.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/bean/GymCustomer.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/bean/GymOwner.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/bean/Notification.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/bean/Payment.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/bean/PromotionalNotification.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/bean/Registration.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/bean/Role.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/bean/Slot.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/bean/User.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/bean/WaitListNotification.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/bean/Waitlist.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/bean/class-use/Booking.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/bean/class-use/BookingNotification.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/bean/class-use/BookingStatus.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/bean/class-use/GymAdmin.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/bean/class-use/GymCenter.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/bean/class-use/GymCustomer.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/bean/class-use/GymOwner.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/bean/class-use/Notification.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/bean/class-use/Payment.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/bean/class-use/PromotionalNotification.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/bean/class-use/Registration.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/bean/class-use/Role.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/bean/class-use/Slot.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/bean/class-use/User.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/bean/class-use/WaitListNotification.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/bean/class-use/Waitlist.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/bean/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/bean/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/bean/package-use.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/business/AdminService.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/business/BookingService.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/business/BookingServiceInterface.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/business/CustomerService.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/business/GymOwnerService.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/business/GymService.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/business/GymServiceInterface.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/business/GymUserInterface.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/business/GymUserService.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/business/PaymentService.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/business/PaymentServiceInterface.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/business/SlotService.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/business/WaitlistService.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/business/WaitlistServiceInterface.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/business/class-use/AdminService.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/business/class-use/BookingService.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/business/class-use/BookingServiceInterface.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/business/class-use/CustomerService.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/business/class-use/GymOwnerService.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/business/class-use/GymService.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/business/class-use/GymServiceInterface.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/business/class-use/GymUserInterface.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/business/class-use/GymUserService.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/business/class-use/PaymentService.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/business/class-use/PaymentServiceInterface.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/business/class-use/SlotService.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/business/class-use/WaitlistService.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/business/class-use/WaitlistServiceInterface.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/business/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/business/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/business/package-use.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/client/AdminFlipFitMenu.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/client/CustomerFlipFitMenu.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/client/FlipFitApplication.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/client/FlipFitMenuInterface.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/client/GymOwnerFlipFitMenu.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/client/PaymentFlipFitMenu.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/client/PaymentTest.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/client/ServiceFactory.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/client/UserMenu.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/client/class-use/AdminFlipFitMenu.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/client/class-use/CustomerFlipFitMenu.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/client/class-use/FlipFitApplication.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/client/class-use/FlipFitMenuInterface.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/client/class-use/GymOwnerFlipFitMenu.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/client/class-use/PaymentFlipFitMenu.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/client/class-use/PaymentTest.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/client/class-use/ServiceFactory.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/client/class-use/UserMenu.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/client/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/client/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/client/package-use.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/constants/SQLConstants.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/constants/class-use/SQLConstants.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/constants/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/constants/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/constants/package-use.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/dao/GymAdminDAO.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/dao/GymAdminDAOImpl.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/dao/GymCustomerDAO.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/dao/GymCustomerDAOImpl.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/dao/GymOwnerDAO.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/dao/GymOwnerDAOImpl.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/dao/GymUserDAO.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/dao/GymUserDAOImpl.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/dao/class-use/GymAdminDAO.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/dao/class-use/GymAdminDAOImpl.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/dao/class-use/GymCustomerDAO.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/dao/class-use/GymCustomerDAOImpl.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/dao/class-use/GymOwnerDAO.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/dao/class-use/GymOwnerDAOImpl.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/dao/class-use/GymUserDAO.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/dao/class-use/GymUserDAOImpl.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/dao/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/dao/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/dao/package-use.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/exception/BookingNotDoneException.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/exception/InvalidAadhaarException.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/exception/InvalidEmailException.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/exception/InvalidMobileException.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/exception/IssueWithApprovalException.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/exception/RegistrationNotDoneException.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/exception/SlotNotAvailableException.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/exception/UserNotFoundException.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/exception/class-use/BookingNotDoneException.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/exception/class-use/InvalidAadhaarException.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/exception/class-use/InvalidEmailException.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/exception/class-use/InvalidMobileException.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/exception/class-use/IssueWithApprovalException.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/exception/class-use/RegistrationNotDoneException.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/exception/class-use/SlotNotAvailableException.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/exception/class-use/UserNotFoundException.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/exception/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/exception/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/exception/package-use.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/utils/DBConnection.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/utils/HashGenerator.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/utils/PasswordUtils.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/utils/class-use/DBConnection.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/utils/class-use/HashGenerator.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/utils/class-use/PasswordUtils.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/utils/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/utils/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/com/flipfit/utils/package-use.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/JEDI_IOTA_DEVELOPMENT_JAVA_POS/module-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/allclasses-index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/allpackages-index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/constant-values.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/element-list" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/help-doc.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/index-files/index-1.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/index-files/index-10.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/index-files/index-11.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/index-files/index-12.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/index-files/index-13.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/index-files/index-14.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/index-files/index-15.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/index-files/index-16.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/index-files/index-17.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/index-files/index-18.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/index-files/index-19.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/index-files/index-2.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/index-files/index-3.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/index-files/index-4.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/index-files/index-5.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/index-files/index-6.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/index-files/index-7.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/index-files/index-8.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/index-files/index-9.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/legal/ADDITIONAL_LICENSE_INFO" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/legal/ASSEMBLY_EXCEPTION" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/legal/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/legal/dejavufonts.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/legal/jquery.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/legal/jqueryUI.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/member-search-index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/module-search-index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/overview-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/package-search-index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/resource-files/copy.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/resource-files/fonts/DejaVuLGCSans-Bold.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/resource-files/fonts/DejaVuLGCSans-Bold.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/resource-files/fonts/DejaVuLGCSans-BoldOblique.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/resource-files/fonts/DejaVuLGCSans-BoldOblique.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/resource-files/fonts/DejaVuLGCSans-Oblique.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/resource-files/fonts/DejaVuLGCSans-Oblique.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/resource-files/fonts/DejaVuLGCSans.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/resource-files/fonts/DejaVuLGCSans.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/resource-files/fonts/DejaVuLGCSansMono-Bold.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/resource-files/fonts/DejaVuLGCSansMono-Bold.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/resource-files/fonts/DejaVuLGCSansMono-BoldOblique.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/resource-files/fonts/DejaVuLGCSansMono-BoldOblique.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/resource-files/fonts/DejaVuLGCSansMono-Oblique.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/resource-files/fonts/DejaVuLGCSansMono-Oblique.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/resource-files/fonts/DejaVuLGCSansMono.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/resource-files/fonts/DejaVuLGCSansMono.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/resource-files/fonts/DejaVuLGCSerif-Bold.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/resource-files/fonts/DejaVuLGCSerif-Bold.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/resource-files/fonts/DejaVuLGCSerif-BoldItalic.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/resource-files/fonts/DejaVuLGCSerif-BoldItalic.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/resource-files/fonts/DejaVuLGCSerif-Italic.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/resource-files/fonts/DejaVuLGCSerif-Italic.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/resource-files/fonts/DejaVuLGCSerif.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/resource-files/fonts/DejaVuLGCSerif.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/resource-files/fonts/dejavu.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/resource-files/glass.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/resource-files/jquery-ui.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/resource-files/left.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/resource-files/link.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/resource-files/right.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/resource-files/stylesheet.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/resource-files/x.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/script-files/jquery-3.7.1.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/script-files/jquery-ui.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/script-files/script.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/script-files/search-page.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/script-files/search.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/search.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/serialized-form.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/tag-search-index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/docs/type-search-index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/src/com/flipfit/business/AdminService.java" beforeDir="false" afterPath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/src/com/flipfit/business/AdminService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS/JEDI_IOTA_DEVELOPMENT_JAVA_POS-COLLECTION/src/com/flipfit/client/FlipFitApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/JEDI-FLIPFIT-JAVA-POS-DAO/JEDI_IOTA_DEVELOPMENT_JAVA_POS/src/com/FlipFitApplication.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -274,10 +55,10 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "#5 on feature/flipfit-updates",
+    "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
     "onboarding.tips.debug.path": "/Users/saumit.pradhan/Downloads/JEDI-IOTA-DEVELOPMENT-FK/src/Main.java",
-    "project.structure.last.edited": "Modules",
+    "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "fileTemplates"
@@ -296,17 +77,6 @@
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
-    </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="JEDI-IOTA-DEVELOPMENT-FK" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="JEDI-IOTA-DEVELOPMENT-FK" />
-      <option name="filePath" />
-      <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
