@@ -8,11 +8,17 @@ public class SQLConstants {
     // GymUser Queries
     public static final String AUTHENTICATE_USER = "SELECT * FROM User WHERE email = ? AND password = ?";
     public static final String REGISTER_USER = "INSERT INTO User (name, email, password, mobileNumber, roleId) VALUES (?, ?, ?, ?, ?)";
-    public static final String GET_USER_BY_EMAIL = "SELECT u.*, r.roleName FROM User u " +
+    public static final String GET_USER_BY_EMAIL = "SELECT u.*, r.roleName, o.gstNumber, o.cin, o.panNumber, o.aadhaarNumber AS ownerAadhaar, c.aadhaarNumber AS customerAadhaar FROM User u "
+            +
             "LEFT JOIN Role r ON u.roleId = r.roleId " +
+            "LEFT JOIN GymOwner o ON u.userId = o.userId " +
+            "LEFT JOIN GymCustomer c ON u.userId = c.userId " +
             "WHERE u.email = ?";
-    public static final String GET_USER_BY_ID = "SELECT u.*, r.roleName FROM User u " +
+    public static final String GET_USER_BY_ID = "SELECT u.*, r.roleName, o.gstNumber, o.cin, o.panNumber, o.aadhaarNumber AS ownerAadhaar, c.aadhaarNumber AS customerAadhaar FROM User u "
+            +
             "LEFT JOIN Role r ON u.roleId = r.roleId " +
+            "LEFT JOIN GymOwner o ON u.userId = o.userId " +
+            "LEFT JOIN GymCustomer c ON u.userId = c.userId " +
             "WHERE u.userId = ?";
     public static final String UPDATE_USER_PROFILE = "UPDATE User SET name = ?, email = ?, mobileNumber = ? WHERE userId = ?";
     public static final String DELETE_USER = "DELETE FROM User WHERE userId = ?";

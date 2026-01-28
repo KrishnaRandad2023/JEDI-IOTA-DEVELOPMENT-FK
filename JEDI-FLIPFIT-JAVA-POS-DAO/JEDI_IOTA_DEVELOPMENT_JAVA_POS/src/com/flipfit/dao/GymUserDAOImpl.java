@@ -127,6 +127,18 @@ public class GymUserDAOImpl implements GymUserDAO {
                 role.setRoleName(roleName);
                 user.setRole(role);
 
+                // Fetch extra details for specific roles
+                if (user instanceof GymOwner) {
+                    GymOwner owner = (GymOwner) user;
+                    owner.setGstNumber(rs.getString("gstNumber"));
+                    owner.setCin(rs.getString("cin"));
+                    owner.setPanNumber(rs.getString("panNumber"));
+                    owner.setAadhaarNumber(rs.getString("ownerAadhaar"));
+                } else if (user instanceof GymCustomer) {
+                    GymCustomer customer = (GymCustomer) user;
+                    customer.setAadhaarNumber(rs.getString("customerAadhaar"));
+                }
+
                 return user;
             }
         } catch (SQLException e) {
@@ -159,6 +171,18 @@ public class GymUserDAOImpl implements GymUserDAO {
                 role.setRoleId(roleId);
                 role.setRoleName(roleName);
                 user.setRole(role);
+
+                // Fetch extra details for specific roles
+                if (user instanceof GymOwner) {
+                    GymOwner owner = (GymOwner) user;
+                    owner.setGstNumber(rs.getString("gstNumber"));
+                    owner.setCin(rs.getString("cin"));
+                    owner.setPanNumber(rs.getString("panNumber"));
+                    owner.setAadhaarNumber(rs.getString("ownerAadhaar"));
+                } else if (user instanceof GymCustomer) {
+                    GymCustomer customer = (GymCustomer) user;
+                    customer.setAadhaarNumber(rs.getString("customerAadhaar"));
+                }
 
                 return user;
             }
