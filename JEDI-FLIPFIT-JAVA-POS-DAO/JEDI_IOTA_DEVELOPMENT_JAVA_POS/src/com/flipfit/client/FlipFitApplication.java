@@ -4,12 +4,27 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import com.flipfit.bean.*;
 import com.flipfit.business.*;
+import com.flipfit.exception.RegistrationNotDoneException;
+import com.flipfit.exception.UserNotFoundException;
 
+/// Classs level Comminting
+
+/**
+ * The Class FlipFitApplication.
+ *
+ * @author krishna
+ * @ClassName "FlipFitApplication"
+ */
 public class FlipFitApplication {
 
+    /** The gym user service. */
     private static GymUserService gymUserService;
-    private static User loggedInUser = null;
 
+    /**
+     * The main method.
+     *
+     * @param args the arguments
+     */
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
@@ -84,6 +99,11 @@ public class FlipFitApplication {
         scanner.close();
     }
 
+    /**
+     * Login.
+     *
+     * @param scanner the scanner
+     */
     // Login functionality
     private static void login(Scanner scanner) {
         System.out.println("\n═══ LOGIN ═══");
@@ -93,45 +113,49 @@ public class FlipFitApplication {
         System.out.print("Enter Password: ");
         String password = scanner.nextLine();
 
-        // Attempt login
-        User user = gymUserService.login(email, password);
+        try {
+            // Attempt login
+            User user = gymUserService.login(email, password);
 
-        if (user != null) {
-            loggedInUser = user;
+            if (user != null) {
+                // DEBUG PRINTS
+                System.out.println("\n🔍 DEBUG LOG:");
+                System.out.println("   - User Class: " + user.getClass().getName());
+                if (user.getRole() != null) {
+                    System.out.println("   - Role ID: " + user.getRole().getRoleId());
+                    System.out.println("   - Role Name: " + user.getRole().getRoleName());
+                } else {
+                    System.out.println("   - Role is NULL!");
+                }
 
-            // DEBUG PRINTS
-            System.out.println("\n🔍 DEBUG LOG:");
-            System.out.println("   - User Class: " + user.getClass().getName());
-            if (user.getRole() != null) {
-                System.out.println("   - Role ID: " + user.getRole().getRoleId());
-                System.out.println("   - Role Name: " + user.getRole().getRoleName());
-            } else {
-                System.out.println("   - Role is NULL!");
+                // Route to appropriate menu based on role
+                if (user instanceof GymAdmin) {
+                    System.out.println("\n🔑 Admin Access Granted!");
+                    AdminFlipFitMenu adminMenu = new AdminFlipFitMenu();
+                    adminMenu.displayMenu(scanner);
+                } else if (user instanceof GymOwner) {
+                    System.out.println("\n🏋️ Gym Owner Access Granted!");
+                    GymOwnerFlipFitMenu ownerMenu = new GymOwnerFlipFitMenu(user);
+                    ownerMenu.displayMenu(scanner);
+                } else if (user instanceof GymCustomer) {
+                    System.out.println("\n💪 Customer Access Granted!");
+                    CustomerFlipFitMenu customerMenu = new CustomerFlipFitMenu(user);
+                    customerMenu.displayMenu(scanner);
+                } else {
+                    System.out.println("\n✅ Login Successful (Generic User Object)!");
+                    System.out.println("   Welcome, " + user.getName() + "!");
+                }
             }
-
-            // Route to appropriate menu based on role
-            if (user instanceof GymAdmin) {
-                System.out.println("\n🔑 Admin Access Granted!");
-                AdminFlipFitMenu adminMenu = new AdminFlipFitMenu();
-                adminMenu.displayMenu(scanner);
-            } else if (user instanceof GymOwner) {
-                System.out.println("\n🏋️ Gym Owner Access Granted!");
-                GymOwnerFlipFitMenu ownerMenu = new GymOwnerFlipFitMenu(user);
-                ownerMenu.displayMenu(scanner);
-            } else if (user instanceof GymCustomer) {
-                System.out.println("\n💪 Customer Access Granted!");
-                CustomerFlipFitMenu customerMenu = new CustomerFlipFitMenu(user);
-                customerMenu.displayMenu(scanner);
-            } else {
-                System.out.println("\n✅ Login Successful (Generic User Object)!");
-                System.out.println("   Welcome, " + user.getName() + "!");
-            }
-
-            // After logout, clear logged in user
-            loggedInUser = null;
+        } catch (UserNotFoundException e) {
+            System.out.println("❌ " + e.getMessage());
         }
     }
 
+    /**
+     * Register customer.
+     *
+     * @param scanner the scanner
+     */
     // Register Customer
     private static void registerCustomer(Scanner scanner) {
         System.out.println("\n═══ CUSTOMER REGISTRATION ═══");
@@ -167,14 +191,23 @@ public class FlipFitApplication {
         Role customerRole = new Role(3, "CUSTOMER", "Customer who books slots");
         customer.setRole(customerRole);
 
-        // Register
-        if (gymUserService.registerUser(customer)) {
-            System.out.println("\n✅ Registration Successful!");
-            System.out.println("   You can now login with your credentials.");
-            System.out.println("   Email: " + email);
+        try {
+            // Register
+            if (gymUserService.registerUser(customer)) {
+                System.out.println("\n✅ Registration Successful!");
+                System.out.println("   You can now login with your credentials.");
+                System.out.println("   Email: " + email);
+            }
+        } catch (RegistrationNotDoneException e) {
+            System.out.println("❌ Registration failed: " + e.getMessage());
         }
     }
 
+    /**
+     * Register gym owner.
+     *
+     * @param scanner the scanner
+     */
     // Register Gym Owner
     private static void registerGymOwner(Scanner scanner) {
         System.out.println("\n═══ GYM OWNER REGISTRATION ═══");
@@ -208,7 +241,6 @@ public class FlipFitApplication {
 
         // FIXED: Actually integrate with AdminService
         ServiceFactory factory = ServiceFactory.getInstance();
-        AdminService adminService = factory.getAdminService();
 
         // Create registration request
         Registration registration = new Registration();
@@ -249,8 +281,12 @@ public class FlipFitApplication {
             Role ownerRole = new Role(2, "GYM_OWNER", "Gym owner who manages centers");
             owner.setRole(ownerRole);
 
-            if (gymUserService.registerUser(owner)) {
-                System.out.println("✅ Auto-approved! You can now login.");
+            try {
+                if (gymUserService.registerUser(owner)) {
+                    System.out.println("✅ Auto-approved! You can now login.");
+                }
+            } catch (RegistrationNotDoneException e) {
+                System.out.println("❌ Auto-approval failed: " + e.getMessage());
             }
         } else {
             // FIXED: Actually add to AdminService pending registrations
@@ -265,6 +301,11 @@ public class FlipFitApplication {
         }
     }
 
+    /**
+     * Change password.
+     *
+     * @param scanner the scanner
+     */
     // Change Password (for existing users)
     private static void changePassword(Scanner scanner) {
         System.out.println("\n═══ CHANGE PASSWORD ═══");
@@ -275,29 +316,35 @@ public class FlipFitApplication {
         System.out.print("Enter Old Password: ");
         String oldPassword = scanner.nextLine();
 
-        // Verify credentials first
-        User user = gymUserService.login(email, oldPassword);
+        try {
+            // Verify credentials first
+            User user = gymUserService.login(email, oldPassword);
 
-        if (user == null) {
-            System.out.println("❌ Invalid email or password!");
-            return;
-        }
+            if (user == null) {
+                System.out.println("❌ Invalid email or password!");
+                return;
+            }
 
-        System.out.print("Enter New Password: ");
-        String newPassword = scanner.nextLine();
+            System.out.print("Enter New Password: ");
+            String newPassword = scanner.nextLine();
 
-        System.out.print("Confirm New Password: ");
-        String confirmPassword = scanner.nextLine();
+            System.out.print("Confirm New Password: ");
+            String confirmPassword = scanner.nextLine();
 
-        if (!newPassword.equals(confirmPassword)) {
-            System.out.println("❌ Passwords don't match!");
-            return;
-        }
+            if (!newPassword.equals(confirmPassword)) {
+                System.out.println("❌ Passwords don't match!");
+                return;
+            }
 
-        // Change password
-        if (gymUserService.changePassword(user.getUserId(), oldPassword, newPassword)) {
-            System.out.println("✅ Password changed successfully!");
-            System.out.println("   Please login with your new password.");
+            // Change password
+            if (gymUserService.changePassword(user.getUserId(), oldPassword, newPassword)) {
+                System.out.println("✅ Password changed successfully!");
+                System.out.println("   Please login with your new password.");
+            }
+        } catch (UserNotFoundException e) {
+            System.out.println("❌ Verification failed: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("❌ An unexpected error occurred: " + e.getMessage());
         }
     }
 }
