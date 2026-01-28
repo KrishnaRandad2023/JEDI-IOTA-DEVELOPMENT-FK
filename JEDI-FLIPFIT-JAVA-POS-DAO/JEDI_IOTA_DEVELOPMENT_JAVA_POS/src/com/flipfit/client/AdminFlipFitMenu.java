@@ -7,12 +7,10 @@ import com.flipfit.exception.IssueWithApprovalException;
 import com.flipfit.exception.RegistrationNotDoneException;
 import com.flipfit.exception.UserNotFoundException;
 
-/// Classs level Comminting
-
 /**
  * The Class AdminFlipFitMenu.
  *
- * @author krishna
+ * @author team IOTA
  * @ClassName "AdminFlipFitMenu"
  */
 public class AdminFlipFitMenu implements FlipFitMenuInterface {

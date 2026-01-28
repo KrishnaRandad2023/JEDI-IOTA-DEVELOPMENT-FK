@@ -2,6 +2,8 @@ package com.flipfit.client;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import com.flipfit.bean.*;
 import com.flipfit.business.*;
 import com.flipfit.exception.RegistrationNotDoneException;
@@ -10,12 +12,10 @@ import com.flipfit.exception.InvalidEmailException;
 import com.flipfit.exception.InvalidMobileException;
 import com.flipfit.exception.InvalidAadhaarException;
 
-/// Classs level Comminting
-
 /**
  * The Class FlipFitApplication.
  *
- * @author krishna
+ * @author team IOTA
  * @ClassName "FlipFitApplication"
  */
 public class FlipFitApplication {
@@ -122,31 +122,47 @@ public class FlipFitApplication {
 
             if (user != null) {
                 // DEBUG PRINTS
-                System.out.println("\n🔍 DEBUG LOG:");
-                System.out.println("   - User Class: " + user.getClass().getName());
-                if (user.getRole() != null) {
-                    System.out.println("   - Role ID: " + user.getRole().getRoleId());
-                    System.out.println("   - Role Name: " + user.getRole().getRoleName());
-                } else {
-                    System.out.println("   - Role is NULL!");
-                }
+//                System.out.println("\n🔍 DEBUG LOG:");
+//                System.out.println("   - User Class: " + user.getClass().getName());
+//                if (user.getRole() != null) {
+//                    System.out.println("   - Role ID: " + user.getRole().getRoleId());
+//                    System.out.println("   - Role Name: " + user.getRole().getRoleName());
+//                } else {
+//                    System.out.println("   - Role is NULL!");
+//                }
+
+                // Get current time
+                LocalDateTime now = LocalDateTime.now();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                String formattedDate = now.format(formatter);
+
+                // Formatted Welcome and Time string
+                String welcomeMsg = "   Welcome, " + user.getName();
+                String timeMsg = "Login Time: " + formattedDate;
+                int totalWidth = 60;
+                int padding = totalWidth - welcomeMsg.length() - timeMsg.length();
+                if (padding < 1)
+                    padding = 1;
 
                 // Route to appropriate menu based on role
                 if (user instanceof GymAdmin) {
                     System.out.println("\n🔑 Admin Access Granted!");
+                    System.out.printf("%s%s%s%n", welcomeMsg, " ".repeat(padding), timeMsg);
                     AdminFlipFitMenu adminMenu = new AdminFlipFitMenu();
                     adminMenu.displayMenu(scanner);
                 } else if (user instanceof GymOwner) {
                     System.out.println("\n🏋️ Gym Owner Access Granted!");
+                    System.out.printf("%s%s%s%n", welcomeMsg, " ".repeat(padding), timeMsg);
                     GymOwnerFlipFitMenu ownerMenu = new GymOwnerFlipFitMenu(user);
                     ownerMenu.displayMenu(scanner);
                 } else if (user instanceof GymCustomer) {
                     System.out.println("\n💪 Customer Access Granted!");
+                    System.out.printf("%s%s%s%n", welcomeMsg, " ".repeat(padding), timeMsg);
                     CustomerFlipFitMenu customerMenu = new CustomerFlipFitMenu(user);
                     customerMenu.displayMenu(scanner);
                 } else {
-                    System.out.println("\n✅ Login Successful (Generic User Object)!");
-                    System.out.println("   Welcome, " + user.getName() + "!");
+                    System.out.println("\n✅ Login Successful!");
+                    System.out.printf("%s%s%s%n", welcomeMsg, " ".repeat(padding), timeMsg);
                 }
             }
         } catch (UserNotFoundException e) {

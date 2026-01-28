@@ -13,6 +13,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Implementation of Gym Customer DAO
+ * 
+ * @author team IOTA
+ */
 public class GymCustomerDAOImpl implements GymCustomerDAO {
 
     @Override

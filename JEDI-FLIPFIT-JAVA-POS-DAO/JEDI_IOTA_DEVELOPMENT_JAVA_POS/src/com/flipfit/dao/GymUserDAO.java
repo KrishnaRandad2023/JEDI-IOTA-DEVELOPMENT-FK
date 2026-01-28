@@ -3,6 +3,11 @@ package com.flipfit.dao;
 import com.flipfit.bean.User;
 import java.util.List;
 
+/**
+ * Interface for Gym User DAO
+ * 
+ * @author team IOTA
+ */
 public interface GymUserDAO {
     boolean authenticateUser(User user);
 

@@ -1,10 +1,9 @@
 package com.flipfit.exception;
 
-/// Classs level Comminting
 /**
  * The Class SlotNotAvailableException.
  *
- * @author krishna
+ * @author team IOTA
  * @ClassName "SlotNotAvailableException"
  */
 public class SlotNotAvailableException extends Exception {

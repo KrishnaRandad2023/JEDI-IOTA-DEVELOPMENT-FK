@@ -12,6 +12,11 @@ import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Implementation of Gym Owner DAO
+ * 
+ * @author team IOTA
+ */
 public class GymOwnerDAOImpl implements GymOwnerDAO {
 
     @Override

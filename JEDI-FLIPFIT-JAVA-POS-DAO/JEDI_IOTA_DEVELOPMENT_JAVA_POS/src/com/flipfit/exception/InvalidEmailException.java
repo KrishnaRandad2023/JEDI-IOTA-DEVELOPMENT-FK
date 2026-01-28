@@ -3,7 +3,7 @@ package com.flipfit.exception;
 /**
  * The Class InvalidEmailException.
  *
- * @author krishna
+ * @author team IOTA
  * @ClassName "InvalidEmailException"
  */
 public class InvalidEmailException extends Exception {

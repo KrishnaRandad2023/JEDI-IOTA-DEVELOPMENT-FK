@@ -2,6 +2,11 @@ package com.flipfit.business;
 
 import com.flipfit.bean.Payment;
 
+/**
+ * Interface for Payment Operations
+ * 
+ * @author team IOTA
+ */
 public interface PaymentServiceInterface {
     /**
      * Process a payment for a booking

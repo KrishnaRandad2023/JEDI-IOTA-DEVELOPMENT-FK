@@ -4,6 +4,11 @@ import com.flipfit.bean.GymCenter;
 import com.flipfit.bean.GymOwner;
 import java.util.List;
 
+/**
+ * Interface for Gym Admin DAO
+ * 
+ * @author team IOTA
+ */
 public interface GymAdminDAO {
     List<GymOwner> viewGymOwners();
 

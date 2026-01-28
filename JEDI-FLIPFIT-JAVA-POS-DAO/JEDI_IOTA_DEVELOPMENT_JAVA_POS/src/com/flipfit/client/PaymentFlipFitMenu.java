@@ -3,6 +3,11 @@ package com.flipfit.client;
 import java.util.Scanner;
 import com.flipfit.business.PaymentService;
 
+/**
+ * The Class PaymentFlipFitMenu.
+ * 
+ * @author team IOTA
+ */
 public class PaymentFlipFitMenu {
 
     private PaymentService paymentService;

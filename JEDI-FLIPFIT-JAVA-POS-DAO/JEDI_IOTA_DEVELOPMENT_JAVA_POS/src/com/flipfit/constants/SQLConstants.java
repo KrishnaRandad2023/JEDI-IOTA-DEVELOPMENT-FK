@@ -2,6 +2,8 @@ package com.flipfit.constants;
 
 /**
  * Centralized class for all SQL queries used in the application.
+ * 
+ * @author team IOTA
  */
 public class SQLConstants {
 

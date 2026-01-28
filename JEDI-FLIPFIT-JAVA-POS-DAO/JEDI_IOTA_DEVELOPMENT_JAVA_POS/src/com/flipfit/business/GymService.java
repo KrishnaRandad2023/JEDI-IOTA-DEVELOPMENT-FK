@@ -9,6 +9,11 @@ import com.flipfit.dao.GymAdminDAOImpl;
 import com.flipfit.dao.GymCustomerDAO;
 import com.flipfit.dao.GymCustomerDAOImpl;
 
+/**
+ * The Class GymService.
+ * 
+ * @author team IOTA
+ */
 public class GymService implements GymServiceInterface {
 
     private GymOwnerDAO gymOwnerDAO = new GymOwnerDAOImpl();

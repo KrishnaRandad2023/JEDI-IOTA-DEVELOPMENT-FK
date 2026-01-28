@@ -10,6 +10,11 @@ import com.flipfit.business.SlotService;
 import com.flipfit.business.WaitlistService;
 import com.flipfit.business.PaymentService;
 
+/**
+ * Factory class to initialize and provide singleton service instances.
+ * 
+ * @author team IOTA
+ */
 public class ServiceFactory {
     // All services as singleton instances
     private static ServiceFactory instance;

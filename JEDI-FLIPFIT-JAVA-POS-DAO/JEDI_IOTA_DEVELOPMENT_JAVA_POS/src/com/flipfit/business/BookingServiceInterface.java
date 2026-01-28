@@ -9,7 +9,7 @@ import com.flipfit.exception.BookingNotDoneException;
 /**
  * The Interface BookingServiceInterface.
  *
- * @author Shravya
+ * @author team IOTA
  * @ClassName "BookingServiceInterface"
  */
 public interface BookingServiceInterface {

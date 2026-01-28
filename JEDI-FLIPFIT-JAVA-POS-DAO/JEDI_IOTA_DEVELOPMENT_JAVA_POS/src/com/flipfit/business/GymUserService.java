@@ -9,14 +9,13 @@ import com.flipfit.exception.UserNotFoundException;
 import com.flipfit.exception.InvalidEmailException;
 import com.flipfit.exception.InvalidMobileException;
 import com.flipfit.exception.InvalidAadhaarException;
+import com.flipfit.utils.PasswordUtils;
 import java.util.regex.Pattern;
-
-/// Classs level Comminting
 
 /**
  * The Class GymUserService.
  *
- * @author krishna
+ * @author team IOTA
  * @ClassName "GymUserService"
  */
 public class GymUserService {
@@ -53,6 +52,9 @@ public class GymUserService {
         } else if (user instanceof GymCustomer) {
             validateAadhaar(((GymCustomer) user).getAadhaarNumber());
         }
+
+        // Hash the password before registration
+        user.setPassword(PasswordUtils.hashPassword(user.getPassword()));
 
         // Check if email already exists
         if (gymUserDAO.getUserByEmail(user.getEmail()) != null) {
@@ -118,7 +120,7 @@ public class GymUserService {
     public User login(String email, String password) throws UserNotFoundException {
         User user = new User();
         user.setEmail(email);
-        user.setPassword(password);
+        user.setPassword(PasswordUtils.hashPassword(password));
 
         if (gymUserDAO.authenticateUser(user)) {
             return gymUserDAO.getUserByEmail(email);
@@ -221,12 +223,12 @@ public class GymUserService {
             throw new UserNotFoundException("User with ID " + userId + " not found!");
         }
 
-        if (!user.getPassword().equals(oldPassword)) {
+        if (!user.getPassword().equals(PasswordUtils.hashPassword(oldPassword))) {
             System.out.println("❌ Old password is incorrect!");
             return false;
         }
 
-        boolean success = gymUserDAO.changePassword(userId, newPassword);
+        boolean success = gymUserDAO.changePassword(userId, PasswordUtils.hashPassword(newPassword));
         if (success) {
             System.out.println("✅ Password changed successfully!");
         }
@@ -249,7 +251,7 @@ public class GymUserService {
         }
 
         String newPassword = "reset" + System.currentTimeMillis() % 10000;
-        boolean success = gymUserDAO.changePassword(user.getUserId(), newPassword);
+        boolean success = gymUserDAO.changePassword(user.getUserId(), PasswordUtils.hashPassword(newPassword));
 
         if (success) {
             System.out.println("✅ Password reset!");

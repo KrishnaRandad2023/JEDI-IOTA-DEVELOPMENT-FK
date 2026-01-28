@@ -16,6 +16,11 @@ import java.util.ArrayList;
 import java.util.List;
 import com.flipfit.bean.Registration;
 
+/**
+ * Implementation of Gym User DAO
+ * 
+ * @author team IOTA
+ */
 public class GymUserDAOImpl implements GymUserDAO {
 
     @Override

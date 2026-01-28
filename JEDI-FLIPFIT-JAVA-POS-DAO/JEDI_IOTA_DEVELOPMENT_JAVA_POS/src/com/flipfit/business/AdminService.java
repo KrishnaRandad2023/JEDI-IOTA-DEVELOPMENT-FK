@@ -9,12 +9,10 @@ import com.flipfit.exception.InvalidEmailException;
 import com.flipfit.exception.InvalidMobileException;
 import com.flipfit.exception.InvalidAadhaarException;
 
-/// Classs level Comminting
-
 /**
  * The Class AdminService.
  *
- * @author krishna
+ * @author team IOTA
  * @ClassName "AdminService"
  */
 public class AdminService {

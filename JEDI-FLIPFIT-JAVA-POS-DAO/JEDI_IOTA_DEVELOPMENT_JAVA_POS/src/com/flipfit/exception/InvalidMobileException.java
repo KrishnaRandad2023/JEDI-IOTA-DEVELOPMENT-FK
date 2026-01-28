@@ -3,7 +3,7 @@ package com.flipfit.exception;
 /**
  * The Class InvalidMobileException.
  *
- * @author krishna
+ * @author team IOTA
  * @ClassName "InvalidMobileException"
  */
 public class InvalidMobileException extends Exception {

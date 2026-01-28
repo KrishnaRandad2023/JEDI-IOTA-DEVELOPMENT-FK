@@ -1,10 +1,9 @@
 package com.flipfit.exception;
 
-/// Classs level Comminting
 /**
  * The Class UserNotFoundException.
  *
- * @author krishna
+ * @author team IOTA
  * @ClassName "UserNotFoundException"
  */
 public class UserNotFoundException extends Exception {
