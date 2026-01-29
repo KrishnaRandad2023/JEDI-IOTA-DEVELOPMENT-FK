@@ -51,6 +51,23 @@
         <artifactId>dotenv-java</artifactId>
         <version>3.0.0</version>
     </dependency>
+    <!-- JAXB requirements for Java 11+ -->
+    <dependency>
+        <groupId>jakarta.xml.bind</groupId>
+        <artifactId>jakarta.xml.bind-api</artifactId>
+        <version>2.3.3</version>
+    </dependency>
+    <dependency>
+        <groupId>com.sun.xml.bind</groupId>
+        <artifactId>jaxb-impl</artifactId>
+        <version>2.3.3</version>
+        <scope>runtime</scope>
+    </dependency>
+    <dependency>
+        <groupId>jakarta.activation</groupId>
+        <artifactId>jakarta.activation-api</artifactId>
+        <version>1.2.2</version>
+    </dependency>
 
   </dependencies>
 
@@ -171,6 +188,11 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
+        <configuration>
+          <additionalOptions>--ignore-source-errors</additionalOptions>
+          <source>8</source>
+          <detectJavaApiLink>false</detectJavaApiLink>
+        </configuration>
         <executions>
           <execution>
             <id>attach-javadocs</id>

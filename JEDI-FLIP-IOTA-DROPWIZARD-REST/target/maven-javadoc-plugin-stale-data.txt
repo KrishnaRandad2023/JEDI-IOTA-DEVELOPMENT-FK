@@ -5,21 +5,22 @@
 -encoding
 'UTF-8'
 -protected
+-source
+'8'
 -sourcepath
-'/Users/akshat.arora1/Desktop/Dropwizard/JEDI-FLIP-IOTA-DROPWIZARD-REST/src/main/java:/Users/akshat.arora1/Desktop/Dropwizard/JEDI-FLIP-IOTA-DROPWIZARD-REST/target/generated-sources/annotations'
+'/Users/akshat.arora1/Desktop/Dropwizard/JEDI-FLIP-IOTA-DROPWIZARD-REST/src/main/java'
+--ignore-source-errors
 -author
 -bottom
 'Copyright &#169; 2026. All rights reserved.'
 -charset
 'UTF-8'
 -d
-'/Users/akshat.arora1/Desktop/Dropwizard/JEDI-FLIP-IOTA-DROPWIZARD-REST/target/apidocs'
+'/Users/akshat.arora1/Desktop/Dropwizard/JEDI-FLIP-IOTA-DROPWIZARD-REST/target/site/apidocs'
 -docencoding
 'UTF-8'
 -doctitle
 'flipfit_d 1.0-SNAPSHOT API'
--linkoffline
-'https://docs.oracle.com/javase/8/docs/api' '/Users/akshat.arora1/Desktop/Dropwizard/JEDI-FLIP-IOTA-DROPWIZARD-REST/target/javadoc-bundle-options'
 -use
 -version
 -windowtitle
@@ -122,20 +123,19 @@ com.flipfit.rest
 /Users/akshat.arora1/.m2/repository/io/github/cdimascio/dotenv-java/3.0.0/dotenv-java-3.0.0.jar = 1682892308000
 /Users/akshat.arora1/Desktop/Dropwizard/JEDI-FLIP-IOTA-DROPWIZARD-REST/src/main/java/.DS_Store = 1769623277250
 /Users/akshat.arora1/Desktop/Dropwizard/JEDI-FLIP-IOTA-DROPWIZARD-REST/src/main/java = 1769623272152
-/Users/akshat.arora1/Desktop/Dropwizard/JEDI-FLIP-IOTA-DROPWIZARD-REST/target/generated-sources/annotations = 1769701000458
-/Users/akshat.arora1/Desktop/Dropwizard/JEDI-FLIP-IOTA-DROPWIZARD-REST/target/apidocs/constant-values.html = 1769701003610
-/Users/akshat.arora1/Desktop/Dropwizard/JEDI-FLIP-IOTA-DROPWIZARD-REST/target/apidocs/tag-search-index.js = 1769701003685
-/Users/akshat.arora1/Desktop/Dropwizard/JEDI-FLIP-IOTA-DROPWIZARD-REST/target/apidocs/overview-tree.html = 1769701003670
-/Users/akshat.arora1/Desktop/Dropwizard/JEDI-FLIP-IOTA-DROPWIZARD-REST/target/apidocs/module-search-index.js = 1769701003683
-/Users/akshat.arora1/Desktop/Dropwizard/JEDI-FLIP-IOTA-DROPWIZARD-REST/target/apidocs/index.html = 1769701003671
-/Users/akshat.arora1/Desktop/Dropwizard/JEDI-FLIP-IOTA-DROPWIZARD-REST/target/apidocs/package-search-index.js = 1769701003683
-/Users/akshat.arora1/Desktop/Dropwizard/JEDI-FLIP-IOTA-DROPWIZARD-REST/target/apidocs/serialized-form.html = 1769701003613
-/Users/akshat.arora1/Desktop/Dropwizard/JEDI-FLIP-IOTA-DROPWIZARD-REST/target/apidocs/index-all.html = 1769701003698
-/Users/akshat.arora1/Desktop/Dropwizard/JEDI-FLIP-IOTA-DROPWIZARD-REST/target/apidocs/allpackages-index.html = 1769701003683
-/Users/akshat.arora1/Desktop/Dropwizard/JEDI-FLIP-IOTA-DROPWIZARD-REST/target/apidocs/member-search-index.js = 1769701003684
-/Users/akshat.arora1/Desktop/Dropwizard/JEDI-FLIP-IOTA-DROPWIZARD-REST/target/apidocs/overview-summary.html = 1769701003699
-/Users/akshat.arora1/Desktop/Dropwizard/JEDI-FLIP-IOTA-DROPWIZARD-REST/target/apidocs/help-doc.html = 1769701003703
-/Users/akshat.arora1/Desktop/Dropwizard/JEDI-FLIP-IOTA-DROPWIZARD-REST/target/apidocs/element-list = 1769701003594
-/Users/akshat.arora1/Desktop/Dropwizard/JEDI-FLIP-IOTA-DROPWIZARD-REST/target/apidocs/search.html = 1769701003699
-/Users/akshat.arora1/Desktop/Dropwizard/JEDI-FLIP-IOTA-DROPWIZARD-REST/target/apidocs/allclasses-index.html = 1769701003682
-/Users/akshat.arora1/Desktop/Dropwizard/JEDI-FLIP-IOTA-DROPWIZARD-REST/target/apidocs/type-search-index.js = 1769701003684
+/Users/akshat.arora1/Desktop/Dropwizard/JEDI-FLIP-IOTA-DROPWIZARD-REST/target/site/apidocs/constant-values.html = 1769701702913
+/Users/akshat.arora1/Desktop/Dropwizard/JEDI-FLIP-IOTA-DROPWIZARD-REST/target/site/apidocs/tag-search-index.js = 1769701702989
+/Users/akshat.arora1/Desktop/Dropwizard/JEDI-FLIP-IOTA-DROPWIZARD-REST/target/site/apidocs/overview-tree.html = 1769701702972
+/Users/akshat.arora1/Desktop/Dropwizard/JEDI-FLIP-IOTA-DROPWIZARD-REST/target/site/apidocs/module-search-index.js = 1769701702987
+/Users/akshat.arora1/Desktop/Dropwizard/JEDI-FLIP-IOTA-DROPWIZARD-REST/target/site/apidocs/index.html = 1769701702973
+/Users/akshat.arora1/Desktop/Dropwizard/JEDI-FLIP-IOTA-DROPWIZARD-REST/target/site/apidocs/package-search-index.js = 1769701702987
+/Users/akshat.arora1/Desktop/Dropwizard/JEDI-FLIP-IOTA-DROPWIZARD-REST/target/site/apidocs/serialized-form.html = 1769701702916
+/Users/akshat.arora1/Desktop/Dropwizard/JEDI-FLIP-IOTA-DROPWIZARD-REST/target/site/apidocs/index-all.html = 1769701703002
+/Users/akshat.arora1/Desktop/Dropwizard/JEDI-FLIP-IOTA-DROPWIZARD-REST/target/site/apidocs/allpackages-index.html = 1769701702986
+/Users/akshat.arora1/Desktop/Dropwizard/JEDI-FLIP-IOTA-DROPWIZARD-REST/target/site/apidocs/member-search-index.js = 1769701702988
+/Users/akshat.arora1/Desktop/Dropwizard/JEDI-FLIP-IOTA-DROPWIZARD-REST/target/site/apidocs/overview-summary.html = 1769701703004
+/Users/akshat.arora1/Desktop/Dropwizard/JEDI-FLIP-IOTA-DROPWIZARD-REST/target/site/apidocs/help-doc.html = 1769701703005
+/Users/akshat.arora1/Desktop/Dropwizard/JEDI-FLIP-IOTA-DROPWIZARD-REST/target/site/apidocs/element-list = 1769701702897
+/Users/akshat.arora1/Desktop/Dropwizard/JEDI-FLIP-IOTA-DROPWIZARD-REST/target/site/apidocs/search.html = 1769701703003
+/Users/akshat.arora1/Desktop/Dropwizard/JEDI-FLIP-IOTA-DROPWIZARD-REST/target/site/apidocs/allclasses-index.html = 1769701702986
+/Users/akshat.arora1/Desktop/Dropwizard/JEDI-FLIP-IOTA-DROPWIZARD-REST/target/site/apidocs/type-search-index.js = 1769701702988
