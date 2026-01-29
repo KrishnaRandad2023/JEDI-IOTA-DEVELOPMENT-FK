@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
  * The Class GymUserService.
  *
  * @author team IOTA
-
+ * 
  */
 public class GymUserService {
 
@@ -28,6 +28,32 @@ public class GymUserService {
      */
     public GymUserService() {
         System.out.println("✅ GymUserService initialized with Database DAO");
+    }
+
+    /**
+     * Registers a user who has already been validated and whose password is already
+     * hashed.
+     *
+     * @param user the user
+     * @return true, if successful
+     * @throws RegistrationNotDoneException the registration not done exception
+     */
+    public boolean registerApprovedUser(User user) throws RegistrationNotDoneException {
+        // Check if email already exists
+        if (gymUserDAO.getUserByEmail(user.getEmail()) != null) {
+            System.out.println("❌ Email already registered!");
+            throw new RegistrationNotDoneException("Email already registered!");
+        }
+
+        GymUserDAOImpl daoImpl = (GymUserDAOImpl) gymUserDAO;
+        String result = daoImpl.registerUserDetailed(user);
+        if ("SUCCESS".equals(result)) {
+            System.out.println("✅ User registered successfully!");
+            return true;
+        } else {
+            System.out.println("❌ Registration failed: " + result);
+            throw new RegistrationNotDoneException("Registration failed in Database: " + result);
+        }
     }
 
     /**
@@ -86,6 +112,9 @@ public class GymUserService {
         validateEmail(reg.getEmail());
         validateMobile(reg.getMobileNumber());
         validateAadhaar(reg.getAadhaarNumber());
+
+        // Hash the password before storage in Registration table
+        reg.setPassword(PasswordUtils.hashPassword(reg.getPassword()));
 
         return gymUserDAO.addRegistration(reg);
     }

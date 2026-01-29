@@ -142,6 +142,7 @@ public class GymAdminDAOImpl implements GymAdminDAO {
                 reg.setRegistrationId(rs.getInt("registrationId"));
                 reg.setName(rs.getString("name"));
                 reg.setEmail(rs.getString("email"));
+                reg.setPassword(rs.getString("password"));
                 reg.setMobileNumber(rs.getString("mobileNumber"));
                 reg.setRoleType(rs.getString("roleType"));
                 reg.setRegistrationDate(rs.getTimestamp("registrationDate"));

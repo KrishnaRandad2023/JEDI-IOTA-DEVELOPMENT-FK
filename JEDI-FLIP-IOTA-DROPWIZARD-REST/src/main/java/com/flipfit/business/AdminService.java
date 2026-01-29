@@ -7,9 +7,6 @@ import com.flipfit.dao.GymAdminDAOImpl;
 import com.flipfit.exception.RegistrationNotDoneException;
 import com.flipfit.exception.IssueWithApprovalException;
 import com.flipfit.exception.UserNotFoundException;
-import com.flipfit.exception.InvalidEmailException;
-import com.flipfit.exception.InvalidMobileException;
-import com.flipfit.exception.InvalidAadhaarException;
 
 /**
  * Service class for Admin role functionality.
@@ -158,7 +155,7 @@ public class AdminService {
             GymOwner owner = createGymOwner(reg);
 
             try {
-                if (gymUserService.registerUser(owner)) {
+                if (gymUserService.registerApprovedUser(owner)) {
                     // Mark registration as approved
                     reg.setApproved(true);
                     // Update registration in DB
@@ -172,8 +169,7 @@ public class AdminService {
                     System.out.println("   User ID: " + owner.getUserId());
                     return true;
                 }
-            } catch (RegistrationNotDoneException | InvalidEmailException | InvalidMobileException
-                    | InvalidAadhaarException e) {
+            } catch (RegistrationNotDoneException e) {
                 throw new IssueWithApprovalException("Failed to register owner during approval: " + e.getMessage());
             }
         }

@@ -28,17 +28,16 @@ public class AuthController {
     private final GymUserService gymUserService = ServiceFactory.getInstance().getGymUserService();
 
     /**
-     * Authenticates a user based on email and password.
+     * Authenticates a user based on email and password provided in a JSON body.
      * 
-     * @param email    user's email
-     * @param password user's password
+     * @param credentials User object containing email and password
      * @return Response containing the User object if successful, or error status
      */
     @POST
     @Path("/login")
-    public Response login(@QueryParam("email") String email, @QueryParam("password") String password) {
+    public Response login(User credentials) {
         try {
-            User user = gymUserService.login(email, password);
+            User user = gymUserService.login(credentials.getEmail(), credentials.getPassword());
             if (user != null) {
                 return Response.ok(user).build();
             }

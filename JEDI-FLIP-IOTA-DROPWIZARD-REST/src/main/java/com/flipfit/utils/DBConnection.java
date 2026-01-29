@@ -3,6 +3,7 @@ package com.flipfit.utils;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import io.github.cdimascio.dotenv.Dotenv;
 
 /**
  * The Class DBConnection.
@@ -17,9 +18,10 @@ public class DBConnection {
     public DBConnection() {
     }
 
-    private static final String URL = "jdbc:mysql://localhost:3306/flipfit_schema";
-    private static final String USER = "root"; // Replace with your DB username
-    private static final String PASSWORD = "Ak@160305"; // Replace with your DB password
+    private static final Dotenv dotenv = Dotenv.load();
+    private static final String URL = dotenv.get("DB_URL");
+    private static final String USER = dotenv.get("DB_USER");
+    private static final String PASSWORD = dotenv.get("DB_PASS");
 
     /**
      * Establishes a connection to the MySQL database.

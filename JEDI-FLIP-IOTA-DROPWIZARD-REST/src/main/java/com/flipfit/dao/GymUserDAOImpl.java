@@ -45,8 +45,7 @@ public class GymUserDAOImpl implements GymUserDAO {
         return false;
     }
 
-    @Override
-    public boolean registerUser(User user) {
+    public String registerUserDetailed(User user) {
         String query = SQLConstants.REGISTER_USER;
         try (Connection conn = DBConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
@@ -83,12 +82,19 @@ public class GymUserDAOImpl implements GymUserDAO {
                         }
                     }
                 }
-                return true;
+                return "SUCCESS";
             }
+            return "No rows affected in User table";
         } catch (SQLException e) {
-            e.printStackTrace();
+            return "SQL ERROR: " + e.getMessage() + " [State: " + e.getSQLState() + "]";
+        } catch (Exception e) {
+            return "ERROR: " + e.getMessage();
         }
-        return false;
+    }
+
+    @Override
+    public boolean registerUser(User user) {
+        return "SUCCESS".equals(registerUserDetailed(user));
     }
 
     @Override
